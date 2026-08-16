@@ -3,142 +3,316 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Planeador Maestro de Construcción por Etapas, Flujo Financiero y Dossier Técnico de Residencia Inteligente en 3 Niveles">
-  <title>Planeador Maestro de Construcción & Finanzas | Residencia Inteligente 3 Niveles</title>
+  <meta name="description" content="SICO-235: Sistema Integral de Control de Obra, Flujo Financiero y Administración Constructiva por Etapas para Residencia Inteligente en 3 Niveles (235 m²)">
+  <title>SICO-235 | Sistema de Control de Obra & Finanzas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- Header Principal -->
+  <!-- Header Principal Ejecutivo -->
   <header class="app-header">
     <div class="header-container">
       <div class="brand-block">
         <div class="brand-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
         </div>
         <div>
-          <h1 class="brand-title">Planeador Maestro de Construcción & Finanzas</h1>
-          <p class="brand-subtitle">Residencia Inteligente en 3 Niveles (235 m²) • Estrategia Progresiva en 4 Fases</p>
+          <div class="brand-badge-top">SISTEMA INTEGRAL DE CONTROL DE OBRA • SICO-235</div>
+          <h1 class="brand-title">Residencia Inteligente en 3 Niveles</h1>
+          <p class="brand-subtitle">Terreno: 153.19 m² • Construcción: 235.0 m² • 4 Fases Progresivas</p>
         </div>
       </div>
 
-      <nav class="nav-tabs" aria-label="Navegación principal">
-        <button class="nav-btn active" data-tab="roadmap" id="tab-btn-roadmap">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Plan Maestro & Fases
+      <!-- Métricas Rápidas en Cabecera -->
+      <div class="header-quick-kpis">
+        <div class="kpi-mini">
+          <span class="kpi-mini-label">Presupuesto Total</span>
+          <span class="kpi-mini-val text-primary" id="hdr-total-budget">$3,572,000 MXN</span>
+        </div>
+        <div class="kpi-mini">
+          <span class="kpi-mini-label">Avance Físico Global</span>
+          <div class="kpi-mini-bar-box">
+            <span class="kpi-mini-val text-success" id="hdr-phys-pct">0.0%</span>
+            <div class="mini-progress-track"><div class="mini-progress-fill" id="hdr-phys-bar" style="width: 0%;"></div></div>
+          </div>
+        </div>
+        <div class="kpi-mini">
+          <span class="kpi-mini-label">Avance Financiero</span>
+          <div class="kpi-mini-bar-box">
+            <span class="kpi-mini-val text-warning" id="hdr-fin-pct">0.0%</span>
+            <div class="mini-progress-track"><div class="mini-progress-fill warning" id="hdr-fin-bar" style="width: 0%;"></div></div>
+          </div>
+        </div>
+        <div class="currency-toggle-box">
+          <button class="currency-btn active" data-cur="MXN" id="btn-cur-mxn">MXN ($)</button>
+          <button class="currency-btn" data-cur="USD" id="btn-cur-usd">USD ($)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Navegación de Módulos -->
+    <nav class="nav-tabs-bar" aria-label="Módulos de Control">
+      <div class="nav-container">
+        <button class="nav-btn active" data-tab="dashboard" id="tab-btn-dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Centro de Mando
         </button>
-        <button class="nav-btn" data-tab="budget" id="tab-btn-budget">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          Presupuesto & Pagos
+        <button class="nav-btn" data-tab="wbs" id="tab-btn-wbs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Control de Etapas (EDT/WBS)
+        </button>
+        <button class="nav-btn" data-tab="finance" id="tab-btn-finance">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>
+          Finanzas & Estimaciones
         </button>
         <button class="nav-btn" data-tab="blueprint" id="tab-btn-blueprint">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          Planos Arquitectónicos
+          Planos Arquitectónicos & MEP
         </button>
-        <button class="nav-btn" data-tab="checklist" id="tab-btn-checklist">
+        <button class="nav-btn" data-tab="gantt" id="tab-btn-gantt">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Cronograma & Ruta Crítica
+        </button>
+        <button class="nav-btn" data-tab="logbook" id="tab-btn-logbook">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          Bitácora & Supervisión
+          Bitácora & Calidad (QA)
+        </button>
+        <button class="nav-btn" data-tab="contractors" id="tab-btn-contractors">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Directorio & RACI
         </button>
         <button class="nav-btn" data-tab="docs" id="tab-btn-docs">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
-          Biblioteca Técnica (01-14)
+          Biblioteca Técnica (01-15)
         </button>
-      </nav>
-    </div>
+      </div>
+    </nav>
   </header>
 
-  <!-- Contenedor Principal de la App -->
+  <!-- Contenedor Principal de la Aplicación -->
   <main class="app-main">
 
     <!-- ====================================================================
-         SECCIÓN 1: PLAN MAESTRO FINANCIERO & FASES DE ARRANQUE
+         MÓDULO 1: CENTRO DE MANDO & KPIS EJECUTIVOS
          ==================================================================== -->
-    <section class="tab-content active" id="sec-roadmap">
-      <!-- Selector de Fases y Resumen de Arranque -->
-      <div class="hero-card">
-        <div class="hero-header-flex">
-          <div>
-            <div class="hero-badge">Estrategia Modular de Construcción Progresiva</div>
-            <h2 class="hero-title">Ruta Financiera: Construye por Etapas y Múdate Rápido</h2>
-            <p class="hero-text">No necesitas tener los $3.57 MDP juntos. Construye la <strong>Fase 1 (Casa Núcleo Habitable)</strong> en 6 meses, múdate para <strong>eliminar el gasto de renta</strong>, y equipa los acabados de lujo y el Roof Garden por fases con tus ingresos corrientes.</p>
+    <section class="tab-content active" id="sec-dashboard">
+      <!-- 4 Tarjetas KPI Maestras -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-box bg-blue-light text-primary">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>
           </div>
-          <div class="currency-toggle-box">
-            <span class="currency-label">Moneda:</span>
-            <button class="currency-btn active" data-cur="MXN" id="btn-cur-mxn">MXN ($)</button>
-            <button class="currency-btn" data-cur="USD" id="btn-cur-usd">USD ($)</button>
+          <div class="kpi-body">
+            <span class="kpi-label">Presupuesto Maestro Total</span>
+            <div class="kpi-number text-primary" id="kpi-total-val">$3,572,000 MXN</div>
+            <div class="kpi-subtext" id="kpi-total-sub">~$178,600 USD • $15,200/m² (235 m²)</div>
           </div>
         </div>
-        
-        <!-- Fases Modulares Stepper -->
-        <div class="phase-stepper-grid">
-          <div class="phase-card active" data-phase="1" id="phase-card-1">
-            <div class="phase-header">
-              <span class="phase-badge phase-1">FASE 1 • PRIORIDAD ALTA</span>
-              <span class="phase-time">Meses 1 a 6</span>
-            </div>
-            <h3 class="phase-title">Casa Núcleo Habitable</h3>
-            <div class="phase-cost text-primary" id="cost-phase-1">$1,980,000 MXN</div>
-            <div class="phase-subcost" id="subcost-phase-1">~$99,000 USD (55.4%)</div>
-            <div class="phase-req-box">
-              <span class="req-tag">Anticipo Requerido (30%):</span>
-              <strong class="req-val text-success" id="req-phase-1">$594,000 MXN</strong>
-            </div>
-            <p class="phase-desc">Estructura 3 niveles techada e impermeable, cisterna 5kL, MEP oculto, Suite PB lista y cocina/baño funcional. <strong>¡MUDANZA Y CERO RENTA!</strong></p>
-          </div>
 
-          <div class="phase-card" data-phase="2" id="phase-card-2">
-            <div class="phase-header">
-              <span class="phase-badge phase-2">FASE 2 • AÑO 1</span>
-              <span class="phase-time">Meses 7 a 12</span>
-            </div>
-            <h3 class="phase-title">Confort Planta Alta</h3>
-            <div class="phase-cost text-success" id="cost-phase-2">$580,000 MXN</div>
-            <div class="phase-subcost" id="subcost-phase-2">~$29,000 USD (16.2%)</div>
-            <div class="phase-req-box">
-              <span class="req-tag">Anticipo Requerido (30%):</span>
-              <strong class="req-val text-success" id="req-phase-2">$174,000 MXN</strong>
-            </div>
-            <p class="phase-desc">Baño Master spa con canceles templados, cocina integral de diseño con isla de cuarzo, vestidor Master y clósets empotrados.</p>
+        <div class="kpi-card">
+          <div class="kpi-icon-box bg-green-light text-success">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-
-          <div class="phase-card" data-phase="3" id="phase-card-3">
-            <div class="phase-header">
-              <span class="phase-badge phase-3">FASE 3 • AÑO 2</span>
-              <span class="phase-time">Meses 13 a 18</span>
-            </div>
-            <h3 class="phase-title">Roof Garden Frontal</h3>
-            <div class="phase-cost text-warning" id="cost-phase-3">$420,000 MXN</div>
-            <div class="phase-subcost" id="subcost-phase-3">~$21,000 USD (11.8%)</div>
-            <div class="phase-req-box">
-              <span class="req-tag">Anticipo Requerido (30%):</span>
-              <strong class="req-val text-warning" id="req-phase-3">$126,000 MXN</strong>
-            </div>
-            <p class="phase-desc">Piso deck exterior ($45 m²), pérgola bioclimática, grill con tarja/barra, 1/2 baño de azotea, lounge firepit y barandal de cristal.</p>
+          <div class="kpi-body">
+            <span class="kpi-label">Capital Pagado / Estimado</span>
+            <div class="kpi-number text-success" id="kpi-paid-val">$0 MXN</div>
+            <div class="kpi-subtext" id="kpi-paid-sub">Saldo por ejercer: $3,572,000 MXN</div>
           </div>
+        </div>
 
-          <div class="phase-card" data-phase="4" id="phase-card-4">
-            <div class="phase-header">
-              <span class="phase-badge phase-4">FASE 4 • AÑO 3</span>
-              <span class="phase-time">Meses 19 a 24</span>
-            </div>
-            <h3 class="phase-title">Solar, Climas & Domótica</h3>
-            <div class="phase-cost text-purple" id="cost-phase-4">$362,000 MXN</div>
-            <div class="phase-subcost" id="subcost-phase-4">~$18,100 USD (10.1%)</div>
-            <div class="phase-req-box">
-              <span class="req-tag">Anticipo Requerido (30%):</span>
-              <strong class="req-val text-purple" id="req-phase-4">$108,600 MXN</strong>
-            </div>
-            <p class="phase-desc">6 paneles solares 3.3 kWp (0 CFE), calentador solar 200L (0 gas), 3 climas A/C inverter, Rack 12U, CCTV 4K e iluminación circadiana.</p>
+        <div class="kpi-card">
+          <div class="kpi-icon-box bg-amber-light text-warning">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="kpi-body">
+            <span class="kpi-label">Anticipo Fase 1 (Meta de Arranque)</span>
+            <div class="kpi-number text-warning" id="kpi-advance-val">$594,000 MXN</div>
+            <div class="kpi-subtext" id="kpi-advance-sub">30% de Fase 1 ($1,980,000 MXN)</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-box bg-purple-light text-purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="kpi-body">
+            <span class="kpi-label">Fondo de Imprevistos (5% Reserva)</span>
+            <div class="kpi-number text-purple" id="kpi-reserve-val">$178,600 MXN</div>
+            <div class="kpi-subtext">Reserva líquida para contingencias técnicas</div>
           </div>
         </div>
       </div>
 
-      <!-- Simulador de Flujo Financiero y Ahorro -->
+      <!-- Resumen de Fases Progresivas con Stepper -->
+      <div class="card margin-top">
+        <div class="card-header space-between">
+          <div>
+            <div class="hero-badge">Estrategia Progresiva en 4 Fases</div>
+            <h2 class="card-title">Ruta de Construcción & Hito de Mudanza Rápida</h2>
+            <p class="card-subtitle">Construye la Fase 1 en 6 meses para habitar de inmediato y eliminar el gasto de renta</p>
+          </div>
+          <div class="phase-action-box">
+            <button class="btn btn-primary" onclick="window.appNavTo('wbs')">Explorar Sub-etapas y Checklists &rarr;</button>
+          </div>
+        </div>
+
+        <div class="phases-summary-grid">
+          <div class="phase-tile active" onclick="window.appSelectPhase(1)">
+            <div class="phase-tile-badge phase-1">FASE 1 • PRIORIDAD ALTA</div>
+            <h3 class="phase-tile-title">Casa Núcleo Habitable</h3>
+            <div class="phase-tile-cost" id="tile-cost-1">$1,980,000 MXN</div>
+            <div class="phase-tile-sub">~$99,000 USD (55.4% de la obra)</div>
+            <div class="phase-tile-meta">
+              <span>⏱️ Meses 1 a 6</span>
+              <span>🔑 <strong>¡Mudanza Inmediata!</strong></span>
+            </div>
+            <div class="phase-progress-wrap">
+              <div class="phase-progress-bar"><div class="phase-progress-fill" id="tile-bar-1" style="width: 0%;"></div></div>
+              <span class="phase-progress-text" id="tile-pct-1">0% completado</span>
+            </div>
+          </div>
+
+          <div class="phase-tile" onclick="window.appSelectPhase(2)">
+            <div class="phase-tile-badge phase-2">FASE 2 • AÑO 1 VIVIENDO</div>
+            <h3 class="phase-tile-title">Confort Planta Alta</h3>
+            <div class="phase-tile-cost" id="tile-cost-2">$580,000 MXN</div>
+            <div class="phase-tile-sub">~$29,000 USD (16.2% de la obra)</div>
+            <div class="phase-tile-meta">
+              <span>⏱️ Meses 7 a 12</span>
+              <span>🛁 Baño Spa & Cocina Cuarzo</span>
+            </div>
+            <div class="phase-progress-wrap">
+              <div class="phase-progress-bar"><div class="phase-progress-fill" id="tile-bar-2" style="width: 0%;"></div></div>
+              <span class="phase-progress-text" id="tile-pct-2">0% completado</span>
+            </div>
+          </div>
+
+          <div class="phase-tile" onclick="window.appSelectPhase(3)">
+            <div class="phase-tile-badge phase-3">FASE 3 • AÑO 2</div>
+            <h3 class="phase-tile-title">Roof Garden Frontal</h3>
+            <div class="phase-tile-cost" id="tile-cost-3">$420,000 MXN</div>
+            <div class="phase-tile-sub">~$21,000 USD (11.8% de la obra)</div>
+            <div class="phase-tile-meta">
+              <span>⏱️ Meses 13 a 18</span>
+              <span>🥩 Terraza, Grill & 1/2 Baño</span>
+            </div>
+            <div class="phase-progress-wrap">
+              <div class="phase-progress-bar"><div class="phase-progress-fill" id="tile-bar-3" style="width: 0%;"></div></div>
+              <span class="phase-progress-text" id="tile-pct-3">0% completado</span>
+            </div>
+          </div>
+
+          <div class="phase-tile" onclick="window.appSelectPhase(4)">
+            <div class="phase-tile-badge phase-4">FASE 4 • AÑO 3</div>
+            <h3 class="phase-tile-title">Solar, Climas & Domótica</h3>
+            <div class="phase-tile-cost" id="tile-cost-4">$362,000 MXN</div>
+            <div class="phase-tile-sub">~$18,100 USD (10.1% de la obra)</div>
+            <div class="phase-tile-meta">
+              <span>⏱️ Meses 19 a 24</span>
+              <span>☀️ 0 CFE • IA & Sensores</span>
+            </div>
+            <div class="phase-progress-wrap">
+              <div class="phase-progress-bar"><div class="phase-progress-fill" id="tile-bar-4" style="width: 0%;"></div></div>
+              <span class="phase-progress-text" id="tile-pct-4">0% completado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel de Control de Riesgos & Próximo Hito Crítico -->
+      <div class="grid-2-col margin-top">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon warning">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div>
+              <h3 class="card-title">Semáforo de Riesgos & Puntos Críticos de Control</h3>
+              <p class="card-subtitle">Alertas normativas para evitar sobrecostos y vicios ocultos</p>
+            </div>
+          </div>
+
+          <div class="risk-alerts-list">
+            <div class="risk-item alert-high">
+              <div class="risk-badge">CRÍTICO • ESTRUCTURAL</div>
+              <div class="risk-content">
+                <strong>Prueba Hidrostática de Tuberías Ocultas a 10 Bar:</strong>
+                <p>NUNCA autorizar el aplanado de muros ni el colado de losas sin tener la prueba de presión de agua a 10 bar (145 PSI) sostenida por 24 horas firmada en bitácora.</p>
+              </div>
+            </div>
+
+            <div class="risk-item alert-medium">
+              <div class="risk-badge">PREVENTIVO • FINANCIERO</div>
+              <div class="risk-content">
+                <strong>Compra Anticipada de Acero de Refuerzo:</strong>
+                <p>Adquirir el 100% de la varilla corrugada Grado 42 de la Fase 1 con el anticipo para congelar precio ante inflación de materiales y almacenar en obra elevado sobre tarimas.</p>
+              </div>
+            </div>
+
+            <div class="risk-item alert-low">
+              <div class="risk-badge">CONTROL • CALIDAD</div>
+              <div class="risk-content">
+                <strong>Fondo de Garantía del 5% Retenido:</strong>
+                <p>Retener el 5% en cada pago semanal al maestro albañil y contratistas. Solo se libera 90 días después de la mudanza tras comprobar cero goteras y perfecto funcionamiento.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h3 class="card-title">Próximos Hitos de Liberación (Milestones)</h3>
+              <p class="card-subtitle">Resultados tangibles requeridos para autorizar pagos</p>
+            </div>
+          </div>
+
+          <div class="milestones-timeline" id="dashboard-milestones-list">
+            <!-- Renderizado dinámico vía JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MÓDULO 2: CONTROL DE ETAPAS & SUB-ETAPAS (WBS / EDT MAESTRO)
+         ==================================================================== -->
+    <section class="tab-content" id="sec-wbs">
+      <div class="card">
+        <div class="card-header space-between">
+          <div>
+            <div class="hero-badge">Estructura de Desglose de Trabajo (WBS / EDT)</div>
+            <h2 class="card-title">Monitoreo Detallado de Etapas, Sub-etapas & Checklists</h2>
+            <p class="card-subtitle">Verifica los criterios técnicos de aceptación, materiales críticos e hitos antes de autorizar estimaciones</p>
+          </div>
+          <div class="wbs-filter-tabs">
+            <button class="filter-btn active" data-wbs-phase="1" id="wbs-btn-phase-1">🟢 Fase 1: Núcleo ($1.98M)</button>
+            <button class="filter-btn" data-wbs-phase="2" id="wbs-btn-phase-2">🔵 Fase 2: Planta Alta ($580k)</button>
+            <button class="filter-btn" data-wbs-phase="3" id="wbs-btn-phase-3">🟡 Fase 3: Roof Garden ($420k)</button>
+            <button class="filter-btn" data-wbs-phase="4" id="wbs-btn-phase-4">🟣 Fase 4: Solar ($362k)</button>
+          </div>
+        </div>
+
+        <!-- Contenedor del Árbol de Etapas y Subetapas -->
+        <div class="wbs-tree-container" id="wbs-tree-display">
+          <!-- Renderizado dinámico vía JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MÓDULO 3: GESTOR FINANCIERO, ESTIMACIONES & CATÁLOGO DE PRECIOS
+         ==================================================================== -->
+    <section class="tab-content" id="sec-finance">
+      <!-- Simulador de Ahorro y Capacidad de Arranque -->
       <div class="grid-2-col">
         <div class="card">
           <div class="card-header">
@@ -146,23 +320,23 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
             <div>
-              <h3 class="card-title">Simulador de Ahorro y Capacidad de Arranque</h3>
-              <p class="card-subtitle">Calcula en cuántos meses puedes arrancar cada fase según tu ahorro o crédito</p>
+              <h3 class="card-title">Simulador de Capacidad de Ahorro & Arranque</h3>
+              <p class="card-subtitle">Calcula en cuántos meses exactos reúnes el anticipo del 30%</p>
             </div>
           </div>
-          
+
           <div class="calc-form">
             <div class="form-group">
-              <label for="input-savings-month">Ahorro / Capacidad de Pago Mensual ($):</label>
+              <label for="input-savings-month">Ahorro Mensual Disponible o Capacidad de Crédito ($):</label>
               <div class="input-prefix-wrapper">
                 <span class="prefix" id="lbl-prefix-cur">$</span>
                 <input type="number" id="input-savings-month" class="form-control" value="35000" min="5000" step="5000">
               </div>
-              <span class="hint-text">Ingreso mensual disponible para construcción o mensualidad de crédito</span>
+              <span class="hint-text">Monto mensual libre que puedes destinar a obra civil o crédito</span>
             </div>
 
             <div class="form-group">
-              <label for="input-initial-capital">Capital Inicial Ahorrado o Crédito de Arranque ($):</label>
+              <label for="input-initial-capital">Capital Inicial Ahorrado o Fondo Líquido Actual ($):</label>
               <div class="input-prefix-wrapper">
                 <span class="prefix">$</span>
                 <input type="number" id="input-initial-capital" class="form-control" value="300000" min="0" step="10000">
@@ -172,10 +346,10 @@
             <div class="form-group">
               <label for="select-target-phase">Fase que deseas evaluar:</label>
               <select id="select-target-phase" class="form-control">
-                <option value="1" selected>Fase 1: Casa Núcleo Habitable (Meta $594k MXN)</option>
-                <option value="2">Fase 2: Confort Planta Alta (Meta $174k MXN)</option>
-                <option value="3">Fase 3: Roof Garden Frontal (Meta $126k MXN)</option>
-                <option value="4">Fase 4: Solar, Climas & Domótica (Meta $108k MXN)</option>
+                <option value="1" selected>Fase 1: Casa Núcleo Habitable (Anticipo 30% = $594k MXN)</option>
+                <option value="2">Fase 2: Confort Planta Alta (Anticipo 30% = $174k MXN)</option>
+                <option value="3">Fase 3: Roof Garden Frontal (Anticipo 30% = $126k MXN)</option>
+                <option value="4">Fase 4: Solar, Climas & Domótica (Anticipo 30% = $108.6k MXN)</option>
               </select>
             </div>
           </div>
@@ -187,22 +361,22 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
             <div>
-              <h3 class="card-title">Dictamen de Viabilidad de Arranque</h3>
-              <p class="card-subtitle">Cálculo de tiempos y flujo de caja en tiempo real</p>
+              <h3 class="card-title">Dictamen Financiero de Viabilidad</h3>
+              <p class="card-subtitle">Diagnóstico y ritmo de gasto semanal proyectado</p>
             </div>
           </div>
 
           <div class="finance-results">
             <div class="stat-box">
-              <div class="stat-label">Tiempo Estimado para Arrancar la Fase Seleccionada</div>
+              <div class="stat-label">Tiempo Estimado para Dar el Banderazo de Obra</div>
               <div class="stat-value text-primary" id="val-months-to-start">8.4 Meses</div>
-              <div class="stat-sub" id="val-capital-gap">Faltan $294,000 MXN para el anticipo del 30%</div>
+              <div class="stat-sub" id="val-capital-gap">Faltan $294,000 MXN para completar el 30% de arranque</div>
             </div>
 
             <div class="progress-bar-container">
               <div class="progress-bar-labels">
                 <span>Fondo de Anticipo Acumulado</span>
-                <span class="text-success" id="val-anticipo-pct">50.5% Reunido</span>
+                <span class="text-success" id="val-anticipo-pct">50.5%</span>
               </div>
               <div class="progress-track">
                 <div class="progress-fill" id="fill-anticipo-progress" style="width: 50.5%;"></div>
@@ -210,68 +384,142 @@
             </div>
 
             <div class="stat-callout" id="callout-readiness">
-              <strong>💡 Recomendación Estratégica:</strong> Para la <strong>Fase 1</strong>, al reunir los $594,000 MXN puedes dar el banderazo de obra. Las ministraciones restantes de la obra ($1,386,000 MXN) se pagan a lo largo de los 6 meses de construcción ($\approx \$57,750\text{ MXN/semana}$) mediante crédito de obra o flujo programado.
+              <strong>💡 Recomendación Estratégica:</strong> Al reunir el anticipo de la <strong>Fase 1 ($594,000 MXN)</strong> arrancas la obra civil. Las ministraciones restantes durante los 6 meses de construcción (aprox. $57,750 MXN/semana) se cubren mediante flujo programado o crédito de obra.
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ====================================================================
-         SECCIÓN 2: PRESUPUESTO MAESTRO & LISTA EXACTA DE PAGOS
-         ==================================================================== -->
-    <section class="tab-content" id="sec-budget">
-      <div class="budget-summary-banner">
-        <div class="budget-stat-item">
-          <span class="stat-tag">Fase 1: Casa Núcleo Habitable</span>
-          <span class="stat-num" id="sum-fase-1">$1,980,000 MXN</span>
-          <span class="stat-hint">~$99,000 USD • Cimentación, Muros y PB Viva</span>
+      <!-- Generador de Estimaciones Semanales de Pago (Destajos) -->
+      <div class="card margin-top">
+        <div class="card-header space-between">
+          <div>
+            <div class="hero-badge">Control Contractual de Destajos</div>
+            <h3 class="card-title">Generador & Registro de Estimaciones de Pago Semanal</h3>
+            <p class="card-subtitle">Aplica automáticamente la amortización de anticipo (30%) y la retención del fondo de garantía (5%)</p>
+          </div>
         </div>
-        <div class="budget-stat-item">
-          <span class="stat-tag">Fase 2: Confort Planta Alta</span>
-          <span class="stat-num" id="sum-fase-2">$580,000 MXN</span>
-          <span class="stat-hint">~$29,000 USD • Cocina Cuarzo & Baño Spa</span>
-        </div>
-        <div class="budget-stat-item">
-          <span class="stat-tag">Fase 3 & 4: Roof & Solar</span>
-          <span class="stat-num" id="sum-fase-3-4">$782,000 MXN</span>
-          <span class="stat-hint">~$39,100 USD • Roof Garden, Paneles & Domótica</span>
-        </div>
-        <div class="budget-stat-item highlight">
-          <span class="stat-tag">Presupuesto Total Consolidado</span>
-          <span class="stat-num text-primary" id="sum-total">$3,572,000 MXN</span>
-          <span class="stat-hint">~$178,600 USD • 235 m² ($15,200/m²)</span>
+
+        <div class="estimation-generator-grid">
+          <div class="estimation-form">
+            <h4 class="form-title">Generar Nueva Estimación de Pago</h4>
+            <div class="grid-2-col-compact">
+              <div class="form-group">
+                <label for="est-contractor">Contratista / Especialista:</label>
+                <select id="est-contractor" class="form-control">
+                  <option value="Maestro Albañil / Cuadrilla Obra Negra">Maestro Albañil / Cuadrilla Obra Negra</option>
+                  <option value="Plomero Certificado (Instalación PPR/PVC)">Plomero Certificado (Instalación PPR/PVC)</option>
+                  <option value="Electricista / Instalador Domótico">Electricista / Instalador Domótico</option>
+                  <option value="Yesero / Cuadrilla de Aplanados">Yesero / Cuadrilla de Aplanados</option>
+                  <option value="Impermeabilizador Especializado">Impermeabilizador Especializado</option>
+                  <option value="Cancelero / Cristalero">Cancelero / Cristalero</option>
+                  <option value="Carpintero de Obra">Carpintero de Obra</option>
+                  <option value="DRO / Supervisor Perito">DRO / Supervisor Perito</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="est-concept">Concepto / Sub-etapa Ejecutada:</label>
+                <input type="text" id="est-concept" class="form-control" placeholder="Ej. Colado de Zapatas y Cisterna">
+              </div>
+
+              <div class="form-group">
+                <label for="est-gross-amount">Monto Bruto Estimado ($):</label>
+                <input type="number" id="est-gross-amount" class="form-control" value="25000" min="1000" step="1000">
+              </div>
+
+              <div class="form-group">
+                <label for="est-status">Dictamen del Supervisor / DRO:</label>
+                <select id="est-status" class="form-control">
+                  <option value="Aprobada">✅ Aprobada (Trabajo 100% verificado en campo)</option>
+                  <option value="Con Observaciones">⚠️ Con Observaciones Menores</option>
+                  <option value="Rechazada">❌ Rechazada por No Conformidad</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Resumen de Liquidación de la Estimación -->
+            <div class="est-calculation-card">
+              <div class="est-calc-row">
+                <span>Monto Bruto Estimado:</span>
+                <strong id="calc-est-gross">$25,000.00 MXN</strong>
+              </div>
+              <div class="est-calc-row text-danger">
+                <span>(-) Amortización de Anticipo (30%):</span>
+                <strong id="calc-est-advance">-$7,500.00 MXN</strong>
+              </div>
+              <div class="est-calc-row text-warning">
+                <span>(-) Fondo de Garantía Retenido (5%):</span>
+                <strong id="calc-est-warranty">-$1,250.00 MXN</strong>
+              </div>
+              <div class="est-calc-row highlight-row">
+                <span>(=) MONTO LÍQUIDO A PAGAR:</span>
+                <strong class="text-success" id="calc-est-net">$16,250.00 MXN</strong>
+              </div>
+            </div>
+
+            <button class="btn btn-success btn-block" id="btn-save-estimation">Registrar y Autorizar Estimación de Pago</button>
+          </div>
+
+          <!-- Historial de Estimaciones Registradas -->
+          <div class="estimation-history">
+            <h4 class="form-title">Historial de Estimaciones Autorizadas</h4>
+            <div class="table-responsive est-table-wrap">
+              <table class="data-table compact" id="table-estimations">
+                <thead>
+                  <tr>
+                    <th>Folio</th>
+                    <th>Fecha</th>
+                    <th>Contratista</th>
+                    <th>Bruto</th>
+                    <th>Fondo Gtía (5%)</th>
+                    <th>Neto Pagado</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="estimations-table-body">
+                  <!-- Renderizado dinámico vía JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="card">
+      <!-- Catálogo de Precios Unitarios (PU) & Partidas -->
+      <div class="card margin-top">
         <div class="card-header space-between">
           <div>
-            <h3 class="card-title">Lista Detallada de Conceptos y Pagos de Obra</h3>
-            <p class="card-subtitle">Filtra por Fase de Construcción o Partida Técnica y ajusta los valores</p>
+            <h3 class="card-title">Catálogo Maestro de Precios Unitarios & Partidas</h3>
+            <p class="card-subtitle">Busca cualquier concepto, filtra por fase y consulta especificaciones técnicas</p>
           </div>
-          <div class="filter-pills" id="budget-filters">
-            <button class="filter-btn active" data-filter="all">Todas las Fases (Obra Completa)</button>
-            <button class="filter-btn" data-filter="fase1">🟢 Fase 1: Núcleo Habitable</button>
-            <button class="filter-btn" data-filter="fase2">🔵 Fase 2: Planta Alta</button>
-            <button class="filter-btn" data-filter="fase3">🟡 Fase 3: Roof Garden</button>
-            <button class="filter-btn" data-filter="fase4">🟣 Fase 4: Solar & Domótica</button>
+          <div class="table-search-box">
+            <input type="text" id="input-search-pu" class="search-input" placeholder="🔍 Buscar concepto (ej. concreto, tubo, yeso, tabique)...">
           </div>
         </div>
 
+        <div class="table-filters-pills" id="pu-filter-pills">
+          <button class="filter-btn active" data-pu-filter="all">Todas las Partidas</button>
+          <button class="filter-btn" data-pu-filter="fase1">🟢 Fase 1: Núcleo ($1.98M)</button>
+          <button class="filter-btn" data-pu-filter="fase2">🔵 Fase 2: Planta Alta ($580k)</button>
+          <button class="filter-btn" data-pu-filter="fase3">🟡 Fase 3: Roof Garden ($420k)</button>
+          <button class="filter-btn" data-pu-filter="fase4">🟣 Fase 4: Solar ($362k)</button>
+        </div>
+
         <div class="table-responsive">
-          <table class="data-table" id="table-budget">
+          <table class="data-table" id="table-pu-catalog">
             <thead>
               <tr>
-                <th>Fase / Partida</th>
-                <th>Concepto / Material de Obra</th>
+                <th>Partida / Fase</th>
+                <th>Concepto / Descripción</th>
                 <th>Especificación Técnica Clave</th>
+                <th>Unidad</th>
                 <th>Cant.</th>
-                <th>Unitario</th>
-                <th>Subtotal</th>
+                <th>Precio Unitario</th>
+                <th>Importe Subtotal</th>
               </tr>
             </thead>
-            <tbody id="budget-table-body">
+            <tbody id="pu-catalog-table-body">
               <!-- Renderizado dinámico vía JS -->
             </tbody>
           </table>
@@ -280,35 +528,36 @@
     </section>
 
     <!-- ====================================================================
-         SECCIÓN 3: PLANOS ARQUITECTÓNICOS & ESPACIOS (100% INTACTOS)
+         MÓDULO 4: PLANOS ARQUITECTÓNICOS & MEP (100% INTACTOS & EXACTOS)
          ==================================================================== -->
     <section class="tab-content" id="sec-blueprint">
       <div class="card">
         <div class="card-header space-between">
           <div>
+            <div class="hero-badge">Geometría Oficial & Distribución Vectorial</div>
             <h2 class="card-title">Planos Arquitectónicos Oficiales</h2>
-            <p class="card-subtitle">Explora la geometría aprobada en Planta Baja, Planta Alta y Roof Garden con 1/2 Baño</p>
+            <p class="card-subtitle">Explora la distribución de Planta Baja, Planta Alta y Roof Garden con 1/2 Baño (100% exactos y validados)</p>
           </div>
           <div class="level-selector" role="group" aria-label="Seleccionar planta">
-            <button class="pill-btn active" data-floor="pb" id="btn-floor-pb">Planta Baja</button>
-            <button class="pill-btn" data-floor="pa" id="btn-floor-pa">Planta Alta</button>
-            <button class="pill-btn" data-floor="ext" id="btn-floor-ext">Exterior & Roof Garden</button>
+            <button class="pill-btn active" data-floor="pb" id="btn-floor-pb">Planta Baja (78.36 m²)</button>
+            <button class="pill-btn" data-floor="pa" id="btn-floor-pa">Planta Alta (77.89 m²)</button>
+            <button class="pill-btn" data-floor="ext" id="btn-floor-ext">Roof Garden & Exterior (40.5 m²)</button>
           </div>
         </div>
 
-        <!-- Visor del Terreno y Geometría -->
+        <!-- Tarjeta del Terreno Real -->
         <div class="card terrain-highlight-card">
           <div class="terrain-header">
             <div>
-              <span class="hero-badge">Mediciones Reales de Campo</span>
+              <span class="hero-badge">Levantamiento Topográfico Real</span>
               <h3 class="card-title">Terreno: 153.19 m² (Perímetro: 50.57 m)</h3>
-              <p class="card-subtitle">Frente 10.04 m × Fondo 15.74 m / 14.49 m • Posterior 10.30 m</p>
+              <p class="card-subtitle">Frente: 10.04 m • Fondo L1: 15.74 m • Posterior: 10.30 m • Fondo L3: 14.49 m</p>
             </div>
             <div class="terrain-stats-chips">
-              <span class="chip">L1-2: <strong>15.74 m</strong></span>
-              <span class="chip">L2-3: <strong>10.30 m</strong></span>
-              <span class="chip">L3-4: <strong>14.49 m</strong></span>
-              <span class="chip">L4-1: <strong>10.04 m</strong></span>
+              <span class="chip">L1-2 (Fondo Izq): <strong>15.74 m</strong></span>
+              <span class="chip">L2-3 (Posterior): <strong>10.30 m</strong></span>
+              <span class="chip">L3-4 (Fondo Der): <strong>14.49 m</strong></span>
+              <span class="chip">L4-1 (Frente Calle): <strong>10.04 m</strong></span>
             </div>
           </div>
 
@@ -317,58 +566,242 @@
           </div>
         </div>
 
-        <!-- Visor de Distribución Arquitectónica -->
+        <!-- Visor Vectorial de la Planta Seleccionada -->
         <div class="blueprint-viewer" id="blueprint-display">
           <!-- Renderizado dinámico vía JS -->
         </div>
 
-        <!-- Detalle de la Zona Seleccionada -->
+        <!-- Ficha Técnica del Espacio Seleccionado -->
         <div class="room-details-card" id="room-details">
           <div class="room-details-header">
-            <h4 class="room-title" id="room-name">Selecciona un espacio arriba</h4>
+            <h4 class="room-title" id="room-name">Selecciona un espacio en el plano</h4>
             <span class="badge" id="room-badge">Planta Baja</span>
           </div>
           <div class="room-specs-grid" id="room-specs">
-            <p class="text-muted">Haz clic en cualquier habitación o elemento para ver las tuberías requeridas, apagadores, sensores y especificaciones constructivas.</p>
+            <p class="text-muted">Haz clic en cualquier habitación o elemento para consultar sus cotas exactas, requerimientos de ductería, apagadores inteligentes, tuberías de agua/drenaje y especificaciones constructivas.</p>
+          </div>
+        </div>
+
+        <!-- Enlaces a Planos Ejecutivos de Ingeniería Hidrosanitaria -->
+        <div class="mep-plans-banner margin-top">
+          <div class="mep-banner-text">
+            <h4>📐 Planos Ejecutivos de Instalaciones & MEP Disponibles:</h4>
+            <p>Descarga o consulta los diagramas vectoriales de ingeniería generados para la obra civil:</p>
+          </div>
+          <div class="mep-links-grid">
+            <a href="planos_y_diagramas/01_plano_isometrico_hidraulico_y_solar.svg" target="_blank" class="mep-link-card">
+              <div class="mep-link-icon">💧</div>
+              <div>
+                <strong>01. Isométrico Hidráulico & Solar</strong>
+                <p>Cisterna 5kL, Presurizador 3.5 bar, Solar 200L y Bypass</p>
+              </div>
+            </a>
+            <a href="planos_y_diagramas/02_plano_red_sanitaria_y_pluvial.svg" target="_blank" class="mep-link-card">
+              <div class="mep-link-icon">🚽</div>
+              <div>
+                <strong>02. Red Sanitaria & Drenaje Pluvial</strong>
+                <p>Aguas Negras BSN 4", Grises BSG 3", CVS +7.20m y Pluviales</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         SECCIÓN 4: BITÁCORA DE SUPERVISIÓN & RUTA CRÍTICA PASO A PASO
+         MÓDULO 5: CRONOGRAMA MAESTRO & RUTA CRÍTICA (GANTT)
          ==================================================================== -->
-    <section class="tab-content" id="sec-checklist">
+    <section class="tab-content" id="sec-gantt">
       <div class="card">
         <div class="card-header space-between">
           <div>
-            <h2 class="card-title">Bitácora de Supervisión de Calidad en Obra</h2>
-            <p class="card-subtitle">Guía de inspección paso a paso para verificar con tu arquitecto, DRO y contratistas</p>
+            <div class="hero-badge">Planificación Temporal & Lean Construction</div>
+            <h2 class="card-title">Cronograma Maestro & Ruta Crítica de Obra</h2>
+            <p class="card-subtitle">Visualiza la secuencia constructiva en 24 semanas para Fase 1 y los hitos clave de mudanza</p>
           </div>
-          <div class="checklist-progress-pill">
-            <span id="checklist-progress-text">0 de 12 Verificaciones Completadas</span>
+          <div class="gantt-legend">
+            <span class="legend-item"><span class="legend-dot critical"></span> Ruta Crítica (Cero Holgura)</span>
+            <span class="legend-item"><span class="legend-dot standard"></span> Tareas Paralelas</span>
+            <span class="legend-item"><span class="legend-dot milestone"></span> Hito de Mudanza</span>
           </div>
         </div>
 
-        <div class="checklist-grid" id="checklist-container">
+        <div class="gantt-timeline-container" id="gantt-timeline-display">
           <!-- Renderizado dinámico vía JS -->
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         SECCIÓN 5: BIBLIOTECA TÉCNICA Y DOCUMENTACIÓN OFICIAL (01 a 14)
+         MÓDULO 6: BITÁCORA DIGITAL DE OBRA & CONTROL DE CALIDAD (QA/QC)
+         ==================================================================== -->
+    <section class="tab-content" id="sec-logbook">
+      <div class="grid-2-col">
+        <!-- Formulario de Registro Diario de Bitácora -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div>
+              <h3 class="card-title">Registro Diario de Bitácora de Obra</h3>
+              <p class="card-subtitle">Asiento diario oficial con clima, personal en sitio y acuerdos</p>
+            </div>
+          </div>
+
+          <form id="form-logbook" class="logbook-form">
+            <div class="grid-2-col-compact">
+              <div class="form-group">
+                <label for="log-date">Fecha del Asiento:</label>
+                <input type="date" id="log-date" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label for="log-weather">Condición Climática:</label>
+                <select id="log-weather" class="form-control">
+                  <option value="Soleado / Despejado">☀️ Soleado / Despejado</option>
+                  <option value="Nublado sin lluvia">⛅ Nublado sin lluvia</option>
+                  <option value="Lluvia Ligera">🌧️ Lluvia Ligera (Interrupción parcial)</option>
+                  <option value="Lluvia Fuerte / Tormenta">⛈️ Lluvia Fuerte (Jornada suspendida)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="log-crew">Personal en Sitio (Cuadrilla):</label>
+                <input type="text" id="log-crew" class="form-control" placeholder="Ej. 1 Maestro + 3 Oficiales + 2 Ayudantes">
+              </div>
+
+              <div class="form-group">
+                <label for="log-stage">Fase / Sub-etapa en Proceso:</label>
+                <input type="text" id="log-stage" class="form-control" placeholder="Ej. Armado de losa entrepiso PB">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="log-activities">Actividades Ejecutadas en la Jornada:</label>
+              <textarea id="log-activities" class="form-control" rows="3" placeholder="Describe los avances cuantificables logrados en el día..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="log-notes">Observaciones Técnicas / Acuerdos con DRO:</label>
+              <textarea id="log-notes" class="form-control" rows="2" placeholder="Notas de calidad, pruebas realizadas, recepción de materiales..."></textarea>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block" id="btn-save-log">Guardar Asiento en Bitácora</button>
+          </form>
+        </div>
+
+        <!-- Registro de Pruebas de Calidad (QA/QC) -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <h3 class="card-title">Matriz de Pruebas de Laboratorio & Calidad</h3>
+              <p class="card-subtitle">Certificados obligatorios para liberación de partidas</p>
+            </div>
+          </div>
+
+          <div class="qa-tests-list">
+            <div class="qa-test-card">
+              <div class="qa-test-header">
+                <strong>1. Resistencia de Concreto f'c=250 kg/cm²</strong>
+                <span class="badge badge-success">Norma NMX-C-083</span>
+              </div>
+              <p>Pruebas de cilindros a los 7, 14 y 28 días en cimentación y losas de entrepiso/azotea.</p>
+              <div class="qa-test-status">
+                <span>Criterio: &ge; 250 kg/cm² (Revenimiento 14&plusmn;3.5 cm)</span>
+              </div>
+            </div>
+
+            <div class="qa-test-card">
+              <div class="qa-test-header">
+                <strong>2. Prueba Hidrostática de Tuberías a 10 Bar</strong>
+                <span class="badge badge-success">Norma NMX-E-226</span>
+              </div>
+              <p>Presión sostenida con bomba de prueba por 24 horas continuas en red PPR antes de aplanar.</p>
+              <div class="qa-test-status">
+                <span>Criterio: Cero caída de aguja en manómetro calibrado</span>
+              </div>
+            </div>
+
+            <div class="qa-test-card">
+              <div class="qa-test-header">
+                <strong>3. Prueba de Estanqueidad de Azotea (48 Horas)</strong>
+                <span class="badge badge-success">Garantía 10 Años</span>
+              </div>
+              <p>Inundación con diques de arena en azotea para verificar impermeabilización termofusionada.</p>
+              <div class="qa-test-status">
+                <span>Criterio: Cero manchas de humedad en losa inferior</span>
+              </div>
+            </div>
+
+            <div class="qa-test-card">
+              <div class="qa-test-header">
+                <strong>4. Medición de Tierra Física & Aislamiento</strong>
+                <span class="badge badge-success">NOM-001-SEDE</span>
+              </div>
+              <p>Megger de aislamiento en líneas eléctricas y medición de resistencia de electrodo.</p>
+              <div class="qa-test-status">
+                <span>Criterio: Resistencia de puesta a tierra &lt; 5 &Omega;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Historial de Asientos de Bitácora -->
+      <div class="card margin-top">
+        <div class="card-header space-between">
+          <div>
+            <h3 class="card-title">Historial Foliado de Bitácora de Obra</h3>
+            <p class="card-subtitle">Consulta todos los asientos registrados cronológicamente</p>
+          </div>
+          <button class="btn btn-outline" id="btn-export-logbook">📥 Exportar Bitácora (JSON/Reporte)</button>
+        </div>
+
+        <div class="logbook-entries-container" id="logbook-entries-list">
+          <!-- Renderizado dinámico vía JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MÓDULO 7: DIRECTORIO DE CONTRATISTAS & MATRIZ RACI
+         ==================================================================== -->
+    <section class="tab-content" id="sec-contractors">
+      <div class="card">
+        <div class="card-header space-between">
+          <div>
+            <div class="hero-badge">Organización & Responsabilidades</div>
+            <h2 class="card-title">Directorio de Especialistas & Matriz RACI</h2>
+            <p class="card-subtitle">Control de contratos, garantías retenidas y teléfonos de emergencia</p>
+          </div>
+        </div>
+
+        <div class="contractors-grid" id="contractors-display">
+          <!-- Renderizado dinámico vía JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MÓDULO 8: BIBLIOTECA TÉCNICA Y DOCUMENTACIÓN OFICIAL (01 a 15)
          ==================================================================== -->
     <section class="tab-content" id="sec-docs">
       <div class="docs-browser-layout">
         <aside class="docs-sidebar">
-          <h4 class="sidebar-heading">Documentos del Proyecto</h4>
+          <div class="docs-search-header">
+            <input type="text" id="input-search-docs" class="docs-search-input" placeholder="🔍 Buscar en documentos...">
+          </div>
+          <h4 class="sidebar-heading">Documentos Técnicos Oficiales</h4>
           <ul class="docs-nav-list" id="docs-nav-list">
             <li class="docs-nav-item active" data-doc="vision">01. Visión y Cronograma 3 Años</li>
             <li class="docs-nav-item" data-doc="dossier">02. Dossier Técnico de Obra</li>
             <li class="docs-nav-item" data-doc="network">03. Arquitectura de Red y Rack</li>
             <li class="docs-nav-item" data-doc="subsystems">04. Subsistemas Domóticos</li>
-            <li class="docs-nav-item" data-doc="budget">05. Presupuesto y Catálogo</li>
+            <li class="docs-nav-item" data-doc="budget">05. Presupuesto y Catálogo Domótico</li>
             <li class="docs-nav-item" data-doc="neufert">06. Estándares Neufert & Arquitectura</li>
             <li class="docs-nav-item" data-doc="topography">07. Levantamiento Topográfico y Terreno</li>
             <li class="docs-nav-item" data-doc="zoning">08. Programa Arquitectónico 3 Niveles</li>
@@ -378,6 +811,7 @@
             <li class="docs-nav-item" data-doc="masterplan">12. Plan Maestro Paso a Paso Llave en Mano</li>
             <li class="docs-nav-item" data-doc="progressive">13. Estrategia Progresiva & Habitabilidad</li>
             <li class="docs-nav-item" data-doc="cashflow">14. Guía Financiera & Flujo de Caja por Fases</li>
+            <li class="docs-nav-item" data-doc="management">15. Manual de Administración & Control QA</li>
           </ul>
         </aside>
 
@@ -389,9 +823,10 @@
 
   </main>
 
+  <!-- Footer -->
   <footer class="app-footer">
     <div class="footer-content">
-      <p>Proyecto Residencia Inteligente • Plan Maestro de Construcción & Finanzas en 4 Fases Progresivas.</p>
+      <p><strong>SICO-235</strong> • Sistema Integral de Control de Obra & Finanzas para Residencia Inteligente en 3 Niveles.</p>
       <p class="footer-meta">Ubicación de archivos locales: <code>/home/olethros1318/Escritorio/Proyecto_Casa_Inteligente/</code></p>
     </div>
   </footer>
