@@ -1617,43 +1617,49 @@ pa: [
    4. PRESUPUESTO & COTIZADOR
    ========================================================================== */
 const budgetItems = [
-  // Obra Negra
-  { sub: 'Obra Negra', cat: 'obra', name: 'Bobina Cat6 Cobre Interior (305m)', spec: '100% Cobre UTP para APs y datos', qty: 1, unit: 110 },
-  { sub: 'Obra Negra', cat: 'obra', name: 'Bobina Cat6 Exterior UV (305m)', spec: 'Protección UV para cámaras y timbre', qty: 1, unit: 120 },
-  { sub: 'Obra Negra', cat: 'obra', name: 'Bobina Cable Audio 14 AWG (100m)', spec: 'Libre de oxígeno para bocinas de techo', qty: 1, unit: 75 },
-  { sub: 'Obra Negra', cat: 'obra', name: 'Chalupas extra-profundas (50mm)', spec: 'Cajas galvanizadas para micromódulos', qty: 30, unit: 2 },
-  { sub: 'Obra Negra', cat: 'obra', name: 'Poliducto/Conduit 3/4", 1" y 2"', spec: 'Tuberías y pasacables de TV', qty: 1, unit: 120 },
-  { sub: 'Obra Negra', cat: 'obra', name: 'Mano de obra electricista (Datos)', spec: 'Tendido y ranurado de tuberías de red', qty: 1, unit: 300 },
+  // 01. Cimentación y Estructura
+  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Estudios Preliminares, Mecánica Suelos & DRO', spec: '3 sondeos, cálculo estructural, licencia de construcción', qty: 1, unit: 7250 },
+  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Trazo, Excavación & Cimentación Concreto', spec: "Zapatas corridas, acero f'c=250 kg/cm2, fumigación antitermitas", qty: 1, unit: 20350 },
+  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Cisterna Subterránea 5,000 L en Concreto', spec: 'Concreto armado hidrófugo bajo cochera con sensor ultrasónico', qty: 1, unit: 3400 },
+  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Muros de Carga, Castillos & Dalas (3 Niveles)', spec: 'Block térmico / ladrillo confinado con columnas de concreto', qty: 1, unit: 17000 },
+  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Losas de Entrepiso PB-PA y Azotea General', spec: "Vigueta y bovedilla poliestireno + capa compresión f'c=250", qty: 1, unit: 20750 },
+  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Cubierta Sobreelevada (Monitor Roof) & Escalera', spec: 'Estructura linternilla pasillo PA y 34 escalones de concreto', qty: 1, unit: 5000 },
 
-  // Red y Rack
-  { sub: 'Red & Rack', cat: 'red', name: 'Gabinete Rack 9U a 12U + PDU', spec: 'Rack de pared para MDF en PB', qty: 1, unit: 140 },
-  { sub: 'Red & Rack', cat: 'red', name: 'Switch PoE+ Gigabit 16 Puertos', spec: 'TP-Link Omada o UniFi PoE+', qty: 1, unit: 250 },
-  { sub: 'Red & Rack', cat: 'red', name: 'Router / Gateway Gigabit', spec: 'Soporte VLANs y cortafuegos', qty: 1, unit: 130 },
-  { sub: 'Red & Rack', cat: 'red', name: 'Access Points Wi-Fi 6 de Techo', spec: '1 por planta (UniFi U6+ / Omada)', qty: 2, unit: 120 },
-  { sub: 'Red & Rack', cat: 'red', name: 'Mini-PC Intel N100 (Home Assistant)', spec: '16GB RAM / 512GB SSD NVMe', qty: 1, unit: 160 },
-  { sub: 'Red & Rack', cat: 'red', name: 'UPS / No-Break 1500VA con AVR', spec: 'Respaldo de energía para el Rack', qty: 1, unit: 130 },
-  { sub: 'Red & Rack', cat: 'red', name: 'Coordinador USB Zigbee / Matter', spec: 'Sonoff Dongle Plus en Mini-PC', qty: 1, unit: 35 },
+  // 02. Acabados y Pisos
+  { sub: '02. Acabados', cat: 'acabados', name: 'Aplanados de Yeso Muestreado y Zarpeo Exterior', spec: 'Yeso a plomo en interiores y repellado con hidrófugo exterior', qty: 1, unit: 8650 },
+  { sub: '02. Acabados', cat: 'acabados', name: 'Impermeabilización Termofusionada Azotea (10 Años)', spec: 'Membrana prefabricada 4.5mm gravillada con poliéster', qty: 1, unit: 2400 },
+  { sub: '02. Acabados', cat: 'acabados', name: 'Piso Porcelánico Gran Formato (60x120 cm)', spec: '185 m2 en PB y PA con boquilla epóxica antibacterial', qty: 1, unit: 8250 },
+  { sub: '02. Acabados', cat: 'acabados', name: 'Piso Deck Exterior / Porcelanato Antiderrapante', spec: '55 m2 en Roof Garden frontal y balcón de Master Suite', qty: 1, unit: 2900 },
+  { sub: '02. Acabados', cat: 'acabados', name: 'Muebles de Baño, Inodoros Suspendidos & Grifería', spec: '4 WCs ecológicos, regaderas tipo lluvia spa y monomandos', qty: 1, unit: 6250 },
+  { sub: '02. Acabados', cat: 'acabados', name: 'Pintura Vinílica Lavable & Jardinería San Agustín', spec: 'Comex Vinimex Total en 3 niveles y pasto en servidumbres', qty: 1, unit: 4650 },
 
-  // Seguridad
-  { sub: 'Seguridad', cat: 'seguridad', name: 'Kit 4 Cámaras 4K PoE + NVR 2TB', spec: 'Reolink 4K PoE perimetrales', qty: 1, unit: 450 },
-  { sub: 'Seguridad', cat: 'seguridad', name: 'Timbre con Video PoE', spec: 'Reolink Doorbell PoE con botón físico', qty: 1, unit: 110 },
-  { sub: 'Seguridad', cat: 'seguridad', name: 'Cerradura Inteligente Matter/Thread', spec: 'Aqara U200 con huella y Apple Key', qty: 1, unit: 230 },
-  { sub: 'Seguridad', cat: 'seguridad', name: 'Relevador para Portón Vehicular', spec: 'Apertura remota y geocerca', qty: 1, unit: 30 },
+  // 03. Carpintería y Cocina
+  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Cocina Integral de Diseño con Isla Central', spec: 'Muebles hidrófugos, herrajes de cierre suave y cubiertas de cuarzo', qty: 1, unit: 9250 },
+  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Puerta Principal Monumental en Madera & Acero', spec: 'Puerta de seguridad pivotante con chapa biométrica inteligente', qty: 1, unit: 1900 },
+  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Puertas Interiores Semisólidas con Marco Envolvente', spec: '8 puertas de recámaras y baños con sellos acústicos', qty: 8, unit: 350 },
+  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Clósets Empotrados & Walk-in Closet Master', spec: 'Clósets recámaras 1, 2, Suite PB y vestidor privado Master', qty: 1, unit: 3900 },
+  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Pérgola Metálica de Sombra en Roof Garden', spec: 'Vigas de acero estructural y sombra bioclimática en terraza', qty: 1, unit: 1150 },
 
-  // Iluminación
-  { sub: 'Iluminación', cat: 'iluminacion', name: 'Micromódulos Ocultos (Shelly/Zigbee)', spec: 'Empotrados detrás de apagadores normales', qty: 18, unit: 15 },
-  { sub: 'Iluminación', cat: 'iluminacion', name: 'Módulos para Persianas (Shelly 2PM)', spec: 'Control de porcentaje de apertura', qty: 4, unit: 25 },
+  // 04. Cancelería y Vidrios
+  { sub: '04. Cancelería', cat: 'canceleria', name: 'Cancelería Aluminio Eurovent 70/80 con Cristal 6mm', spec: 'Ventanas perimetrales y canceles corredizos al jardín trasero', qty: 1, unit: 6750 },
+  { sub: '04. Cancelería', cat: 'canceleria', name: 'Canceles de Cristal Templado 9.5mm en Regaderas', spec: '3 canceles de baño con herrajes de acero inoxidable', qty: 3, unit: 633 },
+  { sub: '04. Cancelería', cat: 'canceleria', name: 'Barandales de Cristal Templado (Balcón & Roof)', spec: 'Cristal templado 9.5mm con postes de acero inoxidable', qty: 1, unit: 2100 },
+  { sub: '04. Cancelería', cat: 'canceleria', name: 'Celosías Louvers Antilluvia en Monitor Roof', spec: 'Aluminio anodizado con lamas a 45° y mosquiteros integrados', qty: 1, unit: 1500 },
 
-  // Audio Multi-Room
-  { sub: 'Audio Multi-Room', cat: 'audio', name: 'Bocinas Empotradas de Techo 6.5"/8"', spec: 'Rejilla magnética plana (3 pares)', qty: 6, unit: 50 },
-  { sub: 'Audio Multi-Room', cat: 'audio', name: 'Amplificador Wi-Fi/AirPlay WiiM Amp', spec: 'Streaming multizona en el Rack', qty: 2, unit: 300 },
+  // 05. Instalaciones MEP y Fontanería
+  { sub: '05. MEP', cat: 'mep', name: 'Instalación Eléctrica con Neutro al 100% & Tablero QO-24', spec: 'Cable antiflama, acometida 220V CFE, circuito EV 40A y UPS', qty: 1, unit: 6000 },
+  { sub: '05. MEP', cat: 'mep', name: 'Red Hidráulica PPR Termofusionada & Recirculación', spec: 'Tuberías TuboPlus aisladas, subida a azotea y retorno 1/2"', qty: 1, unit: 2800 },
+  { sub: '05. MEP', cat: 'mep', name: 'Red Sanitaria PVC, Columna Ventilación & Drenaje Pluvial', spec: 'BSN 4", BSG 3", CVS 2" a +7.20m y bajadas pluviales BAP 4"', qty: 1, unit: 2450 },
+  { sub: '05. MEP', cat: 'mep', name: 'Bomba Presurizadora Inverter + Filtro Dual + Lámpara UV', spec: '3.5 bar constante, 5µm, carbón activado y esterilizador UV', qty: 1, unit: 1700 },
+  { sub: '05. MEP', cat: 'mep', name: 'Calentador Solar de Agua 200 L (15 Tubos de Vacío Inox)', spec: 'Termotanque inox 304, bypass termostático y respaldo modulante', qty: 1, unit: 950 },
 
-  // Recursos (Agua & Clima)
-  { sub: 'Agua & Clima', cat: 'recursos', name: 'Módulos Control Mini-split Inverter', spec: 'Integración local por UART / ESPHome', qty: 3, unit: 33 },
-  { sub: 'Agua & Clima', cat: 'recursos', name: 'Sensor Nivel Cisterna + ESP32', spec: 'Medición ultrasónica del % de agua', qty: 1, unit: 50 },
-  { sub: 'Agua & Clima', cat: 'recursos', name: 'Válvula Corte Fugas + 4 Sensores', spec: 'Corte automático de agua en 3 seg', qty: 1, unit: 130 },
-  { sub: 'Agua & Clima', cat: 'recursos', name: 'Controlador de Riego Inteligente', spec: 'Ajuste según pronóstico del clima', qty: 1, unit: 80 },
-  { sub: 'Agua & Clima', cat: 'recursos', name: 'Sensores de Presencia Radar mmWave', spec: 'Aqara FP2 para detección precisa', qty: 3, unit: 50 }
+  // 06. Domótica, Redes y Energías Limpias
+  { sub: '06. Domótica', cat: 'domotica', name: 'Arreglo Fotovoltaico Solar 3.3 kWp (6 Paneles 550W)', spec: 'Módulos monocristalinos bifaciales + microinversores smart', qty: 1, unit: 3900 },
+  { sub: '06. Domótica', cat: 'domotica', name: 'Sistema Climatización A/C Multi-Split Inverter', spec: '3 condensadoras + 4 evaporadoras para PB, Master y Secundarias', qty: 1, unit: 4900 },
+  { sub: '06. Domótica', cat: 'domotica', name: 'Rack 12U Equipado (Gateway UniFi, Switch PoE+, UPS)', spec: 'Cloud Gateway Ultra, Switch 16p PoE+, UPS Online 1500VA', qty: 1, unit: 2300 },
+  { sub: '06. Domótica', cat: 'domotica', name: '3 Puntos de Acceso Wi-Fi 7 PoE (PB, PA, Roof Top)', spec: 'Ubiquiti UniFi U7 Pro para roaming continuo en toda la casa', qty: 3, unit: 220 },
+  { sub: '06. Domótica', cat: 'domotica', name: 'CCTV 4K PoE con IA, Videoportero & Cerradura Smart', spec: '4 cámaras 4K, NVR local 4TB sin cuotas, timbre con chapa eléc.', qty: 1, unit: 2100 },
+  { sub: '06. Domótica', cat: 'domotica', name: 'Iluminación Inteligente Circadiana & Sensores mmWave', spec: 'Tiras COB LED 24V, Dimmers DALI, apagadores Zigbee/Matter', qty: 1, unit: 2250 }
 ];
 
 function initBudget() {
@@ -1888,13 +1894,43 @@ const docsContent = {
         <p><a href="planos_y_diagramas/02_plano_red_sanitaria_y_pluvial.svg" target="_blank" style="display: inline-block; padding: 6px 12px; background: #b91c1c; color: white; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 12px;">Ver Plano Sanitario SVG ↗</a></p>
       </div>
     </div>
+  `,
+  civilbudget: `
+    <h2>11. Presupuesto Paramétrico de Obra Civil Completa (235 m²)</h2>
+    <p>Estimación desglosada por capítulos para una construcción residencial medio-alto con acabados de primera y domótica integral ($15,200 MXN/m²):</p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0;">
+      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-left: 4px solid #38bdf8;">
+        <div style="font-size: 11px; color: #94a3b8;">01. Cimentación & Estructura</div>
+        <div style="font-size: 18px; font-weight: 800; color: #f8fafc;">$1,365,000 MXN</div>
+        <div style="font-size: 11px; color: #38bdf8;">$68,250 USD (38.2%)</div>
+      </div>
+      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-left: 4px solid #10b981;">
+        <div style="font-size: 11px; color: #94a3b8;">02. Acabados, Pisos & Canceles</div>
+        <div style="font-size: 18px; font-weight: 800; color: #f8fafc;">$1,275,000 MXN</div>
+        <div style="font-size: 11px; color: #10b981;">$63,750 USD (35.7%)</div>
+      </div>
+      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-left: 4px solid #f59e0b;">
+        <div style="font-size: 11px; color: #94a3b8;">03. MEP, Domótica & Solar</div>
+        <div style="font-size: 18px; font-weight: 800; color: #f8fafc;">$932,000 MXN</div>
+        <div style="font-size: 11px; color: #f59e0b;">$46,600 USD (26.1%)</div>
+      </div>
+    </div>
 
-    <h3>Especificaciones de Materiales Obligatorias:</h3>
+    <p><strong>Gran Total Estimado Llave en Mano:</strong> <span style="color: #38bdf8; font-size: 18px; font-weight: 800;">$3,572,000 MXN</span> ($178,600 USD).</p>
+  `,
+  masterplan: `
+    <h2>12. Plan Maestro de Construcción Paso a Paso (10 Meses)</h2>
+    <p>Ruta crítica desde los trámites de licencias hasta la entrega de llaves y mudanza:</p>
     <ul>
-      <li><strong>Agua Potable (Fría y Caliente):</strong> Tubería y conexiones de polipropileno copolímero random (PPR / TuboPlus) termofusionadas al 100% (cero fugas de por vida).</li>
-      <li><strong>Aislamiento Térmico:</strong> Espuma elastomérica tipo coquilla de 1/2" de espesor en todas las tuberías de agua caliente solar y recirculación.</li>
-      <li><strong>Drenaje Sanitario:</strong> Tubería de PVC Sanitario tipo Norma con campana y empaque de hule hermético; pendientes mínimas de 2.0% en todos los tramos horizontales.</li>
-      <li><strong>Registros Sanitarios:</strong> Cuadros de mampostería con acabado pulido fino y contratapa de doble sello hermético anti-olores.</li>
+      <li><strong>Fase 0 (Pre-obra - Mes -3 a 0):</strong> Mecánica de suelos, cálculo estructural, firma de DRO y obtención de licencia municipal de construcción.</li>
+      <li><strong>Fase 1 (Meses 1 y 2):</strong> Trazo con estación total, excavación, cisterna de 5,000 L y colado de zapatas / losa de cimentación con drenajes maestros.</li>
+      <li><strong>Fase 2 (Meses 3 a 5):</strong> Muros de carga, losa de entrepiso PB-PA, muros de Planta Alta, losa de azotea general (+6.00m), caseta de escalera y cubierta sobreelevada (+6.70m).</li>
+      <li><strong>Fase 3 (Meses 5 y 6):</strong> Canalizaciones conduit pesadas, fontanería PPR aislada, drenajes PVC, cableado con neutro y tendido de cable Cat6A.</li>
+      <li><strong>Fase 4 (Meses 6 y 7):</strong> Aplanados de yeso a plomo, repellados exteriores con hidrófugo e impermeabilización termofusionada en azotea (garantía 10 años).</li>
+      <li><strong>Fase 5 (Meses 8 y 9):</strong> Colocación de porcelanatos gran formato, montaje de cocina integral con isla, clósets, vestidor y cancelería Eurovent con cristal templado.</li>
+      <li><strong>Fase 6 (Mes 10):</strong> Montaje de 6 paneles solares (3.3 kWp), calentador solar 200L, 3 climas A/C inverter, Rack 12U y comisionamiento de Home Assistant.</li>
+      <li><strong>Fase 7 (Mes 10 - Semana 4):</strong> Pruebas integrales de presión hidráulica, limpieza fina de obra y entrega formal de llaves en mano.</li>
     </ul>
   `};
 
