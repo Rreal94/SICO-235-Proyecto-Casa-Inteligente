@@ -1796,49 +1796,80 @@ const docsContent = {
       <li><strong>Año 2:</strong> Diseño de planos ejecutivos con el arquitecto e incorporación formal del Rack y canalizaciones.</li>
       <li><strong>Año 3:</strong> Trámite del crédito de construcción, licitación de obra e inicio de colocación de tuberías en obra negra.</li>
     </ul>
-    <pre>Fondo reservado para obra negra: ~$785 USD (~$15,700 MXN) para todas las tuberías y bobinas de red Cat6.</pre>
+    <p>Dejar tuberías de 1 pulgada y cajas chalupas profundas de 2x4" durante la obra negra cuesta <strong>menos de $800 USD</strong> y ahorra miles de dólares en ranurados posteriores.</p>
   `,
   dossier: `
-    <h2>02. Dossier Técnico de Obra para Arquitecto y Electricista</h2>
-    <p>Las 5 reglas de oro innegociables para las instalaciones de la casa:</p>
-    <ol>
-      <li><strong>Cable Neutro en el 100% de los apagadores:</strong> Imprescindible para alimentar los micromódulos inteligentes.</li>
-      <li><strong>Chalupas de 50mm de fondo:</strong> Permite colocar apagadores normales de diseño (Bticino, Schneider, Simon) con el módulo oculto detrás.</li>
-      <li><strong>Rack Central (MDF):</strong> Punto de convergencia único para todos los cables Cat6 de cámaras, APs, timbres y audio.</li>
-      <li><strong>Separación de tuberías:</strong> Al menos 20 cm entre líneas eléctricas de 110V/220V y tuberías de datos Cat6.</li>
-      <li><strong>Pasacables de 2" en TVs:</strong> Oculta los cables HDMI dentro de la pared para un acabado limpio.</li>
-    </ol>
+    <h2>02. Dossier Técnico de Obra Negra</h2>
+    <p>Especificaciones obligatorias para el constructor y electricista:</p>
+    <ul>
+      <li><strong>Caja de Chalupa Profunda:</strong> Exclusivamente cajas cuadradas 4x4" con sobretapa o chalupas de 50mm de profundidad para albergar módulos Zigbee/Matter detrás del apagador.</li>
+      <li><strong>Cable Neutro en Toda Chalupa:</strong> Cero apagadores tradicionales sin neutro; garantiza alimentación continua a los microcontroladores.</li>
+      <li><strong>Tubería Conduit Pesada:</strong> Tubo de 1 pulgada (25mm) para datos y audio; tubo de 3/4" para circuitos de fuerza.</li>
+    </ul>
   `,
   network: `
-    <h2>03. Arquitectura de Red y Rack Central</h2>
-    <p>Toda la casa se conecta mediante cable estructurado Cat6 100% Cobre con alimentación PoE+:</p>
+    <h2>03. Arquitectura de Red y Rack 12U</h2>
+    <p>Topología estructurada en estrella con cable Cat6A 100% cobre:</p>
     <ul>
-      <li><strong>Switch PoE Gigabit:</strong> Alimenta cámaras de seguridad y Access Points por el mismo cable de red.</li>
-      <li><strong>Access Points Wi-Fi 6 de techo:</strong> 1 en Planta Baja y 1 en Planta Alta para roaming perfecto sin cortes.</li>
-      <li><strong>Segmentación VLAN:</strong> Aísla los dispositivos inteligentes (luces, persianas) de tus computadoras personales y cámaras para máxima seguridad.</li>
-      <li><strong>Mini-PC con Home Assistant OS:</strong> Cerebro local que ejecuta todas las automatizaciones sin depender de servidores en la nube.</li>
+      <li><strong>Ubicación:</strong> Cuarto de Máquinas y Domótica en Planta Baja (X = 12.67m, Y = -1.05m).</li>
+      <li><strong>Puntos de Acceso Wi-Fi 7:</strong> AP1 en PB (Área Social), AP2 en PA (Pasillo de recámaras), AP3 en Roof Top (Terraza exterior).</li>
+      <li><strong>Servidor Local:</strong> Mini PC / Home Assistant Yellow con grabación de CCTV 4K local en NVR de 4TB (Cero dependencia de nubes de pago).</li>
     </ul>
   `,
   subsystems: `
-    <h2>04. Subsistemas Domóticos Detallados</h2>
-    <p>Resumen del equipamiento por subsistema:</p>
+    <h2>04. Subsistemas Domóticos</h2>
+    <p>Integración sobre estándares abiertos:</p>
     <ul>
-      <li><strong>Iluminación:</strong> Micromódulos Shelly/Zigbee con apagadores tradicionales y tolerancia a fallos.</li>
-      <li><strong>Climatización:</strong> Mini-splits Inverter con control local y persianas motorizadas en sala y recámaras.</li>
-      <li><strong>Audio Multi-Room:</strong> Bocinas empotradas en techo (Sala, Cocina, Terraza) amplificadas desde el Rack.</li>
-      <li><strong>Seguridad:</strong> 4 Cámaras 4K PoE + Timbre con video PoE + Cerradura inteligente con huella/PIN/Apple Key.</li>
-      <li><strong>Agua & Recursos:</strong> Sensor de nivel de cisterna, corte automático por fugas y riego inteligente para el jardín.</li>
+      <li><strong>Iluminación:</strong> Apagadores Zigbee 3.0 con neutro y tiras COB LED dimerizables con ritmo circadiano (2700K a 4000K).</li>
+      <li><strong>Presencia:</strong> Sensores mmWave de microondas (24GHz/60GHz) para detección de presencia estática y microrrespiración en cada estancia.</li>
+      <li><strong>Clima & Riego:</strong> Termostatos inteligentes y electroválvulas de riego por goteo automatizadas según pronóstico de lluvia.</li>
     </ul>
   `,
   budget: `
     <h2>05. Presupuesto y Catálogo de Equipos</h2>
-    <p>Resumen de costos estimativos:</p>
+    <p>La inversión total se divide en dos etapas:</p>
     <ul>
-      <li><strong>Fase 1 (Obra Negra):</strong> ~$785 USD (~$15,700 MXN) — Tuberías, cajas profundas y bobinas Cat6.</li>
-      <li><strong>Fase 2 (Equipos Tecnológicos):</strong> ~$3,655 USD (~$73,100 MXN) — Rack, Switch, Cámaras, Cerradura, Audio y Módulos.</li>
-      <li><strong>Inversión Global Llave en Mano:</strong> <strong>~$4,440 USD (~$88,800 MXN)</strong>.</li>
+      <li><strong>Fase 1 (Obra Negra - Año 3):</strong> ~$785 USD (~$15,700 MXN) para ductos, cajas y cable Cat6.</li>
+      <li><strong>Fase 2 (Equipamiento Inteligente):</strong> ~$3,655 USD (~$73,100 MXN) adquiribles de manera gradual según prioridad.</li>
     </ul>
-    <p class="text-muted">Nota: Los equipos de la Fase 2 se pueden adquirir gradualmente una vez habitada la casa.</p>
+  `,
+  neufert: `
+    <h2>06. Criterios de Diseño Arquitectónico (Ergonomía Neufert)</h2>
+    <p>Cumplimiento de estándares internacionales de habitabilidad y confort:</p>
+    <ul>
+      <li><strong>Circulaciones:</strong> Pasillos principales de 1.50 m en extremos y 1.01 m a 0.90 m mínimos en zonas de transición.</li>
+      <li><strong>Alturas Libres:</strong> Planta Baja con doble nivel (Gran Área Social con techo a +3.15 m libre; Recámara Suite a +3.00 m).</li>
+      <li><strong>Linternilla Cenital (*Monitor Roof*):</strong> Pasillo de Planta Alta con techo sobreelevado a +3.40 m libre (+70 cm sobre la losa) para iluminación natural difusa y extracción de aire caliente.</li>
+      <li><strong>Escalera Ergonómica (Ley de Blondel):</strong> 17 escalones continuos con huella de 28 cm y contrahuella de 17.65 cm (2P + H = 63.3 cm), apilados verticalmente de PB a PA y a Roof Garden.</li>
+    </ul>
+  `,
+  topography: `
+    <h2>07. Levantamiento Topográfico y Terreno</h2>
+    <p>Dimensiones y límites reales del lote residencial:</p>
+    <ul>
+      <li><strong>Superficie Total:</strong> 153.19 m² (Perímetro: 50.57 m).</li>
+      <li><strong>Linderos:</strong> Norte 15.74 m, Sur 14.49 m, Oriente (Frente a calle) 10.04 m, Poniente (Fondo) 10.30 m.</li>
+      <li><strong>Servidumbres y Retiros:</strong> Calle de acceso 10.30 m, Arriate frontal verde 60 cm, Banqueta peatonal 90 cm y Jardín frontal en servidumbre.</li>
+    </ul>
+  `,
+  zoning: `
+    <h2>08. Programa Arquitectónico Integral (3 Niveles)</h2>
+    <p>Zonificación aprobada del proyecto:</p>
+    <ul>
+      <li><strong>Planta Baja (±0.00 m / -0.15 m):</strong> Cochera techada 2 autos con cargador EV 240V/40A, Cuarto de Máquinas 12U, Lavandería, 1/2 Baño enrasado, Recámara Suite PB con baño en 'L' y vestidor, Gran Área Social abierta con cocina e isla y jardín trasero.</li>
+      <li><strong>Planta Alta (+3.00 m):</strong> Master Suite con gran balcón frontal de 4.75 m, pasillo-clóset privado y baño spa, Family Room diáfano, 2 Recámaras Secundarias, Baño Compartido y Zinc.</li>
+      <li><strong>Roof Garden (+6.00 m):</strong> Terraza social frontal panorámica con pérgola, sala lounge con firepit, grill con tarja y barra, 1/2 baño exclusivo, caseta de escalera interior, arreglo solar 3.3 kWp, calentador solar 200L y 3 condensadoras A/C.</li>
+    </ul>
+  `,
+  mep: `
+    <h2>09. Ingenierías MEP & Domótica Integrada</h2>
+    <p>Infraestructura eléctrica, hidráulica, solar y de telecomunicaciones:</p>
+    <ul>
+      <li><strong>Eléctrico:</strong> Tablero QO-24 bifásico con acometida para medidor bidireccional CFE, circuito EV 40A, circuito UPS para servidores y circuitos de iluminación LED DALI.</li>
+      <li><strong>Iluminación Smart & mmWave:</strong> Control por escenas Zigbee/Matter con ritmo circadiano (2700K a 4000K) y sensores de presencia milimétrica (24GHz) en cada espacio.</li>
+      <li><strong>Red & CCTV:</strong> Cableado Cat6A UTP 100% cobre, 3 Puntos de Acceso Wi-Fi 7 (PB, PA, Roof), 4 Cámaras PoE 4K con IA local y videoportero PoE con chapa eléctrica.</li>
+      <li><strong>Hidráulico & Solar:</strong> Cisterna de 5,000 L, presurizador inverter a 3.5 bar, Calentador Solar de 200 L con 15 tubos de vacío, bypass termostático y recirculación inteligente de agua caliente.</li>
+    </ul>
   `
 };
 
