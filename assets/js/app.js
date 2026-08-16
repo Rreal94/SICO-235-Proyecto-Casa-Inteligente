@@ -1870,8 +1870,33 @@ const docsContent = {
       <li><strong>Red & CCTV:</strong> Cableado Cat6A UTP 100% cobre, 3 Puntos de Acceso Wi-Fi 7 (PB, PA, Roof), 4 Cámaras PoE 4K con IA local y videoportero PoE con chapa eléctrica.</li>
       <li><strong>Hidráulico & Solar:</strong> Cisterna de 5,000 L, presurizador inverter a 3.5 bar, Calentador Solar de 200 L con 15 tubos de vacío, bypass termostático y recirculación inteligente de agua caliente.</li>
     </ul>
-  `
-};
+  `,
+  plumbing: `
+    <h2>10. Planos e Ingeniería Hidrosanitaria & Drenaje Pluvial</h2>
+    <p>Planos ejecutivos unifilares e isométricos de las instalaciones de agua potable, solar y drenaje:</p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
+      <div style="background: #1e293b; border-radius: 8px; padding: 16px; border: 1px solid #334155;">
+        <h4 style="color: #38bdf8; margin-top: 0;">💧 01. Isométrico Hidráulico & Solar</h4>
+        <p style="color: #94a3b8; font-size: 13px;">Cisterna 5,000 L, tren de presurización inverter a 3.5 bar con desinfección UV, calentador solar termosifónico de 200 L, bypass inteligente y anillo de recirculación cero desperdicio.</p>
+        <p><a href="planos_y_diagramas/01_plano_isometrico_hidraulico_y_solar.svg" target="_blank" style="display: inline-block; padding: 6px 12px; background: #0284c7; color: white; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 12px;">Ver Plano Hidráulico SVG ↗</a></p>
+      </div>
+
+      <div style="background: #1e293b; border-radius: 8px; padding: 16px; border: 1px solid #334155;">
+        <h4 style="color: #f87171; margin-top: 0;">🚽 02. Red Sanitaria & Drenaje Pluvial</h4>
+        <p style="color: #94a3b8; font-size: 13px;">Separación estricta de aguas negras (BSN 4"), aguas grises (BSG 3"), columna de ventilación sanitaria (CVS 2" a +7.20 m para cero olores) y bajadas pluviales BAP 4" con trampa de sedimentos.</p>
+        <p><a href="planos_y_diagramas/02_plano_red_sanitaria_y_pluvial.svg" target="_blank" style="display: inline-block; padding: 6px 12px; background: #b91c1c; color: white; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 12px;">Ver Plano Sanitario SVG ↗</a></p>
+      </div>
+    </div>
+
+    <h3>Especificaciones de Materiales Obligatorias:</h3>
+    <ul>
+      <li><strong>Agua Potable (Fría y Caliente):</strong> Tubería y conexiones de polipropileno copolímero random (PPR / TuboPlus) termofusionadas al 100% (cero fugas de por vida).</li>
+      <li><strong>Aislamiento Térmico:</strong> Espuma elastomérica tipo coquilla de 1/2" de espesor en todas las tuberías de agua caliente solar y recirculación.</li>
+      <li><strong>Drenaje Sanitario:</strong> Tubería de PVC Sanitario tipo Norma con campana y empaque de hule hermético; pendientes mínimas de 2.0% en todos los tramos horizontales.</li>
+      <li><strong>Registros Sanitarios:</strong> Cuadros de mampostería con acabado pulido fino y contratapa de doble sello hermético anti-olores.</li>
+    </ul>
+  `};
 
 function initDocsViewer() {
   const navItems = document.querySelectorAll('.docs-nav-item');
