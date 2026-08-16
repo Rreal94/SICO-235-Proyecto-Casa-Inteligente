@@ -1932,6 +1932,43 @@ const docsContent = {
       <li><strong>Fase 6 (Mes 10):</strong> Montaje de 6 paneles solares (3.3 kWp), calentador solar 200L, 3 climas A/C inverter, Rack 12U y comisionamiento de Home Assistant.</li>
       <li><strong>Fase 7 (Mes 10 - Semana 4):</strong> Pruebas integrales de presión hidráulica, limpieza fina de obra y entrega formal de llaves en mano.</li>
     </ul>
+  `,
+  progressive: `
+    <h2>13. Estrategia de Construcción Progresiva & Habitabilidad Inmediata</h2>
+    <p>Plan modular en 4 fases para mudarse rápido, eliminar gastos de renta e ir completando acabados y tecnología en el tiempo sin demoliciones ni retrabajos:</p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 16px 0;">
+      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-top: 3px solid #38bdf8;">
+        <div style="font-size: 11px; color: #38bdf8; font-weight: 700;">FASE 1 (Mes 1 a 6)</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc;">Casa Núcleo Habitable</div>
+        <div style="font-size: 14px; font-weight: 700; color: #38bdf8; margin: 4px 0;">$1,980,000 MXN</div>
+        <p style="font-size: 11px; color: #94a3b8; margin: 0;">Estructura completa en 3 niveles, cisterna 5kL, MEP oculto, Suite PB funcional y cancelería exterior. <strong>¡Te mudas aquí y dejas de pagar renta!</strong></p>
+      </div>
+
+      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-top: 3px solid #10b981;">
+        <div style="font-size: 11px; color: #10b981; font-weight: 700;">FASE 2 (Año 1 viviendo ahí)</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc;">Acabados Planta Alta</div>
+        <div style="font-size: 14px; font-weight: 700; color: #10b981; margin: 4px 0;">$580,000 MXN</div>
+        <p style="font-size: 11px; color: #94a3b8; margin: 0;">Baño Master spa, canceles templados, clósets empotrados, vestidor Master y cocina integral con isla de cuarzo.</p>
+      </div>
+
+      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-top: 3px solid #f59e0b;">
+        <div style="font-size: 11px; color: #f59e0b; font-weight: 700;">FASE 3 (Año 2)</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc;">Roof Garden Frontal</div>
+        <div style="font-size: 14px; font-weight: 700; color: #f59e0b; margin: 4px 0;">$420,000 MXN</div>
+        <p style="font-size: 11px; color: #94a3b8; margin: 0;">Piso deck exterior, pérgola bioclimática, grill con tarja/barra, 1/2 baño de azotea y sala lounge con fogatero.</p>
+      </div>
+
+      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-top: 3px solid #8b5cf6;">
+        <div style="font-size: 11px; color: #8b5cf6; font-weight: 700;">FASE 4 (Año 3)</div>
+        <div style="font-size: 16px; font-weight: 800; color: #f8fafc;">Solar & Domótica Pro</div>
+        <div style="font-size: 14px; font-weight: 700; color: #8b5cf6; margin: 4px 0;">$362,000 MXN</div>
+        <p style="font-size: 11px; color: #94a3b8; margin: 0;">6 paneles solares 3.3 kWp, calentador solar 200L, 3 climas A/C inverter, Rack 12U, cámaras 4K y Home Assistant.</p>
+      </div>
+    </div>
+
+    <h3>La Regla de Oro:</h3>
+    <p>Toda la tubería vacía, mangueras pesadas, cajas profundas y preparaciones de fontanería se colocan en la <strong>Fase 1</strong>. Cuesta menos de $15,000 MXN y permite conectar los paneles, climas y domótica en las siguientes fases <em>Plug & Play</em> sin romper ningún muro.</p>
   `};
 
 function initDocsViewer() {
