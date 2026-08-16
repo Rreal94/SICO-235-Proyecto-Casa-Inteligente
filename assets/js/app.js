@@ -1,116 +1,111 @@
 /**
- * RESIDENCIA INTELIGENTE - INTERACTIVE DASHBOARD JAVASCRIPT
+ * RESIDENCIA INTELIGENTE - PLANEADOR MAESTRO DE CONSTRUCCIÓN & FINANZAS
+ * Gestión Integral en 4 Fases Progresivas con Habitabilidad Inmediata
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  initTabs();
-  initCalculator();
-  initBlueprint();
-  initBudget();
-  initChecklist();
-  initDocsViewer();
-});
+// ==========================================================================
+// 1. ESTADO GLOBAL & CONFIGURACIÓN FINANCIERA
+// ==========================================================================
+let currentCurrency = 'MXN';
+const exchangeRate = 20.0; // 1 USD = 20.00 MXN
 
-/* ==========================================================================
-   1. NAVEGACIÓN POR PESTAÑAS (TABS)
-   ========================================================================== */
-function initTabs() {
-  const tabButtons = document.querySelectorAll('.nav-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
-
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetTab = btn.getAttribute('data-tab');
-
-      tabButtons.forEach(b => b.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
-
-      btn.classList.add('active');
-      const targetSection = document.getElementById(`sec-${targetTab}`);
-      if (targetSection) targetSection.classList.add('active');
-    });
-  });
-
-  // Timeline step card clicks
-  const stepCards = document.querySelectorAll('.step-card');
-  stepCards.forEach(card => {
-    card.addEventListener('click', () => {
-      stepCards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-    });
-  });
-}
-
-/* ==========================================================================
-   2. CALCULADORA FINANCIERA A 3 AÑOS
-   ========================================================================== */
-function initCalculator() {
-  const inputMonthly = document.getElementById('input-monthly-save');
-  const inputCurrency = document.getElementById('input-currency');
-  const inputMonths = document.getElementById('input-months-left');
-  const lblMonths = document.getElementById('lbl-months-count');
-
-  const valTotalSaved = document.getElementById('val-total-saved');
-  const valTotalSavedAlt = document.getElementById('val-total-saved-alt');
-  const fillProgress = document.getElementById('fill-infra-progress');
-  const valProgressPct = document.getElementById('val-progress-pct');
-
-  const USD_TO_MXN = 20.0;
-  const INFRA_COST_USD = 785;
-
-  function updateCalculations() {
-    if (!inputMonthly || !inputMonths || !inputCurrency) return;
-    const monthly = parseFloat(inputMonthly.value) || 0;
-    const months = parseInt(inputMonths.value, 10) || 1;
-    const currency = inputCurrency.value;
-
-    if (lblMonths) lblMonths.textContent = months;
-
-    let totalSavedUSD = monthly * months;
-    if (currency === 'MXN') {
-      totalSavedUSD = (monthly * months) / USD_TO_MXN;
-    }
-
-    const totalSavedMXN = totalSavedUSD * USD_TO_MXN;
-
-    if (valTotalSaved && valTotalSavedAlt) {
-      if (currency === 'USD') {
-        valTotalSaved.textContent = `$${Math.round(totalSavedUSD).toLocaleString()} USD`;
-        valTotalSavedAlt.textContent = `~$${Math.round(totalSavedMXN).toLocaleString()} MXN`;
-      } else {
-        valTotalSaved.textContent = `$${Math.round(totalSavedMXN).toLocaleString()} MXN`;
-        valTotalSavedAlt.textContent = `~$${Math.round(totalSavedUSD).toLocaleString()} USD`;
-      }
-    }
-
-    if (fillProgress && valProgressPct) {
-      const pct = Math.min(100, Math.round((totalSavedUSD / INFRA_COST_USD) * 100));
-      fillProgress.style.width = `${pct}%`;
-      valProgressPct.textContent = `${pct}% Cubierto (Meta: $785 USD)`;
-      valProgressPct.className = pct < 100 ? 'text-primary' : 'text-success';
-    }
+const phasesData = {
+  1: {
+    name: 'Casa Núcleo Habitable',
+    badge: 'FASE 1 • PRIORIDAD ALTA',
+    time: 'Meses 1 a 6',
+    totalMXN: 1980000,
+    anticipoPct: 0.30,
+    desc: 'Estructura completa en 3 niveles techada e impermeable, cisterna 5kL, MEP oculto, Suite PB lista y cocina/baño funcional. ¡MUDANZA Y CERO RENTA!'
+  },
+  2: {
+    name: 'Confort Planta Alta',
+    badge: 'FASE 2 • AÑO 1',
+    time: 'Meses 7 a 12',
+    totalMXN: 580000,
+    anticipoPct: 0.30,
+    desc: 'Baño Master spa con canceles templados, cocina integral de diseño con isla de cuarzo, vestidor Master y clósets empotrados.'
+  },
+  3: {
+    name: 'Roof Garden Frontal',
+    badge: 'FASE 3 • AÑO 2',
+    time: 'Meses 13 a 18',
+    totalMXN: 420000,
+    anticipoPct: 0.30,
+    desc: 'Piso deck exterior (45 m²), pérgola bioclimática, grill con tarja/barra, 1/2 baño de azotea, lounge firepit y barandal de cristal.'
+  },
+  4: {
+    name: 'Solar, Climas & Domótica',
+    badge: 'FASE 4 • AÑO 3',
+    time: 'Meses 19 a 24',
+    totalMXN: 362000,
+    anticipoPct: 0.30,
+    desc: '6 paneles solares 3.3 kWp (0 CFE), calentador solar 200L (0 gas), 3 climas A/C inverter, Rack 12U, CCTV 4K e iluminación circadiana.'
   }
+};
 
-  if (inputMonthly) inputMonthly.addEventListener('input', updateCalculations);
-  if (inputCurrency) inputCurrency.addEventListener('change', updateCalculations);
-  if (inputMonths) inputMonths.addEventListener('input', updateCalculations);
-
-  updateCalculations();
+function formatMoney(amountMXN, currency = currentCurrency) {
+  if (currency === 'USD') {
+    const usd = amountMXN / exchangeRate;
+    return '$' + Math.round(usd).toLocaleString('en-US') + ' USD';
+  } else {
+    return '$' + Math.round(amountMXN).toLocaleString('es-MX') + ' MXN';
+  }
 }
 
-/* ==========================================================================
-   3. PLANOS INTERACTIVOS ARQUITECTÓNICOS & DOMÓTICOS
-   ========================================================================== */
-function initBlueprint() {
-  const floorButtons = document.querySelectorAll('.level-selector .pill-btn, #blueprint-floor-toggle .btn');
-  const blueprintDisplay = document.getElementById('blueprint-display');
-  const roomName = document.getElementById('room-name') || document.getElementById('blueprint-room-name');
-  const roomBadge = document.getElementById('room-badge') || document.getElementById('blueprint-room-badge');
-  const roomSpecs = document.getElementById('room-specs') || document.getElementById('blueprint-room-specs');
+// ==========================================================================
+// 2. CATÁLOGO MAESTRO DE CONCEPTOS DE OBRA POR FASES
+// ==========================================================================
+const budgetItems = [
+  // FASE 1: CASA NÚCLEO HABITABLE
+  { phase: "fase1", name: "Gestoría, Licencia de Construcción, Alineamiento & DRO", spec: "Trámites municipales, dictamen perito DRO, número oficial y licencias", qty: 1, costMXN: 145000 },
+  { phase: "fase1", name: "Estudio Mecánica Suelos & Trazo Estación Total", spec: "3 sondeos a 4.00m, cálculo estructural y delimitación de linderos", qty: 1, costMXN: 26000 },
+  { phase: "fase1", name: "Limpieza, Excavación Masiva & Rellenos Compactados", spec: "Excavación para zapatas a 1.20m y zanjas de drenajes maestros", qty: 1, costMXN: 55000 },
+  { phase: "fase1", name: "Cisterna Subterránea 5,000 L Concreto Hidrófugo", spec: "Cisterna armada f'c=250 bajo cochera con sensor de nivel ultrasónico", qty: 1, costMXN: 68000 },
+  { phase: "fase1", name: "Cimentación Concreto Armado f'c=250 & Fumigación", spec: "Zapatas corridas, contratrabes de liga y barrera química antitermitas", qty: 1, costMXN: 326000 },
+  { phase: "fase1", name: "Muros de Carga, Castillos & Columnas (3 Niveles)", spec: "Block térmico / ladrillo confinado con columnas de concreto armado", qty: 1, costMXN: 340000 },
+  { phase: "fase1", name: "Losa Entrepiso PB-PA (Vigueta/Bovedilla Poliestireno)", spec: "Capa compresión 5cm concreto premezclado y aislamiento acústico", qty: 1, costMXN: 230000 },
+  { phase: "fase1", name: "Losa Azotea General (+6.00m) & Caseta Escalera", spec: "Losa estructural completa de azotea y caseta de cubo de escalera", qty: 1, costMXN: 185000 },
+  { phase: "fase1", name: "Escalera de Concreto Armada (34 Escalones PB-Roof)", spec: "Estructura monolítica continua con descanso intermedio", qty: 1, costMXN: 52000 },
+  { phase: "fase1", name: "Pretiles de Seguridad en Azotea (1.05m Alto)", spec: "Pretiles perimetrales en bloque de concreto con remate de pecho paloma", qty: 1, costMXN: 35000 },
+  { phase: "fase1", name: 'Canalizaciones Conduit Pesadas, Cajas 4x4" & Neutro', spec: 'Manguera 1" y 3/4", chalupas 50mm y cable neutro en 100% de chalupas', qty: 1, costMXN: 148000 },
+  { phase: "fase1", name: "Red Hidráulica PPR Termofusionada & Drenajes PVC", spec: 'Tuberías TuboPlus aisladas, subida a azotea, BSN 4", BSG 3" y CVS 2"', qty: 1, costMXN: 105000 },
+  { phase: "fase1", name: "Aplanados de Yeso PB & Zarpeo Exterior Hidrófugo", spec: "Yeso a plomo en interiores de PB y repelado impermeable en fachadas", qty: 1, costMXN: 95000 },
+  { phase: "fase1", name: "Impermeabilización Termofusionada Azotea (10 Años)", spec: "Membrana prefabricada 4.5mm gravillada con poliéster y pendientes 2%", qty: 1, costMXN: 48000 },
+  { phase: "fase1", name: "Piso Porcelánico PB, Puerta Seguridad & Canceles Ext.", spec: "Piso en PB, puerta principal de seguridad y ventanas exteriores con vidrio", qty: 1, costMXN: 122000 },
 
-  let currentFloor = 'pb';
+  // FASE 2: CONFORT & ACABADOS EN PLANTA ALTA
+  { phase: "fase2", name: "Cocina Integral de Diseño con Isla & Cuarzo", spec: "Muebles hidrófugos, herrajes Blum de cierre suave y cubiertas de cuarzo", qty: 1, costMXN: 185000 },
+  { phase: "fase2", name: "Baño Master Spa (Doble Vanity, Canceles 9.5mm, Lluvia)", spec: "Vanity cuarzo, regadera lluvia spa, canceles templados y WC suspendido", qty: 1, costMXN: 75000 },
+  { phase: "fase2", name: "Baño Compartido PA Completo & Zinc de Servicio", spec: "WC ecológico, regadera con cancel templado, vanity y mueble zinc", qty: 1, costMXN: 55000 },
+  { phase: "fase2", name: "Carpintería 8 Puertas Interiores Semisólidas", spec: "Puertas con marco envolvente y sellos perimetrales acústicos", qty: 8, costMXN: 56000 },
+  { phase: "fase2", name: "Clósets Empotrados Recámaras & Walk-in Closet Master", spec: "Clósets en recámaras secundarias y vestidor con iluminación LED", qty: 1, costMXN: 78000 },
+  { phase: "fase2", name: "Piso Porcelánico Rectificado Gran Formato PA (92 m²)", spec: "Porcelanato 60x120cm en recámaras, pasillo y Family Room con boquilla", qty: 1, costMXN: 85000 },
+  { phase: "fase2", name: "Pintura Vinílica Lavable Interior de Primera Calidad", spec: "Comex Vinimex Total en muros interiores y plafones de Planta Alta", qty: 1, costMXN: 46000 },
 
-  const blueprintData = {
+  // FASE 3: ROOF GARDEN FRONTAL & 1/2 BAÑO
+  { phase: "fase3", name: "Piso Deck Exterior / Porcelanato Antiderrapante (45 m²)", spec: "Deck tecnológico de polímero o porcelánico antideslizante para intemperie", qty: 1, costMXN: 58000 },
+  { phase: "fase3", name: "Pérgola Bioclimática de Acero Estructural", spec: "Estructura metálica con vigas de sombra y preparación para enredadera/toldo", qty: 1, costMXN: 45000 },
+  { phase: "fase3", name: "Estación Asador Grill Inox con Tarja & Barra Periquera", spec: "Asador empotrado a gas/carbón, tarja monomando y barra con 3 bancos", qty: 1, costMXN: 48000 },
+  { phase: "fase3", name: "Acabados & Muebles 1/2 Baño Social de Azotea", spec: "WC suspendido, vanity compacto, espejo LED y puerta de acceso al deck", qty: 1, costMXN: 38000 },
+  { phase: "fase3", name: "Barandal Frontal Cristal Templado hacia la Calle", spec: "Cristal templado 9.5mm con postes de acero inox sobre pretil frontal", qty: 1, costMXN: 42000 },
+  { phase: "fase3", name: "Celosías Louvers Antilluvia en Cubierta Sobreelevada", spec: "Aluminio anodizado con lamas a 45° en Monitor Roof para ventilación cenital", qty: 1, costMXN: 30000 },
+  { phase: "fase3", name: "Sala Lounge Modular Exterior & Mesa Fogatero Firepit", spec: "Sillones intemperie con cojines hidrófugos y mesa firepit a gas", qty: 1, costMXN: 48000 },
+  { phase: "fase3", name: "Jardineras Perimetrales Decorativas & Riego Goteo", spec: "Macetones y jardineras de concreto con iluminación cálida indirecta", qty: 1, costMXN: 21000 },
+  { phase: "fase3", name: "Iluminación Cálida Indirecta & Contactos GFCI Azotea", spec: "Tiras LED IP65 bajo barra y escalones, con contactos impermeables", qty: 1, costMXN: 90000 },
+
+  // FASE 4: SOLAR, CLIMAS & DOMÓTICA PRO
+  { phase: "fase4", name: "Arreglo Fotovoltaico Solar 3.3 kWp (6 Paneles 550W)", spec: "Módulos monocristalinos bifaciales + microinversores smart (Ahorro 90% CFE)", qty: 1, costMXN: 78000 },
+  { phase: "fase4", name: "Calentador Solar de Agua 200 L (15 Tubos de Vacío Inox)", spec: "Termotanque inox 304, bypass termostático y respaldo modulante (Ahorro 80% Gas)", qty: 1, costMXN: 19000 },
+  { phase: "fase4", name: "Sistema Climatización Multi-Split Inverter (3 Condensadoras)", spec: "3 condensadoras en azotea + 4 evaporadoras para PB, Master y Secundarias", qty: 1, costMXN: 98000 },
+  { phase: "fase4", name: "Bomba Presurizadora Inverter + Filtro Dual + Lámpara UV", spec: "3.5 bar constante silenciosa, filtro 5µm, carbón activado y esterilizador UV", qty: 1, costMXN: 34000 },
+  { phase: "fase4", name: "Rack 12U Equipado (Gateway UniFi, Switch PoE+, UPS)", spec: "Cloud Gateway Ultra, Switch 16p PoE+, UPS Online 1500VA y Home Assistant", qty: 1, costMXN: 46000 },
+  { phase: "fase4", name: "Iluminación Inteligente Circadiana & Sensores mmWave", spec: "Tiras COB LED 24V, Dimmers DALI, apagadores Zigbee/Matter con neutro", qty: 1, costMXN: 45000 },
+  { phase: "fase4", name: "CCTV 4K PoE con IA Local, Videoportero & Cerradura Smart", spec: "4 cámaras 4K, NVR local 4TB sin cuotas, timbre con chapa eléc. y huella", qty: 1, costMXN: 42000 }
+];
+
+
+const blueprintData = {
     pb: [
       {
         id: 'recamara_suite_pb',
@@ -326,7 +321,7 @@ pa: [
     ]
   };
 
-  function getGroundFloorSVG() {
+function getGroundFloorSVG() {
     return `<svg viewBox="0 0 920 580" width="100%" height="560" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background-color: #fafbfc; border-radius: 12px;">
         <defs>
           <!-- Patrones Arquitectónicos -->
@@ -915,7 +910,7 @@ pa: [
       </svg>`;
   }
 
-  function getUpperFloorSVG() {
+function getUpperFloorSVG() {
     return `<svg viewBox="0 0 880 580" width="100%" height="560" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background-color: #fafbfc; border-radius: 12px;">
         <defs>
           <pattern id="gridPatternPA" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -1261,7 +1256,7 @@ pa: [
       </svg>`;
   }
 
-  function getExteriorRoofSVG() {
+function getExteriorRoofSVG() {
     return `<svg viewBox="0 0 920 580" width="100%" height="560" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background-color: #fafbfc; border-radius: 12px;">
         <defs>
           <pattern id="gridPatternExt" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -1539,454 +1534,494 @@ pa: [
       </svg>`;
   }
 
-  function renderFloor(floorKey) {
-    const wrapper = document.getElementById('terrain-svg-wrapper');
-    if (!wrapper) return;
 
-    if (floorKey === 'pa') {
-      wrapper.innerHTML = getUpperFloorSVG();
-    } else if (floorKey === 'ext') {
-      wrapper.innerHTML = getExteriorRoofSVG();
+// ==========================================================================
+// 3. CONTROLADOR DEL PLANEADOR FINANCIERO & SIMULADOR DE AHORRO
+// ==========================================================================
+function initFinancialPlanner() {
+  const inputSavings = document.getElementById('input-savings-month');
+  const inputInitial = document.getElementById('input-initial-capital');
+  const selectPhase = document.getElementById('select-target-phase');
+  const phaseCards = document.querySelectorAll('.phase-card');
+  const btnMXN = document.getElementById('btn-cur-mxn');
+  const btnUSD = document.getElementById('btn-cur-usd');
+
+  function calculateFinance() {
+    if (!selectPhase) return;
+    const currentPhaseId = parseInt(selectPhase.value);
+    const phaseInfo = phasesData[currentPhaseId];
+    if (!phaseInfo) return;
+    
+    let monthlySavings = parseFloat(inputSavings ? inputSavings.value : 0) || 0;
+    let initialCapital = parseFloat(inputInitial ? inputInitial.value : 0) || 0;
+    
+    if (currentCurrency === 'USD') {
+      monthlySavings *= exchangeRate;
+      initialCapital *= exchangeRate;
+    }
+
+    const anticipoMeta = phaseInfo.totalMXN * phaseInfo.anticipoPct;
+    const capitalGap = anticipoMeta - initialCapital;
+
+    const valMonths = document.getElementById('val-months-to-start');
+    const valGap = document.getElementById('val-capital-gap');
+    const valPct = document.getElementById('val-anticipo-pct');
+    const fillProgress = document.getElementById('fill-anticipo-progress');
+    const callout = document.getElementById('callout-readiness');
+
+    let pct = (initialCapital / anticipoMeta) * 100;
+    if (pct > 100) pct = 100;
+    if (pct < 0) pct = 0;
+
+    if (fillProgress) fillProgress.style.width = pct.toFixed(1) + '%';
+    if (valPct) valPct.textContent = pct.toFixed(1) + '% Reunido';
+
+    if (capitalGap <= 0) {
+      if (valMonths) {
+        valMonths.textContent = '¡Listo para Iniciar!';
+        valMonths.className = 'stat-value text-success';
+      }
+      if (valGap) valGap.textContent = 'Cuentas con el 100% del anticipo requerido (' + formatMoney(anticipoMeta) + ')';
+      if (callout) {
+        callout.innerHTML = '<strong>🎉 ¡Excelente!</strong> Tienes el capital inicial para dar el banderazo de salida a la <strong>' + phaseInfo.name + '</strong>. Puedes contratar albañilería, comprar los primeros materiales y comenzar de inmediato.';
+      }
     } else {
-      wrapper.innerHTML = getGroundFloorSVG();
-    }
-
-    if (!blueprintDisplay) return;
-    blueprintDisplay.innerHTML = '';
-    const rooms = blueprintData[floorKey] || [];
-
-    rooms.forEach(room => {
-      const card = document.createElement('div');
-      card.className = 'blueprint-room-card';
-      card.innerHTML = `
-        <div class="room-card-head">
-          <span class="room-card-name">${room.name}</span>
-        </div>
-        <div class="room-tag-list">
-          ${room.tags.map(t => `<span class="room-tag">${t}</span>`).join('')}
-        </div>
-      `;
-
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.blueprint-room-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        showRoomDetails(room, floorKey);
-      });
-
-      blueprintDisplay.appendChild(card);
-    });
-
-    if (rooms.length > 0) {
-      showRoomDetails(rooms[0], floorKey);
-    }
-  }
-
-  function showRoomDetails(room, floorKey) {
-    if (roomName) roomName.textContent = room.name;
-    const floorNames = { pb: 'Planta Baja', pa: 'Planta Alta', ext: 'Exterior & Azotea' };
-    if (roomBadge) roomBadge.textContent = floorNames[floorKey] || 'Zona';
-
-    if (roomSpecs) {
-      roomSpecs.innerHTML = '';
-      for (const [title, desc] of Object.entries(room.specs)) {
-        const specEl = document.createElement('div');
-        specEl.className = 'spec-item';
-        specEl.innerHTML = `
-          <div class="spec-item-title">${title}</div>
-          <div class="spec-item-desc">${desc}</div>
-        `;
-        roomSpecs.appendChild(specEl);
+      const months = monthlySavings > 0 ? (capitalGap / monthlySavings).toFixed(1) : '∞';
+      if (valMonths) {
+        valMonths.textContent = months + ' Meses';
+        valMonths.className = 'stat-value text-primary';
+      }
+      if (valGap) valGap.textContent = 'Faltan ' + formatMoney(capitalGap) + ' para el anticipo del 30%';
+      if (callout) {
+        callout.innerHTML = '<strong>💡 Recomendación Estratégica:</strong> Ahorrando <strong>' + formatMoney(monthlySavings) + '/mes</strong>, alcanzarás el anticipo de <strong>' + formatMoney(anticipoMeta) + '</strong> en <strong>' + months + ' meses</strong> para arrancar la ' + phaseInfo.name + '.';
       }
     }
   }
 
+  function updateCurrencyUI() {
+    document.querySelectorAll('.currency-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.cur === currentCurrency);
+    });
+
+    const prefix = document.getElementById('lbl-prefix-cur');
+    if (prefix) prefix.textContent = currentCurrency === 'USD' ? 'USD $' : '$';
+
+    for (let i = 1; i <= 4; i++) {
+      const p = phasesData[i];
+      const costEl = document.getElementById('cost-phase-' + i);
+      const subcostEl = document.getElementById('subcost-phase-' + i);
+      const reqEl = document.getElementById('req-phase-' + i);
+
+      if (costEl) costEl.textContent = formatMoney(p.totalMXN);
+      if (subcostEl) {
+        const otherCur = currentCurrency === 'MXN' ? 'USD' : 'MXN';
+        subcostEl.textContent = '~' + formatMoney(p.totalMXN, otherCur);
+      }
+      if (reqEl) reqEl.textContent = formatMoney(p.totalMXN * p.anticipoPct);
+    }
+
+    const sumF1 = document.getElementById('sum-fase-1');
+    const sumF2 = document.getElementById('sum-fase-2');
+    const sumF34 = document.getElementById('sum-fase-3-4');
+    const sumTot = document.getElementById('sum-total');
+
+    if (sumF1) sumF1.textContent = formatMoney(phasesData[1].totalMXN);
+    if (sumF2) sumF2.textContent = formatMoney(phasesData[2].totalMXN);
+    if (sumF34) sumF34.textContent = formatMoney(phasesData[3].totalMXN + phasesData[4].totalMXN);
+    if (sumTot) sumTot.textContent = formatMoney(3572000);
+
+    calculateFinance();
+    renderBudgetTable();
+  }
+
+  if (btnMXN) {
+    btnMXN.addEventListener('click', () => {
+      if (currentCurrency !== 'MXN') {
+        currentCurrency = 'MXN';
+        if (inputSavings) inputSavings.value = Math.round(parseFloat(inputSavings.value) * exchangeRate);
+        if (inputInitial) inputInitial.value = Math.round(parseFloat(inputInitial.value) * exchangeRate);
+        updateCurrencyUI();
+      }
+    });
+  }
+
+  if (btnUSD) {
+    btnUSD.addEventListener('click', () => {
+      if (currentCurrency !== 'USD') {
+        currentCurrency = 'USD';
+        if (inputSavings) inputSavings.value = Math.round(parseFloat(inputSavings.value) / exchangeRate);
+        if (inputInitial) inputInitial.value = Math.round(parseFloat(inputInitial.value) / exchangeRate);
+        updateCurrencyUI();
+      }
+    });
+  }
+
+  phaseCards.forEach(card => {
+    card.addEventListener('click', () => {
+      phaseCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      const pId = card.dataset.phase;
+      if (selectPhase) {
+        selectPhase.value = pId;
+        calculateFinance();
+      }
+    });
+  });
+
+  if (selectPhase) {
+    selectPhase.addEventListener('change', () => {
+      phaseCards.forEach(c => {
+        c.classList.toggle('active', c.dataset.phase === selectPhase.value);
+      });
+      calculateFinance();
+    });
+  }
+
+  if (inputSavings) inputSavings.addEventListener('input', calculateFinance);
+  if (inputInitial) inputInitial.addEventListener('input', calculateFinance);
+
+  updateCurrencyUI();
+}
+
+// ==========================================================================
+// 4. CONTROLADOR DEL PRESUPUESTO & TABLA DE PAGOS
+// ==========================================================================
+let currentBudgetFilter = 'all';
+
+function renderBudgetTable() {
+  const tableBody = document.getElementById('budget-table-body');
+  if (!tableBody) return;
+
+  tableBody.innerHTML = '';
+  const filtered = budgetItems.filter(item => {
+    return currentBudgetFilter === 'all' || item.phase === currentBudgetFilter;
+  });
+
+  filtered.forEach(item => {
+    const row = document.createElement('tr');
+    
+    let phaseBadge = '';
+    if (item.phase === 'fase1') phaseBadge = '<span class="phase-badge phase-1">Fase 1: Núcleo</span>';
+    else if (item.phase === 'fase2') phaseBadge = '<span class="phase-badge phase-2">Fase 2: Planta Alta</span>';
+    else if (item.phase === 'fase3') phaseBadge = '<span class="phase-badge phase-3">Fase 3: Roof</span>';
+    else if (item.phase === 'fase4') phaseBadge = '<span class="phase-badge phase-4">Fase 4: Solar</span>';
+
+    const unitFormatted = formatMoney(item.costMXN / item.qty);
+    const subtotalFormatted = formatMoney(item.costMXN);
+
+    row.innerHTML = `
+      <td>${phaseBadge}</td>
+      <td><strong>${item.name}</strong></td>
+      <td class="text-muted" style="font-size: 0.8rem;">${item.spec}</td>
+      <td style="text-align: center; font-weight: 700;">${item.qty}</td>
+      <td style="font-family: var(--font-mono); font-size: 0.85rem;">${unitFormatted}</td>
+      <td style="font-family: var(--font-mono); font-weight: 800; color: var(--color-primary);">${subtotalFormatted}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+function initBudget() {
+  const filterButtons = document.querySelectorAll('#budget-filters .filter-btn');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentBudgetFilter = btn.dataset.filter;
+      renderBudgetTable();
+    });
+  });
+
+  renderBudgetTable();
+}
+
+// ==========================================================================
+// 5. CONTROLADOR DEL VISOR DE PLANOS ARQUITECTÓNICOS (PB, PA, ROOF)
+// ==========================================================================
+function renderFloor(floorKey) {
+  const display = document.getElementById('blueprint-display');
+  const terrainWrapper = document.getElementById('terrain-svg-wrapper');
+  if (!display) return;
+
+  if (floorKey === 'pb') {
+    display.innerHTML = getGroundFloorSVG();
+  } else if (floorKey === 'pa') {
+    display.innerHTML = getUpperFloorSVG();
+  } else if (floorKey === 'ext') {
+    display.innerHTML = getExteriorRoofSVG();
+  }
+
+  if (terrainWrapper && !terrainWrapper.hasChildNodes()) {
+    terrainWrapper.innerHTML = `
+      <svg viewBox="0 0 760 520" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" style="background: #0f172a; border-radius: 8px;">
+        <polygon points="80,60 710,60 660,469 80,462" fill="rgba(56, 189, 248, 0.08)" stroke="#38bdf8" stroke-width="2" />
+        <line x1="80" y1="60" x2="710" y2="60" stroke="#f59e0b" stroke-width="2" />
+        <text x="395" y="48" font-size="10" font-weight="900" fill="#fbbf24" text-anchor="middle">L1-2 (SUR): 15.74 m</text>
+        <line x1="710" y1="60" x2="660" y2="469" stroke="#10b981" stroke-width="2" />
+        <text x="700" y="270" font-size="10" font-weight="900" fill="#34d399" text-anchor="start">L2-3 (ORIENTE / CALLE): 10.30 m</text>
+        <line x1="660" y1="469" x2="80" y2="462" stroke="#38bdf8" stroke-width="2" />
+        <text x="370" y="485" font-size="10" font-weight="900" fill="#38bdf8" text-anchor="middle">L3-4 (NORTE): 14.49 m</text>
+        <line x1="80" y1="462" x2="80" y2="60" stroke="#ec4899" stroke-width="2" />
+        <text x="65" y="260" font-size="10" font-weight="900" fill="#f472b6" text-anchor="end">L4-1 (PONIENTE): 10.04 m</text>
+        <circle cx="80" cy="60" r="4" fill="#fbbf24" />
+        <circle cx="710" cy="60" r="4" fill="#10b981" />
+        <circle cx="660" cy="469" r="4" fill="#38bdf8" />
+        <circle cx="80" cy="462" r="4" fill="#f472b6" />
+        <rect x="200" y="102" width="386.8" height="350" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4" />
+        <text x="393.4" y="280" font-size="12" font-weight="900" fill="#ffffff" text-anchor="middle">HUELLA CONSTRUIDA EN 3 NIVELES</text>
+        <text x="393.4" y="300" font-size="9" font-weight="700" fill="#94a3b8" text-anchor="middle">Área Terreno: 153.19 m² • Perímetro: 50.57 m</text>
+      </svg>
+    `;
+  }
+
+  attachRoomInteractivity(floorKey);
+}
+
+function attachRoomInteractivity(floorKey) {
+  const display = document.getElementById('blueprint-display');
+  if (!display) return;
+
+  const roomGroups = display.querySelectorAll('g[id^="room-"]');
+  roomGroups.forEach(group => {
+    group.style.cursor = 'pointer';
+    group.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const roomId = group.id.replace('room-', '');
+      showRoomDetails(floorKey, roomId);
+    });
+  });
+}
+
+function showRoomDetails(floorKey, roomId) {
+  const roomNameEl = document.getElementById('room-name');
+  const roomBadgeEl = document.getElementById('room-badge');
+  const roomSpecsEl = document.getElementById('room-specs');
+
+  const floorData = blueprintData[floorKey];
+  if (!floorData) return;
+
+  let room = null;
+  if (Array.isArray(floorData)) {
+    room = floorData.find(r => r.id === roomId);
+  } else if (floorData.rooms && floorData.rooms[roomId]) {
+    room = floorData.rooms[roomId];
+  }
+
+  if (!room) return;
+
+  if (roomNameEl) roomNameEl.textContent = room.name;
+  if (roomBadgeEl) roomBadgeEl.textContent = floorKey === 'pb' ? 'Planta Baja' : floorKey === 'pa' ? 'Planta Alta' : 'Roof Garden';
+
+  if (roomSpecsEl) {
+    const tagsHTML = (room.tags || []).map(t => `<span class="badge" style="margin-right:4px;">${t}</span>`).join(' ');
+    const descHTML = room.desc ? `<p style="margin-top:8px; font-size:0.85rem; color:var(--text-muted);">${room.desc}</p>` : '';
+    roomSpecsEl.innerHTML = tagsHTML + descHTML;
+  }
+}
+
+function initBlueprintViewer() {
+  const floorButtons = document.querySelectorAll('.level-selector .pill-btn');
   floorButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
+    btn.addEventListener('click', () => {
       floorButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      currentFloor = btn.getAttribute('data-floor');
-      renderFloor(currentFloor);
+      const floorKey = btn.dataset.floor;
+      renderFloor(floorKey);
     });
   });
 
   renderFloor('pb');
 }
 
-/* ==========================================================================
-   4. PRESUPUESTO & COTIZADOR
-   ========================================================================== */
-const budgetItems = [
-  // 01. Cimentación y Estructura
-  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Estudios Preliminares, Mecánica Suelos & DRO', spec: '3 sondeos, cálculo estructural, licencia de construcción', qty: 1, unit: 7250 },
-  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Trazo, Excavación & Cimentación Concreto', spec: "Zapatas corridas, acero f'c=250 kg/cm2, fumigación antitermitas", qty: 1, unit: 20350 },
-  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Cisterna Subterránea 5,000 L en Concreto', spec: 'Concreto armado hidrófugo bajo cochera con sensor ultrasónico', qty: 1, unit: 3400 },
-  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Muros de Carga, Castillos & Dalas (3 Niveles)', spec: 'Block térmico / ladrillo confinado con columnas de concreto', qty: 1, unit: 17000 },
-  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Losas de Entrepiso PB-PA y Azotea General', spec: "Vigueta y bovedilla poliestireno + capa compresión f'c=250", qty: 1, unit: 20750 },
-  { sub: '01. Cimentación', cat: 'cimentacion', name: 'Cubierta Sobreelevada (Monitor Roof) & Escalera', spec: 'Estructura linternilla pasillo PA y 34 escalones de concreto', qty: 1, unit: 5000 },
-
-  // 02. Acabados y Pisos
-  { sub: '02. Acabados', cat: 'acabados', name: 'Aplanados de Yeso Muestreado y Zarpeo Exterior', spec: 'Yeso a plomo en interiores y repellado con hidrófugo exterior', qty: 1, unit: 8650 },
-  { sub: '02. Acabados', cat: 'acabados', name: 'Impermeabilización Termofusionada Azotea (10 Años)', spec: 'Membrana prefabricada 4.5mm gravillada con poliéster', qty: 1, unit: 2400 },
-  { sub: '02. Acabados', cat: 'acabados', name: 'Piso Porcelánico Gran Formato (60x120 cm)', spec: '185 m2 en PB y PA con boquilla epóxica antibacterial', qty: 1, unit: 8250 },
-  { sub: '02. Acabados', cat: 'acabados', name: 'Piso Deck Exterior / Porcelanato Antiderrapante', spec: '55 m2 en Roof Garden frontal y balcón de Master Suite', qty: 1, unit: 2900 },
-  { sub: '02. Acabados', cat: 'acabados', name: 'Muebles de Baño, Inodoros Suspendidos & Grifería', spec: '4 WCs ecológicos, regaderas tipo lluvia spa y monomandos', qty: 1, unit: 6250 },
-  { sub: '02. Acabados', cat: 'acabados', name: 'Pintura Vinílica Lavable & Jardinería San Agustín', spec: 'Comex Vinimex Total en 3 niveles y pasto en servidumbres', qty: 1, unit: 4650 },
-
-  // 03. Carpintería y Cocina
-  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Cocina Integral de Diseño con Isla Central', spec: 'Muebles hidrófugos, herrajes de cierre suave y cubiertas de cuarzo', qty: 1, unit: 9250 },
-  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Puerta Principal Monumental en Madera & Acero', spec: 'Puerta de seguridad pivotante con chapa biométrica inteligente', qty: 1, unit: 1900 },
-  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Puertas Interiores Semisólidas con Marco Envolvente', spec: '8 puertas de recámaras y baños con sellos acústicos', qty: 8, unit: 350 },
-  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Clósets Empotrados & Walk-in Closet Master', spec: 'Clósets recámaras 1, 2, Suite PB y vestidor privado Master', qty: 1, unit: 3900 },
-  { sub: '03. Carpintería', cat: 'carpinteria', name: 'Pérgola Metálica de Sombra en Roof Garden', spec: 'Vigas de acero estructural y sombra bioclimática en terraza', qty: 1, unit: 1150 },
-
-  // 04. Cancelería y Vidrios
-  { sub: '04. Cancelería', cat: 'canceleria', name: 'Cancelería Aluminio Eurovent 70/80 con Cristal 6mm', spec: 'Ventanas perimetrales y canceles corredizos al jardín trasero', qty: 1, unit: 6750 },
-  { sub: '04. Cancelería', cat: 'canceleria', name: 'Canceles de Cristal Templado 9.5mm en Regaderas', spec: '3 canceles de baño con herrajes de acero inoxidable', qty: 3, unit: 633 },
-  { sub: '04. Cancelería', cat: 'canceleria', name: 'Barandales de Cristal Templado (Balcón & Roof)', spec: 'Cristal templado 9.5mm con postes de acero inoxidable', qty: 1, unit: 2100 },
-  { sub: '04. Cancelería', cat: 'canceleria', name: 'Celosías Louvers Antilluvia en Monitor Roof', spec: 'Aluminio anodizado con lamas a 45° y mosquiteros integrados', qty: 1, unit: 1500 },
-
-  // 05. Instalaciones MEP y Fontanería
-  { sub: '05. MEP', cat: 'mep', name: 'Instalación Eléctrica con Neutro al 100% & Tablero QO-24', spec: 'Cable antiflama, acometida 220V CFE, circuito EV 40A y UPS', qty: 1, unit: 6000 },
-  { sub: '05. MEP', cat: 'mep', name: 'Red Hidráulica PPR Termofusionada & Recirculación', spec: 'Tuberías TuboPlus aisladas, subida a azotea y retorno 1/2"', qty: 1, unit: 2800 },
-  { sub: '05. MEP', cat: 'mep', name: 'Red Sanitaria PVC, Columna Ventilación & Drenaje Pluvial', spec: 'BSN 4", BSG 3", CVS 2" a +7.20m y bajadas pluviales BAP 4"', qty: 1, unit: 2450 },
-  { sub: '05. MEP', cat: 'mep', name: 'Bomba Presurizadora Inverter + Filtro Dual + Lámpara UV', spec: '3.5 bar constante, 5µm, carbón activado y esterilizador UV', qty: 1, unit: 1700 },
-  { sub: '05. MEP', cat: 'mep', name: 'Calentador Solar de Agua 200 L (15 Tubos de Vacío Inox)', spec: 'Termotanque inox 304, bypass termostático y respaldo modulante', qty: 1, unit: 950 },
-
-  // 06. Domótica, Redes y Energías Limpias
-  { sub: '06. Domótica', cat: 'domotica', name: 'Arreglo Fotovoltaico Solar 3.3 kWp (6 Paneles 550W)', spec: 'Módulos monocristalinos bifaciales + microinversores smart', qty: 1, unit: 3900 },
-  { sub: '06. Domótica', cat: 'domotica', name: 'Sistema Climatización A/C Multi-Split Inverter', spec: '3 condensadoras + 4 evaporadoras para PB, Master y Secundarias', qty: 1, unit: 4900 },
-  { sub: '06. Domótica', cat: 'domotica', name: 'Rack 12U Equipado (Gateway UniFi, Switch PoE+, UPS)', spec: 'Cloud Gateway Ultra, Switch 16p PoE+, UPS Online 1500VA', qty: 1, unit: 2300 },
-  { sub: '06. Domótica', cat: 'domotica', name: '3 Puntos de Acceso Wi-Fi 7 PoE (PB, PA, Roof Top)', spec: 'Ubiquiti UniFi U7 Pro para roaming continuo en toda la casa', qty: 3, unit: 220 },
-  { sub: '06. Domótica', cat: 'domotica', name: 'CCTV 4K PoE con IA, Videoportero & Cerradura Smart', spec: '4 cámaras 4K, NVR local 4TB sin cuotas, timbre con chapa eléc.', qty: 1, unit: 2100 },
-  { sub: '06. Domótica', cat: 'domotica', name: 'Iluminación Inteligente Circadiana & Sensores mmWave', spec: 'Tiras COB LED 24V, Dimmers DALI, apagadores Zigbee/Matter', qty: 1, unit: 2250 }
-];
-
-function initBudget() {
-  const tableBody = document.getElementById('budget-table-body');
-  const filterButtons = document.querySelectorAll('#budget-filters .filter-btn');
-
-  function renderTable(filter = 'all') {
-    if (!tableBody) return;
-    tableBody.innerHTML = '';
-    const filtered = budgetItems.filter(item => filter === 'all' || item.cat === filter);
-
-    filtered.forEach(item => {
-      const row = document.createElement('tr');
-      const total = item.qty * item.unit;
-      row.innerHTML = `
-        <td><span class="room-tag">${item.sub}</span></td>
-        <td><strong>${item.name}</strong></td>
-        <td><span class="text-muted">${item.spec}</span></td>
-        <td>${item.qty}</td>
-        <td>$${item.unit}</td>
-        <td><strong>$${total}</strong></td>
-      `;
-      tableBody.appendChild(row);
-    });
-  }
-
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderTable(btn.getAttribute('data-filter'));
-    });
-  });
-
-  renderTable('all');
-}
-
-/* ==========================================================================
-   5. CHECKLIST DE OBRA INTERACTIVO (LocalStorage)
-   ========================================================================== */
-const checklistData = [
-  {
-    group: 'Fase de Planos & Arquitecto (Años 1 y 2)',
-    items: [
-      { id: 'c1', title: 'Ubicación del Rack Central (MDF) en planos', desc: 'Espacio de 9U a 12U en planta baja con ventilación adecuada.' },
-      { id: 'c2', title: 'Marcado de cable Neutro en todas las chalupas', desc: 'Nota explícita en plano eléctrico para todas las cajas de apagador.' },
-      { id: 'c3', title: 'Cajas extra-profundas de 50mm especificadas', desc: 'Chalupas con profundidad para alojar micromódulos.' },
-      { id: 'c4', title: 'Puntos de red en techos para Access Points', desc: '1 toma Cat6 en centro geométrico de PB y PA.' }
-    ]
-  },
-  {
-    group: 'Fase de Obra Negra & Instalaciones (Año 3)',
-    items: [
-      { id: 'c5', title: 'Tendido de tuberías hacia las 4 esquinas de cámaras', desc: 'Tubo de 3/4" directo al Rack con cable Cat6 exterior UV.' },
-      { id: 'c6', title: 'Tubo pasacables de 2" en zonas de TV', desc: 'Oculto en pared para paso de cables HDMI sin nada a la vista.' },
-      { id: 'c7', title: 'Tuberías para bocinas empotradas en techo', desc: 'Cables 14/2 desde cielo raso de Sala, Cocina y Terraza al Rack.' },
-      { id: 'c8', title: 'Salidas de corriente en dinteles de ventanas', desc: 'Alimentación de 110V para motores de persianas.' },
-      { id: 'c9', title: 'Tubería de 1" para cargador de auto eléctrico', desc: 'Conduit pesado en cochera con cable calibre 6 AWG.' },
-      { id: 'c10', title: 'Tubería de 1" de azotea a cuadro para paneles solares', desc: 'Guía lista para futura instalación de energía solar.' }
-    ]
-  },
-  {
-    group: 'Fase de Acabados & Puesta en Marcha (Año 3)',
-    items: [
-      { id: 'c11', title: 'Instalación de Rack, Switch PoE y Mini-PC', desc: 'Configuración inicial de Home Assistant OS y VLANs.' },
-      { id: 'c12', title: 'Colocación de cerradura inteligente y timbre PoE', desc: 'Pruebas de apertura remota, huellas y notificaciones en móvil.' }
-    ]
-  }
+// ==========================================================================
+// 6. BITÁCORA DE SUPERVISIÓN & CHECKLIST DE CALIDAD EN OBRA
+// ==========================================================================
+const checklistItems = [
+  { id: 'chk-1', phase: 'Fase 1', title: 'Estudio de Mecánica de Suelos & Trazo Estación Total', desc: "Validar capacidad de carga q_adm >= 1.5 kg/cm2 y linderos exactos (153.19 m2)." },
+  { id: 'chk-2', phase: 'Fase 1', title: 'Cisterna 5,000 L & Prueba de Estanqueidad', desc: "Concreto armado f'c=250 con aditivo hidrófugo integral y prueba de llenado por 48h sin fugas." },
+  { id: 'chk-3', phase: 'Fase 1', title: 'Cimentación & Fumigación Antitermitas', desc: "Verificar armados de acero, zapatas corridas y aplicación de barrera química." },
+  { id: 'chk-4', phase: 'Fase 1', title: 'Muros de Carga & Losa Entrepiso PB-PA', desc: "Castillos colados a plomo, vigueta/bovedilla poliestireno y losa con f'c=250." },
+  { id: 'chk-5', phase: 'Fase 1', title: 'Canalizaciones Conduit & Cable Neutro al 100%', desc: 'Mangueras de 1" para red Cat6A, 3/4" para fuerza y cable neutro en todas las chalupas profundas (50mm).' },
+  { id: 'chk-6', phase: 'Fase 1', title: 'Prueba Hidrostática en Tuberías PPR Termofusionadas', desc: "Presurizar tuberías de agua fría y caliente a 10 bar (145 PSI) por 24 horas antes de colar o aplanar." },
+  { id: 'chk-7', phase: 'Fase 1', title: 'Impermeabilización Termofusionada en Azotea (+6.00m)', desc: "Membrana prefabricada 4.5mm con poliéster y prueba de encharcamiento por 24 horas." },
+  { id: 'chk-8', phase: 'Fase 2', title: 'Prueba de Inundación en Bases de Regaderas PA', desc: "Colocación de membrana elastomérica en área de regaderas y prueba de agua por 24h." },
+  { id: 'chk-9', phase: 'Fase 2', title: 'Colocación de Cocina Integral con Isla & Canceles', desc: "Canceles de cristal templado 9.5mm con herrajes inox y cocina a nivel con cierre suave." },
+  { id: 'chk-10', phase: 'Fase 3', title: 'Piso Deck & Barandal de Cristal en Roof Garden', desc: "Fijación de postes de acero inox en pretil frontal y pendientes de drenaje pluvial 2%." },
+  { id: 'chk-11', phase: 'Fase 4', title: 'Instalación de Paneles Solares (3.3 kWp) & Calentador Solar', desc: "Estructuras de aluminio ancladas a dados de concreto sin perforar la membrana impermeable." },
+  { id: 'chk-12', phase: 'Fase 4', title: 'Comisionamiento de Rack 12U & Home Assistant', desc: "Certificación de cableado Cat6A con tester digital, roaming Wi-Fi 7 y pruebas de CCTV 4K." }
 ];
 
 function initChecklist() {
   const container = document.getElementById('checklist-container');
-  const progressText = document.getElementById('chk-progress-text');
-  if (!container || !progressText) return;
-
-  let savedState = JSON.parse(localStorage.getItem('smart_home_checklist') || '{}');
-
-  function updateProgress() {
-    let total = 0;
-    let checked = 0;
-    checklistData.forEach(g => {
-      g.items.forEach(item => {
-        total++;
-        if (savedState[item.id]) checked++;
-      });
-    });
-
-    const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
-    progressText.textContent = `${checked} de ${total} tareas completadas (${pct}%)`;
-    localStorage.setItem('smart_home_checklist', JSON.stringify(savedState));
-  }
+  const progressText = document.getElementById('checklist-progress-text');
+  if (!container) return;
 
   container.innerHTML = '';
-  checklistData.forEach(group => {
-    const groupEl = document.createElement('div');
-    groupEl.className = 'checklist-group';
-    groupEl.innerHTML = `<h3 class="checklist-group-title">📌 ${group.group}</h3>`;
+  let completed = 0;
 
-    group.items.forEach(item => {
-      const isChecked = !!savedState[item.id];
-      const itemEl = document.createElement('label');
-      itemEl.className = `check-item ${isChecked ? 'completed' : ''}`;
-      itemEl.innerHTML = `
-        <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''}>
-        <div class="check-item-content">
-          <div class="check-item-title">${item.title}</div>
-          <div class="check-item-desc">${item.desc}</div>
+  checklistItems.forEach(item => {
+    const isChecked = localStorage.getItem('chk_' + item.id) === 'true';
+    if (isChecked) completed++;
+
+    const card = document.createElement('div');
+    card.className = 'checklist-card' + (isChecked ? ' checked' : '');
+    card.innerHTML = `
+      <div class="checklist-item-header">
+        <input type="checkbox" id="${item.id}" class="checklist-checkbox" ${isChecked ? 'checked' : ''}>
+        <div style="flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label for="${item.id}" class="checklist-item-title">${item.title}</label>
+            <span class="phase-badge phase-1" style="font-size: 0.65rem;">${item.phase}</span>
+          </div>
+          <p class="checklist-item-desc">${item.desc}</p>
         </div>
-      `;
+      </div>
+    `;
 
-      const checkbox = itemEl.querySelector('input');
-      checkbox.addEventListener('change', () => {
-        savedState[item.id] = checkbox.checked;
-        if (checkbox.checked) {
-          itemEl.classList.add('completed');
-        } else {
-          itemEl.classList.remove('completed');
-        }
-        updateProgress();
-      });
-
-      groupEl.appendChild(itemEl);
+    const checkbox = card.querySelector('input[type="checkbox"]');
+    checkbox.addEventListener('change', () => {
+      localStorage.setItem('chk_' + item.id, checkbox.checked);
+      card.classList.toggle('checked', checkbox.checked);
+      updateChecklistProgress();
     });
 
-    container.appendChild(groupEl);
+    container.appendChild(card);
   });
 
-  updateProgress();
+  function updateChecklistProgress() {
+    const total = checklistItems.length;
+    const currentChecked = document.querySelectorAll('.checklist-checkbox:checked').length;
+    if (progressText) {
+      progressText.textContent = `${currentChecked} de ${total} Verificaciones Completadas (${Math.round((currentChecked/total)*100)}%)`;
+    }
+  }
+
+  updateChecklistProgress();
 }
 
-/* ==========================================================================
-   6. VISOR DE GUÍAS TÉCNICAS (DOCUMENTACIÓN)
-   ========================================================================== */
+// ==========================================================================
+// 7. BIBLIOTECA DE DOCUMENTOS Y DOSSIER TÉCNICO OFICIAL (01 a 14)
+// ==========================================================================
 const docsContent = {
   vision: `
-    <h2>01. Visión y Cronograma a 3 Años</h2>
-    <p>Este proyecto está estructurado con un horizonte de 3 años para acompañar la maduración financiera de tu proyecto de construcción:</p>
-    <ul>
-      <li><strong>Año 1:</strong> Liquidación acelerada del crédito del terreno y recopilación de ideas arquitectónicas.</li>
-      <li><strong>Año 2:</strong> Diseño de planos ejecutivos con el arquitecto e incorporación formal del Rack y canalizaciones.</li>
-      <li><strong>Año 3:</strong> Trámite del crédito de construcción, licitación de obra e inicio de colocación de tuberías en obra negra.</li>
-    </ul>
-    <p>Dejar tuberías de 1 pulgada y cajas chalupas profundas de 2x4" durante la obra negra cuesta <strong>menos de $800 USD</strong> y ahorra miles de dólares en ranurados posteriores.</p>
+    <h2>01. Visión Estratégica y Cronograma Maestro</h2>
+    <p>La estrategia se basa en ejecutar la <strong>Fase 1 (Casa Núcleo Habitable)</strong> en los primeros 6 meses, mudarse de inmediato para eliminar el gasto de renta, y habilitar el crecimiento modular por fases a lo largo de 3 años sin demoliciones ni retrabajos.</p>
   `,
   dossier: `
-    <h2>02. Dossier Técnico de Obra Negra</h2>
-    <p>Especificaciones obligatorias para el constructor y electricista:</p>
+    <h2>02. Dossier Técnico de Obra Negra para Electricista y Arquitecto</h2>
+    <p>Normas obligatorias para canalizaciones en obra negra:</p>
     <ul>
-      <li><strong>Caja de Chalupa Profunda:</strong> Exclusivamente cajas cuadradas 4x4" con sobretapa o chalupas de 50mm de profundidad para albergar módulos Zigbee/Matter detrás del apagador.</li>
-      <li><strong>Cable Neutro en Toda Chalupa:</strong> Cero apagadores tradicionales sin neutro; garantiza alimentación continua a los microcontroladores.</li>
-      <li><strong>Tubería Conduit Pesada:</strong> Tubo de 1 pulgada (25mm) para datos y audio; tubo de 3/4" para circuitos de fuerza.</li>
+      <li><strong>Cable Neutro Obligatorio:</strong> En el 100% de las cajas de apagadores para compatibilidad con micro-módulos Zigbee/Matter.</li>
+      <li><strong>Chalupas Profundas (50 mm):</strong> Cajas metálicas galvanizadas de 50mm de profundidad mínima.</li>
+      <li><strong>Ductos Pesados Cat6A:</strong> Manguera conduit de 1 pulgada exclusiva para red, sin compartir canalización con cables de alta tensión.</li>
     </ul>
   `,
   network: `
-    <h2>03. Arquitectura de Red y Rack 12U</h2>
-    <p>Topología estructurada en estrella con cable Cat6A 100% cobre:</p>
-    <ul>
-      <li><strong>Ubicación:</strong> Cuarto de Máquinas y Domótica en Planta Baja (X = 12.67m, Y = -1.05m).</li>
-      <li><strong>Puntos de Acceso Wi-Fi 7:</strong> AP1 en PB (Área Social), AP2 en PA (Pasillo de recámaras), AP3 en Roof Top (Terraza exterior).</li>
-      <li><strong>Servidor Local:</strong> Mini PC / Home Assistant Yellow con grabación de CCTV 4K local en NVR de 4TB (Cero dependencia de nubes de pago).</li>
-    </ul>
+    <h2>03. Arquitectura de Red, Rack 12U y Telecomunicaciones</h2>
+    <p>Infraestructura cableada Cat6A con topología en estrella hacia el Rack 12U en el Cuarto de Máquinas de PB. 3 Puntos de Acceso Wi-Fi 7 (PB, PA, Roof Top) y 4 Cámaras 4K PoE perimetrales.</p>
   `,
   subsystems: `
-    <h2>04. Subsistemas Domóticos</h2>
-    <p>Integración sobre estándares abiertos:</p>
-    <ul>
-      <li><strong>Iluminación:</strong> Apagadores Zigbee 3.0 con neutro y tiras COB LED dimerizables con ritmo circadiano (2700K a 4000K).</li>
-      <li><strong>Presencia:</strong> Sensores mmWave de microondas (24GHz/60GHz) para detección de presencia estática y microrrespiración en cada estancia.</li>
-      <li><strong>Clima & Riego:</strong> Termostatos inteligentes y electroválvulas de riego por goteo automatizadas según pronóstico de lluvia.</li>
-    </ul>
+    <h2>04. Subsistemas Domóticos y Sensores de Presencia</h2>
+    <p>Integración de iluminación circadiana DALI/Zigbee, sensores de presencia milimétrica mmWave (24GHz) para detección de presencia estática y automatización de clima.</p>
   `,
   budget: `
-    <h2>05. Presupuesto y Catálogo de Equipos</h2>
-    <p>La inversión total se divide en dos etapas:</p>
-    <ul>
-      <li><strong>Fase 1 (Obra Negra - Año 3):</strong> ~$785 USD (~$15,700 MXN) para ductos, cajas y cable Cat6.</li>
-      <li><strong>Fase 2 (Equipamiento Inteligente):</strong> ~$3,655 USD (~$73,100 MXN) adquiribles de manera gradual según prioridad.</li>
-    </ul>
+    <h2>05. Catálogo de Dispositivos y Especificaciones</h2>
+    <p>Listado de componentes certificados Matter, Zigbee 3.0 y equipos de red grado empresarial.</p>
   `,
   neufert: `
-    <h2>06. Criterios de Diseño Arquitectónico (Ergonomía Neufert)</h2>
-    <p>Cumplimiento de estándares internacionales de habitabilidad y confort:</p>
-    <ul>
-      <li><strong>Circulaciones:</strong> Pasillos principales de 1.50 m en extremos y 1.01 m a 0.90 m mínimos en zonas de transición.</li>
-      <li><strong>Alturas Libres:</strong> Planta Baja con doble nivel (Gran Área Social con techo a +3.15 m libre; Recámara Suite a +3.00 m).</li>
-      <li><strong>Linternilla Cenital (*Monitor Roof*):</strong> Pasillo de Planta Alta con techo sobreelevado a +3.40 m libre (+70 cm sobre la losa) para iluminación natural difusa y extracción de aire caliente.</li>
-      <li><strong>Escalera Ergonómica (Ley de Blondel):</strong> 17 escalones continuos con huella de 28 cm y contrahuella de 17.65 cm (2P + H = 63.3 cm), apilados verticalmente de PB a PA y a Roof Garden.</li>
-    </ul>
+    <h2>06. Dictamen de Estándares Neufert y Criterios Arquitectónicos</h2>
+    <p>Cumplimiento de alturas libres mínimas (2.60m a 2.75m), circulaciones fluidas (pasillos de 1.15m), iluminación natural cenital y ventilación cruzada.</p>
   `,
   topography: `
-    <h2>07. Levantamiento Topográfico y Terreno</h2>
-    <p>Dimensiones y límites reales del lote residencial:</p>
-    <ul>
-      <li><strong>Superficie Total:</strong> 153.19 m² (Perímetro: 50.57 m).</li>
-      <li><strong>Linderos:</strong> Norte 15.74 m, Sur 14.49 m, Oriente (Frente a calle) 10.04 m, Poniente (Fondo) 10.30 m.</li>
-      <li><strong>Servidumbres y Retiros:</strong> Calle de acceso 10.30 m, Arriate frontal verde 60 cm, Banqueta peatonal 90 cm y Jardín frontal en servidumbre.</li>
-    </ul>
+    <h2>07. Levantamiento Topográfico y Geometría Real del Terreno</h2>
+    <p>Polígono de 153.19 m² (Perímetro: 50.57 m) con ángulos reales y servidumbres respetadas (arriate de 60 cm y banqueta de 90 cm).</p>
   `,
   zoning: `
-    <h2>08. Programa Arquitectónico Integral (3 Niveles)</h2>
-    <p>Zonificación aprobada del proyecto:</p>
-    <ul>
-      <li><strong>Planta Baja (±0.00 m / -0.15 m):</strong> Cochera techada 2 autos con cargador EV 240V/40A, Cuarto de Máquinas 12U, Lavandería, 1/2 Baño enrasado, Recámara Suite PB con baño en 'L' y vestidor, Gran Área Social abierta con cocina e isla y jardín trasero.</li>
-      <li><strong>Planta Alta (+3.00 m):</strong> Master Suite con gran balcón frontal de 4.75 m, pasillo-clóset privado y baño spa, Family Room diáfano, 2 Recámaras Secundarias, Baño Compartido y Zinc.</li>
-      <li><strong>Roof Garden (+6.00 m):</strong> Terraza social frontal panorámica con pérgola, sala lounge con firepit, grill con tarja y barra, 1/2 baño exclusivo, caseta de escalera interior, arreglo solar 3.3 kWp, calentador solar 200L y 3 condensadoras A/C.</li>
-    </ul>
+    <h2>08. Programa Arquitectónico y Zonificación en 3 Niveles</h2>
+    <p>Distribución en 3 niveles con 4 recámaras (Suite en PB + Master Suite + 2 Secundarias), 3.5 baños, Gran Área Social, Cuarto de Máquinas y Roof Garden Frontal.</p>
   `,
   mep: `
     <h2>09. Ingenierías MEP & Domótica Integrada</h2>
-    <p>Infraestructura eléctrica, hidráulica, solar y de telecomunicaciones:</p>
-    <ul>
-      <li><strong>Eléctrico:</strong> Tablero QO-24 bifásico con acometida para medidor bidireccional CFE, circuito EV 40A, circuito UPS para servidores y circuitos de iluminación LED DALI.</li>
-      <li><strong>Iluminación Smart & mmWave:</strong> Control por escenas Zigbee/Matter con ritmo circadiano (2700K a 4000K) y sensores de presencia milimétrica (24GHz) en cada espacio.</li>
-      <li><strong>Red & CCTV:</strong> Cableado Cat6A UTP 100% cobre, 3 Puntos de Acceso Wi-Fi 7 (PB, PA, Roof), 4 Cámaras PoE 4K con IA local y videoportero PoE con chapa eléctrica.</li>
-      <li><strong>Hidráulico & Solar:</strong> Cisterna de 5,000 L, presurizador inverter a 3.5 bar, Calentador Solar de 200 L con 15 tubos de vacío, bypass termostático y recirculación inteligente de agua caliente.</li>
-    </ul>
+    <p>Tablero QO-24 bifásico (220V/110V), circuito EV 40A, circuito UPS para servidores, iluminación circadiana, red estructurada Cat6A y fontanería presurizada a 3.5 bar.</p>
   `,
   plumbing: `
     <h2>10. Planos e Ingeniería Hidrosanitaria & Drenaje Pluvial</h2>
-    <p>Planos ejecutivos unifilares e isométricos de las instalaciones de agua potable, solar y drenaje:</p>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0;">
-      <div style="background: #1e293b; border-radius: 8px; padding: 16px; border: 1px solid #334155;">
-        <h4 style="color: #38bdf8; margin-top: 0;">💧 01. Isométrico Hidráulico & Solar</h4>
-        <p style="color: #94a3b8; font-size: 13px;">Cisterna 5,000 L, tren de presurización inverter a 3.5 bar con desinfección UV, calentador solar termosifónico de 200 L, bypass inteligente y anillo de recirculación cero desperdicio.</p>
-        <p><a href="planos_y_diagramas/01_plano_isometrico_hidraulico_y_solar.svg" target="_blank" style="display: inline-block; padding: 6px 12px; background: #0284c7; color: white; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 12px;">Ver Plano Hidráulico SVG ↗</a></p>
-      </div>
-
-      <div style="background: #1e293b; border-radius: 8px; padding: 16px; border: 1px solid #334155;">
-        <h4 style="color: #f87171; margin-top: 0;">🚽 02. Red Sanitaria & Drenaje Pluvial</h4>
-        <p style="color: #94a3b8; font-size: 13px;">Separación estricta de aguas negras (BSN 4"), aguas grises (BSG 3"), columna de ventilación sanitaria (CVS 2" a +7.20 m para cero olores) y bajadas pluviales BAP 4" con trampa de sedimentos.</p>
-        <p><a href="planos_y_diagramas/02_plano_red_sanitaria_y_pluvial.svg" target="_blank" style="display: inline-block; padding: 6px 12px; background: #b91c1c; color: white; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 12px;">Ver Plano Sanitario SVG ↗</a></p>
-      </div>
-    </div>
+    <p>Planos ejecutivos unifilares e isométricos de agua potable, solar y drenaje:</p>
+    <ul>
+      <li><a href="planos_y_diagramas/01_plano_isometrico_hidraulico_y_solar.svg" target="_blank" style="color: #38bdf8; font-weight: 700;">Ver Plano Isométrico Hidráulico & Solar SVG ↗</a></li>
+      <li><a href="planos_y_diagramas/02_plano_red_sanitaria_y_pluvial.svg" target="_blank" style="color: #f87171; font-weight: 700;">Ver Plano de Red Sanitaria & Pluvial SVG ↗</a></li>
+    </ul>
   `,
   civilbudget: `
     <h2>11. Presupuesto Paramétrico de Obra Civil Completa (235 m²)</h2>
-    <p>Estimación desglosada por capítulos para una construcción residencial medio-alto con acabados de primera y domótica integral ($15,200 MXN/m²):</p>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0;">
-      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-left: 4px solid #38bdf8;">
-        <div style="font-size: 11px; color: #94a3b8;">01. Cimentación & Estructura</div>
-        <div style="font-size: 18px; font-weight: 800; color: #f8fafc;">$1,365,000 MXN</div>
-        <div style="font-size: 11px; color: #38bdf8;">$68,250 USD (38.2%)</div>
-      </div>
-      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-left: 4px solid #10b981;">
-        <div style="font-size: 11px; color: #94a3b8;">02. Acabados, Pisos & Canceles</div>
-        <div style="font-size: 18px; font-weight: 800; color: #f8fafc;">$1,275,000 MXN</div>
-        <div style="font-size: 11px; color: #10b981;">$63,750 USD (35.7%)</div>
-      </div>
-      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-left: 4px solid #f59e0b;">
-        <div style="font-size: 11px; color: #94a3b8;">03. MEP, Domótica & Solar</div>
-        <div style="font-size: 18px; font-weight: 800; color: #f8fafc;">$932,000 MXN</div>
-        <div style="font-size: 11px; color: #f59e0b;">$46,600 USD (26.1%)</div>
-      </div>
-    </div>
-
-    <p><strong>Gran Total Estimado Llave en Mano:</strong> <span style="color: #38bdf8; font-size: 18px; font-weight: 800;">$3,572,000 MXN</span> ($178,600 USD).</p>
+    <p>Estimación desglosada por capítulos para construcción residencial medio-alto ($15,200 MXN/m²): <strong>$3,572,000 MXN</strong> ($178,600 USD).</p>
   `,
   masterplan: `
     <h2>12. Plan Maestro de Construcción Paso a Paso (10 Meses)</h2>
-    <p>Ruta crítica desde los trámites de licencias hasta la entrega de llaves y mudanza:</p>
-    <ul>
-      <li><strong>Fase 0 (Pre-obra - Mes -3 a 0):</strong> Mecánica de suelos, cálculo estructural, firma de DRO y obtención de licencia municipal de construcción.</li>
-      <li><strong>Fase 1 (Meses 1 y 2):</strong> Trazo con estación total, excavación, cisterna de 5,000 L y colado de zapatas / losa de cimentación con drenajes maestros.</li>
-      <li><strong>Fase 2 (Meses 3 a 5):</strong> Muros de carga, losa de entrepiso PB-PA, muros de Planta Alta, losa de azotea general (+6.00m), caseta de escalera y cubierta sobreelevada (+6.70m).</li>
-      <li><strong>Fase 3 (Meses 5 y 6):</strong> Canalizaciones conduit pesadas, fontanería PPR aislada, drenajes PVC, cableado con neutro y tendido de cable Cat6A.</li>
-      <li><strong>Fase 4 (Meses 6 y 7):</strong> Aplanados de yeso a plomo, repellados exteriores con hidrófugo e impermeabilización termofusionada en azotea (garantía 10 años).</li>
-      <li><strong>Fase 5 (Meses 8 y 9):</strong> Colocación de porcelanatos gran formato, montaje de cocina integral con isla, clósets, vestidor y cancelería Eurovent con cristal templado.</li>
-      <li><strong>Fase 6 (Mes 10):</strong> Montaje de 6 paneles solares (3.3 kWp), calentador solar 200L, 3 climas A/C inverter, Rack 12U y comisionamiento de Home Assistant.</li>
-      <li><strong>Fase 7 (Mes 10 - Semana 4):</strong> Pruebas integrales de presión hidráulica, limpieza fina de obra y entrega formal de llaves en mano.</li>
-    </ul>
+    <p>Ruta crítica desde mecánica de suelos y trámites de licencias hasta colado de losas, acabados finos y entrega de llaves en mano.</p>
   `,
   progressive: `
     <h2>13. Estrategia de Construcción Progresiva & Habitabilidad Inmediata</h2>
-    <p>Plan modular en 4 fases para mudarse rápido, eliminar gastos de renta e ir completando acabados y tecnología en el tiempo sin demoliciones ni retrabajos:</p>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 16px 0;">
-      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-top: 3px solid #38bdf8;">
-        <div style="font-size: 11px; color: #38bdf8; font-weight: 700;">FASE 1 (Mes 1 a 6)</div>
-        <div style="font-size: 16px; font-weight: 800; color: #f8fafc;">Casa Núcleo Habitable</div>
-        <div style="font-size: 14px; font-weight: 700; color: #38bdf8; margin: 4px 0;">$1,980,000 MXN</div>
-        <p style="font-size: 11px; color: #94a3b8; margin: 0;">Estructura completa en 3 niveles, cisterna 5kL, MEP oculto, Suite PB funcional y cancelería exterior. <strong>¡Te mudas aquí y dejas de pagar renta!</strong></p>
-      </div>
-
-      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-top: 3px solid #10b981;">
-        <div style="font-size: 11px; color: #10b981; font-weight: 700;">FASE 2 (Año 1 viviendo ahí)</div>
-        <div style="font-size: 16px; font-weight: 800; color: #f8fafc;">Acabados Planta Alta</div>
-        <div style="font-size: 14px; font-weight: 700; color: #10b981; margin: 4px 0;">$580,000 MXN</div>
-        <p style="font-size: 11px; color: #94a3b8; margin: 0;">Baño Master spa, canceles templados, clósets empotrados, vestidor Master y cocina integral con isla de cuarzo.</p>
-      </div>
-
-      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-top: 3px solid #f59e0b;">
-        <div style="font-size: 11px; color: #f59e0b; font-weight: 700;">FASE 3 (Año 2)</div>
-        <div style="font-size: 16px; font-weight: 800; color: #f8fafc;">Roof Garden Frontal</div>
-        <div style="font-size: 14px; font-weight: 700; color: #f59e0b; margin: 4px 0;">$420,000 MXN</div>
-        <p style="font-size: 11px; color: #94a3b8; margin: 0;">Piso deck exterior, pérgola bioclimática, grill con tarja/barra, 1/2 baño de azotea y sala lounge con fogatero.</p>
-      </div>
-
-      <div style="background: #1e293b; padding: 14px; border-radius: 6px; border-top: 3px solid #8b5cf6;">
-        <div style="font-size: 11px; color: #8b5cf6; font-weight: 700;">FASE 4 (Año 3)</div>
-        <div style="font-size: 16px; font-weight: 800; color: #f8fafc;">Solar & Domótica Pro</div>
-        <div style="font-size: 14px; font-weight: 700; color: #8b5cf6; margin: 4px 0;">$362,000 MXN</div>
-        <p style="font-size: 11px; color: #94a3b8; margin: 0;">6 paneles solares 3.3 kWp, calentador solar 200L, 3 climas A/C inverter, Rack 12U, cámaras 4K y Home Assistant.</p>
-      </div>
-    </div>
-
-    <h3>La Regla de Oro:</h3>
-    <p>Toda la tubería vacía, mangueras pesadas, cajas profundas y preparaciones de fontanería se colocan en la <strong>Fase 1</strong>. Cuesta menos de $15,000 MXN y permite conectar los paneles, climas y domótica en las siguientes fases <em>Plug & Play</em> sin romper ningún muro.</p>
-  `};
+    <p>Plan en 4 fases para mudarse en el mes 6, eliminar gastos de renta e ir completando acabados y tecnología en el tiempo sin demoliciones ni retrabajos.</p>
+  `,
+  cashflow: `
+    <h2>14. Guía Financiera & Flujo de Caja por Fases</h2>
+    <p>Desglose de anticipos requeridos (Fase 1: $594k MXN | Fase 2: $174k MXN | Fase 3: $126k MXN | Fase 4: $108k MXN) y ministraciones semanales durante la obra.</p>
+  `
+};
 
 function initDocsViewer() {
-  const navItems = document.querySelectorAll('.docs-nav-item');
+  const navItems = document.querySelectorAll('#docs-nav-list .docs-nav-item');
   const viewer = document.getElementById('doc-viewer-content');
-  if (!viewer) return;
 
   function renderDoc(docKey) {
-    viewer.innerHTML = docsContent[docKey] || '<p>Documento no encontrado.</p>';
+    if (!viewer) return;
+    const content = docsContent[docKey] || '<p>Documento en preparación...</p>';
+    viewer.innerHTML = content;
   }
 
   navItems.forEach(item => {
     item.addEventListener('click', () => {
       navItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
-      renderDoc(item.getAttribute('data-doc'));
+      renderDoc(item.dataset.doc);
     });
   });
 
   renderDoc('vision');
 }
+
+// ==========================================================================
+// 8. CONTROLADOR DE PESTAÑAS PRINCIPALES (TABS)
+// ==========================================================================
+function initNavigationTabs() {
+  const tabButtons = document.querySelectorAll('.nav-tabs .nav-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetId = 'sec-' + btn.dataset.tab;
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+    });
+  });
+}
+
+// ==========================================================================
+// 9. INICIALIZACIÓN GLOBAL
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  initNavigationTabs();
+  initFinancialPlanner();
+  initBudget();
+  initBlueprintViewer();
+  initChecklist();
+  initDocsViewer();
+});
