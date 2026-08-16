@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard de Control, Planeación Financiera a 3 Años e Infraestructura de Domótica para Construcción de Casa Inteligente">
+  <title>Proyecto Residencia Inteligente | Plan Maestro a 3 Años</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Header Principal -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-block">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">Residencia Inteligente</h1>
+          <p class="brand-subtitle">Planificación Arquitectónica & Domótica • Horizonte 3 Años</p>
+        </div>
+      </div>
+
+      <nav class="nav-tabs" aria-label="Navegación principal">
+        <button class="nav-btn active" data-tab="roadmap" id="tab-btn-roadmap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Cronograma 3 Años
+        </button>
+        <button class="nav-btn" data-tab="blueprint" id="tab-btn-blueprint">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Plano & Espacios
+        </button>
+        <button class="nav-btn" data-tab="budget" id="tab-btn-budget">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Presupuesto & Equipos
+        </button>
+        <button class="nav-btn" data-tab="checklist" id="tab-btn-checklist">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Checklist de Obra
+        </button>
+        <button class="nav-btn" data-tab="docs" id="tab-btn-docs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+          Guías Técnicas
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal de la App -->
+  <main class="app-main">
+
+    <!-- SECCIÓN 1: CRONOGRAMA Y PLAN FINANCIERO A 3 AÑOS -->
+    <section class="tab-content active" id="sec-roadmap">
+      <div class="hero-card">
+        <div class="hero-badge">Estrategia a Mediano Plazo</div>
+        <h2 class="hero-title">Ruta hacia la Construcción de tu Hogar Inteligente</h2>
+        <p class="hero-text">Durante los próximos 3 años tu prioridad es liquidar el crédito del terreno y preparar el financiamiento de la construcción. La domótica se diseña desde ahora para que en la obra negra todo el cableado quede perfecto sin gastar de más.</p>
+        
+        <div class="timeline-stepper">
+          <div class="step-card active" data-step="1">
+            <div class="step-num">Año 1</div>
+            <div class="step-tag">En Curso</div>
+            <h3 class="step-title">Liquidación Terreno & Concepto</h3>
+            <p class="step-desc">Amortización mensual, definición de espacios deseados y lista de necesidades por estancia.</p>
+          </div>
+          <div class="step-card" data-step="2">
+            <div class="step-num">Año 2</div>
+            <div class="step-tag">Diseño Técnico</div>
+            <h3 class="step-title">Planos con Arquitecto & Rack</h3>
+            <p class="step-desc">Trazado de planos ejecutivos, inclusión de cuartos técnicos, cable neutro y tuberías en planos.</p>
+          </div>
+          <div class="step-card" data-step="3">
+            <div class="step-num">Año 3</div>
+            <div class="step-tag">Construcción</div>
+            <h3 class="step-title">Crédito de Obra & Arranque</h3>
+            <p class="step-desc">Liquidación total del terreno, trámite del crédito de construcción y tendido de tuberías Cat6 en obra negra.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculadora Financiera de Ahorro -->
+      <div class="grid-2-col">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div>
+              <h3 class="card-title">Calculadora de Ahorro para Obra</h3>
+              <p class="card-subtitle">Simula tu fondo de reserva para materiales de domótica en obra negra</p>
+            </div>
+          </div>
+          
+          <div class="calc-form">
+            <div class="form-group">
+              <label for="input-monthly-save">Ahorro mensual destinado al proyecto ($):</label>
+              <div class="input-prefix-wrapper">
+                <span class="prefix">$</span>
+                <input type="number" id="input-monthly-save" class="form-control" value="200" min="10" step="10">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-currency">Moneda de visualización:</label>
+              <select id="input-currency" class="form-control">
+                <option value="USD">Dólares Americanos (USD)</option>
+                <option value="MXN" selected>Pesos Mexicanos (MXN)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="input-months-left">Meses restantes del plan (36 meses total):</label>
+              <input type="range" id="input-months-left" class="range-slider" min="1" max="36" value="36">
+              <div class="range-val-display"><span id="lbl-months-count">36</span> meses restantes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card highlight-card">
+          <div class="card-header">
+            <div class="card-icon success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <h3 class="card-title">Proyección de Fondos a 3 Años</h3>
+              <p class="card-subtitle">Estimación calculada automáticamente</p>
+            </div>
+          </div>
+
+          <div class="finance-results">
+            <div class="stat-box">
+              <div class="stat-label">Fondo Total Estimado Acumulado</div>
+              <div class="stat-value text-primary" id="val-total-saved">$7,200 USD</div>
+              <div class="stat-sub" id="val-total-saved-alt">~$144,000 MXN</div>
+            </div>
+
+            <div class="progress-bar-container">
+              <div class="progress-bar-labels">
+                <span>Infraestructura Obra Negra (~$785 USD)</span>
+                <span class="text-success" id="val-progress-pct">100% Cubierto</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="fill-infra-progress" style="width: 100%;"></div>
+              </div>
+            </div>
+
+            <div class="stat-callout">
+              <strong>💡 Conclusión Estratégica:</strong> Con solo apartar <strong>$25 USD (~$500 MXN)</strong> al mes durante los 3 años, cubres el 100% de todas las tuberías, cajas profundas y bobinas de cable Cat6 de toda la casa.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: PLANO INTERACTIVO Y DISTRIBUCIÓN DE ESPACIOS -->
+    <section class="tab-content" id="sec-blueprint">
+      <div class="card">
+        <div class="card-header space-between">
+          <div>
+            <h2 class="card-title">Distribución de Infraestructura por Planta</h2>
+            <p class="card-subtitle">Explora los puntos de conexión, tuberías y dispositivos inteligentes por zona</p>
+          </div>
+          <div class="level-selector" role="group" aria-label="Seleccionar planta">
+            <button class="pill-btn active" data-floor="pb" id="btn-floor-pb">Planta Baja</button>
+            <button class="pill-btn" data-floor="pa" id="btn-floor-pa">Planta Alta</button>
+            <button class="pill-btn" data-floor="ext" id="btn-floor-ext">Exterior & Azotea</button>
+          </div>
+        </div>
+
+        <!-- Visor del Terreno y Geometría -->
+        <div class="card terrain-highlight-card">
+          <div class="terrain-header">
+            <div>
+              <span class="hero-badge">Mediciones Reales de Campo</span>
+              <h3 class="card-title">Terreno: 153.10 m² (Perímetro: 50.57 m)</h3>
+              <p class="card-subtitle">Frente 10.04 m × Fondo 15.74 m / 14.49 m • Posterior 10.30 m</p>
+            </div>
+            <div class="terrain-stats-chips">
+              <span class="chip">L1-2: <strong>15.74 m</strong></span>
+              <span class="chip">L2-3: <strong>10.30 m</strong></span>
+              <span class="chip">L3-4: <strong>14.49 m</strong></span>
+              <span class="chip">L4-1: <strong>10.04 m</strong></span>
+            </div>
+          </div>
+
+          <div class="terrain-svg-container" id="terrain-svg-wrapper">
+            <!-- SVG del polígono generado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- Visor de Distribución -->
+        <div class="blueprint-viewer" id="blueprint-display">
+          <!-- Renderizado dinámico vía JS -->
+        </div>
+
+        <!-- Detalle de la Zona Seleccionada -->
+        <div class="room-details-card" id="room-details">
+          <div class="room-details-header">
+            <h4 class="room-title" id="room-name">Selecciona un espacio arriba</h4>
+            <span class="badge" id="room-badge">Planta Baja</span>
+          </div>
+          <div class="room-specs-grid" id="room-specs">
+            <p class="text-muted">Haz clic en cualquier habitación o elemento para ver las tuberías requeridas, apagadores, sensores y cables a dejar en obra negra.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: PRESUPUESTO Y CATÁLOGO DE EQUIPOS -->
+    <section class="tab-content" id="sec-budget">
+      <div class="budget-summary-banner">
+        <div class="budget-stat-item">
+          <span class="stat-tag">Inversión Obra Negra (Año 3)</span>
+          <span class="stat-num" id="sum-obra-negra">$785 USD</span>
+          <span class="stat-hint">~$15,700 MXN • Tuberías y Cable Cat6</span>
+        </div>
+        <div class="budget-stat-item">
+          <span class="stat-tag">Equipamiento Tecnológico</span>
+          <span class="stat-num" id="sum-equipos">$3,655 USD</span>
+          <span class="stat-hint">~$73,100 MXN • Modular / Gradual</span>
+        </div>
+        <div class="budget-stat-item highlight">
+          <span class="stat-tag">Presupuesto Global Estimado</span>
+          <span class="stat-num text-primary" id="sum-total">$4,440 USD</span>
+          <span class="stat-hint">~$88,800 MXN • Sistema Completo</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header space-between">
+          <div>
+            <h3 class="card-title">Catálogo y Cotizador de Dispositivos</h3>
+            <p class="card-subtitle">Filtra por subsistema y ajusta las cantidades para simular tu presupuesto</p>
+          </div>
+          <div class="filter-pills" id="budget-filters">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="obra">Obra Negra</button>
+            <button class="filter-btn" data-filter="red">Red & Rack</button>
+            <button class="filter-btn" data-filter="seguridad">Seguridad</button>
+            <button class="filter-btn" data-filter="audio">Audio Multi-Room</button>
+            <button class="filter-btn" data-filter="iluminacion">Iluminación</button>
+            <button class="filter-btn" data-filter="recursos">Agua & Clima</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table" id="table-budget">
+            <thead>
+              <tr>
+                <th>Subsistema</th>
+                <th>Dispositivo / Material</th>
+                <th>Especificación Clave</th>
+                <th>Cant.</th>
+                <th>Unitario (USD)</th>
+                <th>Total (USD)</th>
+              </tr>
+            </thead>
+            <tbody id="budget-table-body">
+              <!-- Renderizado dinámico vía JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: CHECKLIST DE OBRA -->
+    <section class="tab-content" id="sec-checklist">
+      <div class="card">
+        <div class="card-header space-between">
+          <div>
+            <h2 class="card-title">Checklist de Verificación en Construcción</h2>
+            <p class="card-subtitle">Lista de control interactiva para verificar con tu arquitecto y electricista</p>
+          </div>
+          <div class="checklist-progress-pill">
+            <span id="chk-progress-text">0 de 12 tareas completadas (0%)</span>
+          </div>
+        </div>
+
+        <div class="checklist-sections" id="checklist-container">
+          <!-- Renderizado dinámico vía JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: GUÍAS TÉCNICAS (DOCUMENTACIÓN) -->
+    <section class="tab-content" id="sec-docs">
+      <div class="docs-browser-layout">
+        <aside class="docs-sidebar">
+          <h4 class="sidebar-heading">Documentos del Proyecto</h4>
+          <ul class="docs-nav-list" id="docs-nav-list">
+            <li class="docs-nav-item active" data-doc="vision">01. Visión y Cronograma 3 Años</li>
+            <li class="docs-nav-item" data-doc="dossier">02. Dossier Técnico de Obra</li>
+            <li class="docs-nav-item" data-doc="network">03. Arquitectura de Red y Rack</li>
+            <li class="docs-nav-item" data-doc="subsystems">04. Subsistemas Domóticos</li>
+            <li class="docs-nav-item" data-doc="budget">05. Presupuesto y Catálogo</li>
+          </ul>
+        </aside>
+
+        <article class="docs-content-viewer" id="doc-viewer-content">
+          <!-- Renderizado dinámico vía JS -->
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p>Proyecto Residencia Inteligente • Diseñado con arquitectura abierta y local-first (Home Assistant / Matter / Cat6 PoE).</p>
+      <p class="footer-meta">Ubicación de archivos locales: <code>/home/olethros1318/Escritorio/Proyecto_Casa_Inteligente/</code></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

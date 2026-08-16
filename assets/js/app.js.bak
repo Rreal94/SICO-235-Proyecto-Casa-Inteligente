@@ -1,0 +1,545 @@
+/**
+ * RESIDENCIA INTELIGENTE - INTERACTIVE DASHBOARD JAVASCRIPT
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTabs();
+  initCalculator();
+  initBlueprint();
+  initBudget();
+  initChecklist();
+  initDocsViewer();
+});
+
+/* ==========================================================================
+   1. NAVEGACIÓN POR PESTAÑAS (TABS)
+   ========================================================================== */
+function initTabs() {
+  const tabButtons = document.querySelectorAll('.nav-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab');
+
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetSection = document.getElementById(`sec-${targetTab}`);
+      if (targetSection) targetSection.classList.add('active');
+    });
+  });
+
+  // Timeline step card clicks
+  const stepCards = document.querySelectorAll('.step-card');
+  stepCards.forEach(card => {
+    card.addEventListener('click', () => {
+      stepCards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+}
+
+/* ==========================================================================
+   2. CALCULADORA FINANCIERA A 3 AÑOS
+   ========================================================================== */
+function initCalculator() {
+  const inputMonthly = document.getElementById('input-monthly-save');
+  const inputCurrency = document.getElementById('input-currency');
+  const inputMonths = document.getElementById('input-months-left');
+  const lblMonths = document.getElementById('lbl-months-count');
+
+  const valTotalSaved = document.getElementById('val-total-saved');
+  const valTotalSavedAlt = document.getElementById('val-total-saved-alt');
+  const fillProgress = document.getElementById('fill-infra-progress');
+  const valProgressPct = document.getElementById('val-progress-pct');
+
+  const USD_TO_MXN = 20.0;
+  const INFRA_COST_USD = 785;
+
+  function updateCalculations() {
+    const monthly = parseFloat(inputMonthly.value) || 0;
+    const months = parseInt(inputMonths.value, 10) || 1;
+    const currency = inputCurrency.value;
+
+    lblMonths.textContent = months;
+
+    let totalSavedUSD = monthly * months;
+    if (currency === 'MXN') {
+      totalSavedUSD = (monthly * months) / USD_TO_MXN;
+    }
+
+    const totalSavedMXN = totalSavedUSD * USD_TO_MXN;
+
+    if (currency === 'USD') {
+      valTotalSaved.textContent = `$${Math.round(totalSavedUSD).toLocaleString()} USD`;
+      valTotalSavedAlt.textContent = `~$${Math.round(totalSavedMXN).toLocaleString()} MXN`;
+    } else {
+      valTotalSaved.textContent = `$${Math.round(totalSavedMXN).toLocaleString()} MXN`;
+      valTotalSavedAlt.textContent = `~$${Math.round(totalSavedUSD).toLocaleString()} USD`;
+    }
+
+    // Porcentaje de cobertura de obra negra (~$785 USD)
+    const pct = Math.min(100, Math.round((totalSavedUSD / INFRA_COST_USD) * 100));
+    fillProgress.style.width = `${pct}%`;
+    valProgressPct.textContent = `${pct}% Cubierto (Meta: $785 USD)`;
+    if (pct < 100) {
+      valProgressPct.className = 'text-primary';
+    } else {
+      valProgressPct.className = 'text-success';
+    }
+  }
+
+  inputMonthly.addEventListener('input', updateCalculations);
+  inputCurrency.addEventListener('change', updateCalculations);
+  inputMonths.addEventListener('input', updateCalculations);
+
+  updateCalculations();
+}
+
+/* ==========================================================================
+   3. VISOR INTERACTIVO DE PLANO & DISTRIBUCIÓN
+   ========================================================================== */
+const blueprintData = {
+  pb: [
+    {
+      id: 'rack',
+      name: 'Rack Central (MDF)',
+      tags: ['Cerebro', 'Switch PoE', 'Home Assistant', 'UPS'],
+      specs: {
+        'Ubicación': 'Clóset de blancos o bajo escalera (ventilado)',
+        'Tuberías de llegada': 'Convergencia de todos los tubos de 3/4" de cámaras, APs y audio',
+        'Alimentación': 'Pastilla dedicada de 20A + 2 tomas dobles de tierra física',
+        'Equipos': 'Patch Panel Cat6, Switch PoE 16p, Mini-PC Intel N100, UPS 1500VA'
+      }
+    },
+    {
+      id: 'sala',
+      name: 'Sala & Comedor',
+      tags: ['Audio Techo', 'Tubo 2" TV', 'Micromódulos'],
+      specs: {
+        'Televisión': 'Tubo pasacables de 2" oculto en pared + 2 tomas de red Cat6',
+        'Audio': '2 bocinas de 6.5" empotradas en cielo raso (cable 14/2 al Rack)',
+        'Iluminación': 'Cajas de 50mm con cable Neutro + Shelly Plus 1 detrás de apagadores',
+        'Persianas': 'Salida de 110V en dintel de ventanal para motorización'
+      }
+    },
+    {
+      id: 'cocina',
+      name: 'Cocina & Lavandería',
+      tags: ['Sensor Fugas', 'Audio', 'Luz Cálida'],
+      specs: {
+        'Protección Agua': 'Sensor de fuga bajo fregadero y lavadora',
+        'Audio': '2 bocinas empotradas en techo conectadas a zona 2',
+        'Apagadores': 'Neutro en todas las chalupas para circuitos de barras y luz ambiental'
+      }
+    },
+    {
+      id: 'ap_pb',
+      name: 'Access Point Wi-Fi Techo PB',
+      tags: ['Wi-Fi 6', 'PoE', 'Cat6'],
+      specs: {
+        'Ubicación': 'Centro geométrico del techo de Planta Baja',
+        'Tubería': 'Tubo 3/4" directo al Rack con cable Cat6 100% Cobre',
+        'Alimentación': 'PoE+ (alimentado por el mismo cable de red, sin contacto eléctrico en techo)'
+      }
+    }
+  ],
+  pa: [
+    {
+      id: 'rec_ppal',
+      name: 'Recámara Principal',
+      tags: ['Clima Inverter', 'Persianas', 'TV Cat6'],
+      specs: {
+        'Climatización': 'Mini-split Inverter con control local WiFi/ESPHome',
+        'Persianas': 'Salida eléctrica en esquina de ventana para persianas automáticas',
+        'Televisión': 'Tubo pasacables de 2" para ocultar cables + toma Cat6',
+        'Apagadores': 'Conmutados con neutro y micromódulo para escenas de descanso'
+      }
+    },
+    {
+      id: 'rec_sec',
+      name: 'Recámaras Secundarias',
+      tags: ['Red Cat6', 'Luz Smart', 'Clima'],
+      specs: {
+        'Tomas de Red': '1 toma Cat6 por recámara para PC / Estudio',
+        'Iluminación': 'Chalupas de 50mm con neutro para luces dimerizables',
+        'Clima': 'Alimentación independiente para Mini-split'
+      }
+    },
+    {
+      id: 'ap_pa',
+      name: 'Access Point Wi-Fi Techo PA',
+      tags: ['Wi-Fi 6', 'PoE', 'Cat6'],
+      specs: {
+        'Ubicación': 'Techo de pasillo distribuidor de Planta Alta',
+        'Función': 'Cobertura completa de 5GHz para todas las recámaras y estudio'
+      }
+    },
+    {
+      id: 'hall_sensor',
+      name: 'Pasillo & Escaleras',
+      tags: ['Radar mmWave', 'Luz de Cortesía'],
+      specs: {
+        'Sensor Presencia': 'Sensor radar mmWave oculto para luz de noche tenue',
+        'Escaleras': 'Tomas bajas para luces de cortesía en escalones'
+      }
+    }
+  ],
+  ext: [
+    {
+      id: 'fachada',
+      name: 'Entrada Principal & Portón',
+      tags: ['Timbre PoE', 'Cerradura Smart', 'Chapa 12V'],
+      specs: {
+        'Timbre': 'Tubo 3/4" a marco exterior con Cat6 para Timbre con Video PoE',
+        'Cerradura': 'Cerradura inteligente Aqara U200 con huella y Apple HomeKey',
+        'Portón': 'Tubo subterráneo al motor para relevador de apertura remota'
+      }
+    },
+    {
+      id: 'camaras',
+      name: 'Perímetro Exterior (4 Cámaras PoE)',
+      tags: ['4K PoE', 'IA Local', 'Cat6 UV'],
+      specs: {
+        'Puntos': '4 esquinas estratégicas a 3 metros de altura',
+        'Cable': 'Cat6 para intemperie con protección UV directo al Switch PoE del Rack',
+        'Grabación': 'Grabación continua 24/7 en NVR local, cero suscripciones'
+      }
+    },
+    {
+      id: 'jardin',
+      name: 'Jardín, Cisterna & Riego',
+      tags: ['Cisterna', 'Riego Smart', 'Válvula Corte'],
+      specs: {
+        'Cisterna': 'Sensor ultrasónico impermeable en tapa para medir % de agua',
+        'Riego': 'Tubo a caja de electroválvulas para riego automático inteligente',
+        'Seguridad Agua': 'Válvula de corte motorizada en la toma principal de agua'
+      }
+    },
+    {
+      id: 'cochera_solar',
+      name: 'Cochera (EV) & Azotea (Solar)',
+      tags: ['Cargador 240V', 'Paneles Solares'],
+      specs: {
+        'Auto Eléctrico': 'Tubo conduit de 1" con cable calibre 6 AWG (240V/40A)',
+        'Paneles Solares': 'Tubo conduit de 1" desde azotea hasta cuadro general'
+      }
+    }
+  ]
+};
+
+function initBlueprint() {
+  const floorButtons = document.querySelectorAll('.level-selector .pill-btn');
+  const blueprintDisplay = document.getElementById('blueprint-display');
+  const roomName = document.getElementById('room-name');
+  const roomBadge = document.getElementById('room-badge');
+  const roomSpecs = document.getElementById('room-specs');
+
+  let currentFloor = 'pb';
+
+  function renderFloor(floorKey) {
+    blueprintDisplay.innerHTML = '';
+    const rooms = blueprintData[floorKey] || [];
+
+    rooms.forEach((room, idx) => {
+      const card = document.createElement('div');
+      card.className = `blueprint-room-card ${idx === 0 ? 'selected' : ''}`;
+      card.innerHTML = `
+        <div class="room-card-head">
+          <span class="room-card-name">${room.name}</span>
+        </div>
+        <div class="room-tag-list">
+          ${room.tags.map(t => `<span class="room-tag">${t}</span>`).join('')}
+        </div>
+      `;
+
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.blueprint-room-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        showRoomDetails(room, floorKey);
+      });
+
+      blueprintDisplay.appendChild(card);
+    });
+
+    if (rooms.length > 0) {
+      showRoomDetails(rooms[0], floorKey);
+    }
+  }
+
+  function showRoomDetails(room, floorKey) {
+    roomName.textContent = room.name;
+    const floorNames = { pb: 'Planta Baja', pa: 'Planta Alta', ext: 'Exterior & Azotea' };
+    roomBadge.textContent = floorNames[floorKey] || 'Zona';
+
+    roomSpecs.innerHTML = '';
+    for (const [title, desc] of Object.entries(room.specs)) {
+      const specEl = document.createElement('div');
+      specEl.className = 'spec-item';
+      specEl.innerHTML = `
+        <div class="spec-item-title">${title}</div>
+        <div class="spec-item-desc">${desc}</div>
+      `;
+      roomSpecs.appendChild(specEl);
+    }
+  }
+
+  floorButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      floorButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFloor = btn.getAttribute('data-floor');
+      renderFloor(currentFloor);
+    });
+  });
+
+  renderFloor('pb');
+}
+
+/* ==========================================================================
+   4. PRESUPUESTO & COTIZADOR
+   ========================================================================== */
+const budgetItems = [
+  // Obra Negra
+  { sub: 'Obra Negra', cat: 'obra', name: 'Bobina Cat6 Cobre Interior (305m)', spec: '100% Cobre UTP para APs y datos', qty: 1, unit: 110 },
+  { sub: 'Obra Negra', cat: 'obra', name: 'Bobina Cat6 Exterior UV (305m)', spec: 'Protección UV para cámaras y timbre', qty: 1, unit: 120 },
+  { sub: 'Obra Negra', cat: 'obra', name: 'Bobina Cable Audio 14 AWG (100m)', spec: 'Libre de oxígeno para bocinas de techo', qty: 1, unit: 75 },
+  { sub: 'Obra Negra', cat: 'obra', name: 'Chalupas extra-profundas (50mm)', spec: 'Cajas galvanizadas para micromódulos', qty: 30, unit: 2 },
+  { sub: 'Obra Negra', cat: 'obra', name: 'Poliducto/Conduit 3/4", 1" y 2"', spec: 'Tuberías y pasacables de TV', qty: 1, unit: 120 },
+  { sub: 'Obra Negra', cat: 'obra', name: 'Mano de obra electricista (Datos)', spec: 'Tendido y ranurado de tuberías de red', qty: 1, unit: 300 },
+
+  // Red y Rack
+  { sub: 'Red & Rack', cat: 'red', name: 'Gabinete Rack 9U a 12U + PDU', spec: 'Rack de pared para MDF en PB', qty: 1, unit: 140 },
+  { sub: 'Red & Rack', cat: 'red', name: 'Switch PoE+ Gigabit 16 Puertos', spec: 'TP-Link Omada o UniFi PoE+', qty: 1, unit: 250 },
+  { sub: 'Red & Rack', cat: 'red', name: 'Router / Gateway Gigabit', spec: 'Soporte VLANs y cortafuegos', qty: 1, unit: 130 },
+  { sub: 'Red & Rack', cat: 'red', name: 'Access Points Wi-Fi 6 de Techo', spec: '1 por planta (UniFi U6+ / Omada)', qty: 2, unit: 120 },
+  { sub: 'Red & Rack', cat: 'red', name: 'Mini-PC Intel N100 (Home Assistant)', spec: '16GB RAM / 512GB SSD NVMe', qty: 1, unit: 160 },
+  { sub: 'Red & Rack', cat: 'red', name: 'UPS / No-Break 1500VA con AVR', spec: 'Respaldo de energía para el Rack', qty: 1, unit: 130 },
+  { sub: 'Red & Rack', cat: 'red', name: 'Coordinador USB Zigbee / Matter', spec: 'Sonoff Dongle Plus en Mini-PC', qty: 1, unit: 35 },
+
+  // Seguridad
+  { sub: 'Seguridad', cat: 'seguridad', name: 'Kit 4 Cámaras 4K PoE + NVR 2TB', spec: 'Reolink 4K PoE perimetrales', qty: 1, unit: 450 },
+  { sub: 'Seguridad', cat: 'seguridad', name: 'Timbre con Video PoE', spec: 'Reolink Doorbell PoE con botón físico', qty: 1, unit: 110 },
+  { sub: 'Seguridad', cat: 'seguridad', name: 'Cerradura Inteligente Matter/Thread', spec: 'Aqara U200 con huella y Apple Key', qty: 1, unit: 230 },
+  { sub: 'Seguridad', cat: 'seguridad', name: 'Relevador para Portón Vehicular', spec: 'Apertura remota y geocerca', qty: 1, unit: 30 },
+
+  // Iluminación
+  { sub: 'Iluminación', cat: 'iluminacion', name: 'Micromódulos Ocultos (Shelly/Zigbee)', spec: 'Empotrados detrás de apagadores normales', qty: 18, unit: 15 },
+  { sub: 'Iluminación', cat: 'iluminacion', name: 'Módulos para Persianas (Shelly 2PM)', spec: 'Control de porcentaje de apertura', qty: 4, unit: 25 },
+
+  // Audio Multi-Room
+  { sub: 'Audio Multi-Room', cat: 'audio', name: 'Bocinas Empotradas de Techo 6.5"/8"', spec: 'Rejilla magnética plana (3 pares)', qty: 6, unit: 50 },
+  { sub: 'Audio Multi-Room', cat: 'audio', name: 'Amplificador Wi-Fi/AirPlay WiiM Amp', spec: 'Streaming multizona en el Rack', qty: 2, unit: 300 },
+
+  // Recursos (Agua & Clima)
+  { sub: 'Agua & Clima', cat: 'recursos', name: 'Módulos Control Mini-split Inverter', spec: 'Integración local por UART / ESPHome', qty: 3, unit: 33 },
+  { sub: 'Agua & Clima', cat: 'recursos', name: 'Sensor Nivel Cisterna + ESP32', spec: 'Medición ultrasónica del % de agua', qty: 1, unit: 50 },
+  { sub: 'Agua & Clima', cat: 'recursos', name: 'Válvula Corte Fugas + 4 Sensores', spec: 'Corte automático de agua en 3 seg', qty: 1, unit: 130 },
+  { sub: 'Agua & Clima', cat: 'recursos', name: 'Controlador de Riego Inteligente', spec: 'Ajuste según pronóstico del clima', qty: 1, unit: 80 },
+  { sub: 'Agua & Clima', cat: 'recursos', name: 'Sensores de Presencia Radar mmWave', spec: 'Aqara FP2 para detección precisa', qty: 3, unit: 50 }
+];
+
+function initBudget() {
+  const tableBody = document.getElementById('budget-table-body');
+  const filterButtons = document.querySelectorAll('#budget-filters .filter-btn');
+
+  function renderTable(filter = 'all') {
+    tableBody.innerHTML = '';
+    const filtered = budgetItems.filter(item => filter === 'all' || item.cat === filter);
+
+    filtered.forEach(item => {
+      const row = document.createElement('tr');
+      const total = item.qty * item.unit;
+      row.innerHTML = `
+        <td><span class="room-tag">${item.sub}</span></td>
+        <td><strong>${item.name}</strong></td>
+        <td><span class="text-muted">${item.spec}</span></td>
+        <td>${item.qty}</td>
+        <td>$${item.unit}</td>
+        <td><strong>$${total}</strong></td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTable(btn.getAttribute('data-filter'));
+    });
+  });
+
+  renderTable('all');
+}
+
+/* ==========================================================================
+   5. CHECKLIST DE OBRA INTERACTIVO (LocalStorage)
+   ========================================================================== */
+const checklistData = [
+  {
+    group: 'Fase de Planos & Arquitecto (Años 1 y 2)',
+    items: [
+      { id: 'c1', title: 'Ubicación del Rack Central (MDF) en planos', desc: 'Espacio de 9U a 12U en planta baja con ventilación adecuada.' },
+      { id: 'c2', title: 'Marcado de cable Neutro en todas las chalupas', desc: 'Nota explícita en plano eléctrico para todas las cajas de apagador.' },
+      { id: 'c3', title: 'Cajas extra-profundas de 50mm especificadas', desc: 'Chalupas con profundidad para alojar micromódulos.' },
+      { id: 'c4', title: 'Puntos de red en techos para Access Points', desc: '1 toma Cat6 en centro geométrico de PB y PA.' }
+    ]
+  },
+  {
+    group: 'Fase de Obra Negra & Instalaciones (Año 3)',
+    items: [
+      { id: 'c5', title: 'Tendido de tuberías hacia las 4 esquinas de cámaras', desc: 'Tubo de 3/4" directo al Rack con cable Cat6 exterior UV.' },
+      { id: 'c6', title: 'Tubo pasacables de 2" en zonas de TV', desc: 'Oculto en pared para paso de cables HDMI sin nada a la vista.' },
+      { id: 'c7', title: 'Tuberías para bocinas empotradas en techo', desc: 'Cables 14/2 desde cielo raso de Sala, Cocina y Terraza al Rack.' },
+      { id: 'c8', title: 'Salidas de corriente en dinteles de ventanas', desc: 'Alimentación de 110V para motores de persianas.' },
+      { id: 'c9', title: 'Tubería de 1" para cargador de auto eléctrico', desc: 'Conduit pesado en cochera con cable calibre 6 AWG.' },
+      { id: 'c10', title: 'Tubería de 1" de azotea a cuadro para paneles solares', desc: 'Guía lista para futura instalación de energía solar.' }
+    ]
+  },
+  {
+    group: 'Fase de Acabados & Puesta en Marcha (Año 3)',
+    items: [
+      { id: 'c11', title: 'Instalación de Rack, Switch PoE y Mini-PC', desc: 'Configuración inicial de Home Assistant OS y VLANs.' },
+      { id: 'c12', title: 'Colocación de cerradura inteligente y timbre PoE', desc: 'Pruebas de apertura remota, huellas y notificaciones en móvil.' }
+    ]
+  }
+];
+
+function initChecklist() {
+  const container = document.getElementById('checklist-container');
+  const progressText = document.getElementById('chk-progress-text');
+
+  let savedState = JSON.parse(localStorage.getItem('smart_home_checklist') || '{}');
+
+  function updateProgress() {
+    let total = 0;
+    let checked = 0;
+    checklistData.forEach(g => {
+      g.items.forEach(item => {
+        total++;
+        if (savedState[item.id]) checked++;
+      });
+    });
+
+    const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+    progressText.textContent = `${checked} de ${total} tareas completadas (${pct}%)`;
+    localStorage.setItem('smart_home_checklist', JSON.stringify(savedState));
+  }
+
+  container.innerHTML = '';
+  checklistData.forEach(group => {
+    const groupEl = document.createElement('div');
+    groupEl.className = 'checklist-group';
+    groupEl.innerHTML = `<h3 class="checklist-group-title">📌 ${group.group}</h3>`;
+
+    group.items.forEach(item => {
+      const isChecked = !!savedState[item.id];
+      const itemEl = document.createElement('label');
+      itemEl.className = `check-item ${isChecked ? 'completed' : ''}`;
+      itemEl.innerHTML = `
+        <input type="checkbox" id="${item.id}" ${isChecked ? 'checked' : ''}>
+        <div class="check-item-content">
+          <div class="check-item-title">${item.title}</div>
+          <div class="check-item-desc">${item.desc}</div>
+        </div>
+      `;
+
+      const checkbox = itemEl.querySelector('input');
+      checkbox.addEventListener('change', () => {
+        savedState[item.id] = checkbox.checked;
+        if (checkbox.checked) {
+          itemEl.classList.add('completed');
+        } else {
+          itemEl.classList.remove('completed');
+        }
+        updateProgress();
+      });
+
+      groupEl.appendChild(itemEl);
+    });
+
+    container.appendChild(groupEl);
+  });
+
+  updateProgress();
+}
+
+/* ==========================================================================
+   6. VISOR DE GUÍAS TÉCNICAS (DOCUMENTACIÓN)
+   ========================================================================== */
+const docsContent = {
+  vision: `
+    <h2>01. Visión y Cronograma a 3 Años</h2>
+    <p>Este proyecto está estructurado con un horizonte de 3 años para acompañar la maduración financiera de tu proyecto de construcción:</p>
+    <ul>
+      <li><strong>Año 1:</strong> Liquidación acelerada del crédito del terreno y recopilación de ideas arquitectónicas.</li>
+      <li><strong>Año 2:</strong> Diseño de planos ejecutivos con el arquitecto e incorporación formal del Rack y canalizaciones.</li>
+      <li><strong>Año 3:</strong> Trámite del crédito de construcción, licitación de obra e inicio de colocación de tuberías en obra negra.</li>
+    </ul>
+    <pre>Fondo reservado para obra negra: ~$785 USD (~$15,700 MXN) para todas las tuberías y bobinas de red Cat6.</pre>
+  `,
+  dossier: `
+    <h2>02. Dossier Técnico de Obra para Arquitecto y Electricista</h2>
+    <p>Las 5 reglas de oro innegociables para las instalaciones de la casa:</p>
+    <ol>
+      <li><strong>Cable Neutro en el 100% de los apagadores:</strong> Imprescindible para alimentar los micromódulos inteligentes.</li>
+      <li><strong>Chalupas de 50mm de fondo:</strong> Permite colocar apagadores normales de diseño (Bticino, Schneider, Simon) con el módulo oculto detrás.</li>
+      <li><strong>Rack Central (MDF):</strong> Punto de convergencia único para todos los cables Cat6 de cámaras, APs, timbres y audio.</li>
+      <li><strong>Separación de tuberías:</strong> Al menos 20 cm entre líneas eléctricas de 110V/220V y tuberías de datos Cat6.</li>
+      <li><strong>Pasacables de 2" en TVs:</strong> Oculta los cables HDMI dentro de la pared para un acabado limpio.</li>
+    </ol>
+  `,
+  network: `
+    <h2>03. Arquitectura de Red y Rack Central</h2>
+    <p>Toda la casa se conecta mediante cable estructurado Cat6 100% Cobre con alimentación PoE+:</p>
+    <ul>
+      <li><strong>Switch PoE Gigabit:</strong> Alimenta cámaras de seguridad y Access Points por el mismo cable de red.</li>
+      <li><strong>Access Points Wi-Fi 6 de techo:</strong> 1 en Planta Baja y 1 en Planta Alta para roaming perfecto sin cortes.</li>
+      <li><strong>Segmentación VLAN:</strong> Aísla los dispositivos inteligentes (luces, persianas) de tus computadoras personales y cámaras para máxima seguridad.</li>
+      <li><strong>Mini-PC con Home Assistant OS:</strong> Cerebro local que ejecuta todas las automatizaciones sin depender de servidores en la nube.</li>
+    </ul>
+  `,
+  subsystems: `
+    <h2>04. Subsistemas Domóticos Detallados</h2>
+    <p>Resumen del equipamiento por subsistema:</p>
+    <ul>
+      <li><strong>Iluminación:</strong> Micromódulos Shelly/Zigbee con apagadores tradicionales y tolerancia a fallos.</li>
+      <li><strong>Climatización:</strong> Mini-splits Inverter con control local y persianas motorizadas en sala y recámaras.</li>
+      <li><strong>Audio Multi-Room:</strong> Bocinas empotradas en techo (Sala, Cocina, Terraza) amplificadas desde el Rack.</li>
+      <li><strong>Seguridad:</strong> 4 Cámaras 4K PoE + Timbre con video PoE + Cerradura inteligente con huella/PIN/Apple Key.</li>
+      <li><strong>Agua & Recursos:</strong> Sensor de nivel de cisterna, corte automático por fugas y riego inteligente para el jardín.</li>
+    </ul>
+  `,
+  budget: `
+    <h2>05. Presupuesto y Catálogo de Equipos</h2>
+    <p>Resumen de costos estimativos:</p>
+    <ul>
+      <li><strong>Fase 1 (Obra Negra):</strong> ~$785 USD (~$15,700 MXN) — Tuberías, cajas profundas y bobinas Cat6.</li>
+      <li><strong>Fase 2 (Equipos Tecnológicos):</strong> ~$3,655 USD (~$73,100 MXN) — Rack, Switch, Cámaras, Cerradura, Audio y Módulos.</li>
+      <li><strong>Inversión Global Llave en Mano:</strong> <strong>~$4,440 USD (~$88,800 MXN)</strong>.</li>
+    </ul>
+    <p class="text-muted">Nota: Los equipos de la Fase 2 se pueden adquirir gradualmente una vez habitada la casa.</p>
+  `
+};
+
+function initDocsViewer() {
+  const navItems = document.querySelectorAll('.docs-nav-item');
+  const viewer = document.getElementById('doc-viewer-content');
+
+  function renderDoc(docKey) {
+    viewer.innerHTML = docsContent[docKey] || '<p>Documento no encontrado.</p>';
+  }
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      renderDoc(item.getAttribute('data-doc'));
+    });
+  });
+
+  renderDoc('vision');
+}
