@@ -1040,7 +1040,7 @@ const contractorsData = [
 const blueprintData = {
   pb: [
     {
-      id: 'recamara_suite_pb',
+      id: 'recamara-suite-pb',
       name: 'Recámara Suite Principal PB (Habitación Núcleo)',
       tags: ['3.16 x 4.00 m (12.6 m²)', 'Cama King Size', 'Baño en L Privado', 'Cancel 2.85m al Jardín'],
       specs: {
@@ -1050,8 +1050,8 @@ const blueprintData = {
       }
     },
     {
-      id: 'gran_area_social_pb',
-      name: 'Gran Área Social Integrada (Cocina al Sur)',
+      id: 'gran-area-social-integrada',
+      name: 'Gran Área Social Integrada (Sala + Cocina + Comedor)',
       tags: ['4.66 x 4.75 m (22.2 m²)', 'Techo 3.15m Alto', 'Isla con 3 Bancos', 'Gran Cancel 3.75m'],
       specs: {
         'Ubicación': 'Crujía Sur-Poniente en Nivel -0.15 m (X = 3.00m a 7.66m, Y = -5.05m a -9.80m)',
@@ -1059,7 +1059,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'bano_suite_vestidor_pb',
+      id: 'bano-completo-en-l-y-vestidor',
       name: 'Baño Completo en L + Vestidor Privado PB',
       tags: ['5.72 m² Polígono en L', 'Regadera 1.20x0.90m', 'Clóset 1.50m', 'Ventana Norte'],
       specs: {
@@ -1068,7 +1068,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'medio_bano_pb',
+      id: 'medio-bano-visitas',
       name: 'Medio Baño de Visitas PB (Alineado a Cochera)',
       tags: ['1.50 x 1.30 m (1.60 m²)', 'Vanity Flotante', 'WC', '1.01m Vestíbulo Libre'],
       specs: {
@@ -1077,7 +1077,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'lavanderia_maquinas_pb',
+      id: 'cuarto-maquinas-y-lavanderia',
       name: 'Cuarto de Lavandería & Cuarto de Máquinas / Rack 12U',
       tags: ['4.00 x 1.50 m (6.00 m²)', 'Rack 12U + Solar', 'Lavadora / Secadora', 'Puertas Alineadas'],
       specs: {
@@ -1086,7 +1086,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'escalera_confinada_pb',
+      id: 'escalera-confinada-sin-invasion',
       name: 'Escalera Compensada Confinada (Cero Invasión)',
       tags: ['2.50 x 2.25 m (5.62 m²)', '17 Escalones', 'Desembarco +3.00m', 'Fórmula Blondel'],
       specs: {
@@ -1095,18 +1095,27 @@ const blueprintData = {
       }
     },
     {
-      id: 'estacionamiento_cochera_pb',
+      id: 'area-estacionamiento-marcada',
       name: 'Estacionamiento / Cochera Techada',
       tags: ['30.28 m² Superficie', 'SUV 4.90m + Compacto', 'Cargador EV 240V', 'Ángulo Recto 90°'],
       specs: {
         'Ubicación': 'Frente a Banqueta Oriente (X = 7.66m a 13.66m Norte / 13.00m Sur)',
         'Capacidad': '2 cajones en batería (SUV 4.90m en lado norte de 6.00m y Compacto en lado sur de 5.34m) con punto de carga para auto eléctrico'
       }
+    },
+    {
+      id: 'jardin-posterior-7x3',
+      name: 'Jardín Posterior Privado',
+      tags: ['7.00 x 3.00 m (21.0 m²)', 'Jardín Húmedo', 'Cancel Corredizo', 'Privacidad Total'],
+      specs: {
+        'Ubicación': 'Colindancia Poniente (Y = -5.05m a -9.80m, X = 0 a 3.00m)',
+        'Diseño': 'Jardín privado con vegetación de bajo consumo, acceso directo desde la recámara suite y el área social mediante cancel de 2.85m'
+      }
     }
   ],
   pa: [
     {
-      id: 'habitacion_principal_pa',
+      id: 'habitacion-principal-pa',
       name: 'Habitación Principal Master (Planta Alta)',
       tags: ['3.50 x 3.25 m (11.38 m²)', 'Cama King Size', 'Balcón Frontal 4.75m', 'Conexión Privada'],
       specs: {
@@ -1115,7 +1124,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'pasillo_closet_master_pa',
+      id: 'pasillo-closet-master-pa',
       name: 'Pasillo-Clóset Vestidor Master Suite',
       tags: ['1.50 x 2.67 m (4.00 m²)', 'Clóset Empotrado 60cm', 'Única Conexión Privada', 'Muro Sur'],
       specs: {
@@ -1124,7 +1133,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'bano_principal_master_pa',
+      id: 'bano-principal-pa',
       name: 'Baño Principal Master Suite (Reorganizado)',
       tags: ['2.00 x 3.25 m (6.50 m²)', 'Regadera Spa 2.0x1.2m', 'Doble Vanity 1.40m', 'WC Privado'],
       specs: {
@@ -1133,7 +1142,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'family_room_abierto_pa',
+      id: 'family-room-abierto-pa',
       name: 'Family Room Diáfano y Abierto',
       tags: ['2.67 x 2.35 m (6.27 m²)', 'Concepto Abierto', 'Pasillo 90cm Libre', 'Sin Pared Norte'],
       specs: {
@@ -1142,7 +1151,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'recamara_secundaria_1_pa',
+      id: 'recamara-secundaria-1-pa',
       name: 'Recámara Secundaria 1 (Planta Alta Poniente)',
       tags: ['2.76 x 4.00 m (11.04 m²)', 'Cama Queen Size', 'Escritorio', 'Clóset 60cm'],
       specs: {
@@ -1151,7 +1160,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'recamara_secundaria_2_pa',
+      id: 'recamara-secundaria-2-pa',
       name: 'Recámara Secundaria 2 (Planta Alta Centro-Norte)',
       tags: ['2.76 x 4.00 m (11.04 m²)', 'Cama Queen Size', 'Escritorio', 'Clóset 60cm'],
       specs: {
@@ -1160,7 +1169,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'balcon_frontal_pa',
+      id: 'balcon-frontal-pa',
       name: 'Gran Balcón Frontal (Fachada Este)',
       tags: ['1.50 x 4.75 m (7.13 m²)', 'Deck Exterior', 'Barandal Cristal Templado', 'Sala Lounge'],
       specs: {
@@ -1169,7 +1178,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'zinc_servicio_pa',
+      id: 'zinc-fondo-pasillo-pa',
       name: 'Zinc de Servicio (Fondo Pasillo)',
       tags: ['1.50 x 0.60 m (0.90 m²)', 'Tarja Vertedero', 'Mueble Blancos', 'Ventana Ventilación'],
       specs: {
@@ -1178,8 +1187,8 @@ const blueprintData = {
       }
     },
     {
-      id: 'bano_compartido_pa',
-      name: 'Baño Completo Compartido',
+      id: 'bano-completo-compartido-pa',
+      name: 'Baño Completo Compartido (Recámaras Secundarias)',
       tags: ['4.00 x 1.50 m (6.00 m²)', 'Regadera Spa', 'Vanity 1.20m', 'Sobre Lavandería/Máquinas'],
       specs: {
         'Ubicación': 'Crujía Nor-Oriente (X = 8.67m a 12.67m, Y = -1.05m a -2.55m)',
@@ -1189,7 +1198,7 @@ const blueprintData = {
   ],
   ext: [
     {
-      id: 'roof_garden_frontal_ext',
+      id: 'zona-roof-garden-frontal',
       name: 'Roof Garden Frontal Panorámico con 1/2 Baño Social',
       tags: ['40.5 m² Deck Social', 'Pérgola Sombra', 'Asador Grill & Barra', 'Lounge Firepit'],
       specs: {
@@ -1198,7 +1207,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'medio_bano_roof_ext',
+      id: 'medio-bano-roof-garden',
       name: 'Medio Baño de Visitas del Roof Garden',
       tags: ['1.65 x 2.25 m (3.71 m²)', 'Vanity & WC Suspendido', 'Alineado a Ducto Hidrosanitario', 'Privacidad Total'],
       specs: {
@@ -1207,7 +1216,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'caseta_escalera_ext',
+      id: 'caseta-escalera-azotea',
       name: 'Caseta de Salida y Cubo de Escalera Interior',
       tags: ['2.50 x 2.25 m (5.62 m²)', 'Puerta Hermética Exterior', 'Salida Directa al Roof Garden'],
       specs: {
@@ -1216,7 +1225,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'cubierta_sobreelevada_ext',
+      id: 'monitor-roof-pasillo',
       name: 'Cubierta Sobreelevada (Monitor Roof - Zona Posterior)',
       tags: ['X = 3.00m a 8.52m (5.52m largo)', 'Termina en Hab. Secundarias', 'Nivel +6.70m', 'Celosías Louvers'],
       specs: {
@@ -1225,7 +1234,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'calentador_solar_ext',
+      id: 'calentador-solar-agua',
       name: 'Calentador Solar de Agua Termosifónico (200 L)',
       tags: ['15 Tubos de Vacío', 'Losa Técnica Norte', 'Ahorro 80% Gas', 'Agua Caliente Sanitaria'],
       specs: {
@@ -1234,7 +1243,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'paneles_solares_ext',
+      id: 'paneles-solares-norte',
       name: 'Arreglo Fotovoltaico Solar (6 Paneles Tier 1)',
       tags: ['3.3 kWp Potencia', 'Losa Técnica Norte', '6 Módulos de 550W', 'Autosuficiencia'],
       specs: {
@@ -1243,7 +1252,7 @@ const blueprintData = {
       }
     },
     {
-      id: 'clima_condensadoras_ext',
+      id: 'zona-tecnica-sur',
       name: 'Condensadoras A/C Inverter (Losa Técnica Sur)',
       tags: ['3 Unidades Exteriores', 'Losa Técnica Sur', 'Ocultas de Fachada', 'Anti-vibración'],
       specs: {
@@ -3136,14 +3145,26 @@ function attachRoomInteractivity(floorKey) {
   const display = document.getElementById('blueprint-display');
   if (!display) return;
 
-  const roomGroups = display.querySelectorAll('g[id^="room-"]');
-  roomGroups.forEach(group => {
-    group.style.cursor = 'pointer';
-    group.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const roomId = group.id.replace('room-', '');
-      showRoomDetails(floorKey, roomId);
-    });
+  // Build a Set of IDs that have data entries for this floor
+  const floorRoomIds = new Set((blueprintData[floorKey] || []).map(r => r.id));
+
+  // Query ALL <g> elements inside the SVG and attach click to those that have matching data
+  const allGroups = display.querySelectorAll('g[id]');
+  allGroups.forEach(group => {
+    if (floorRoomIds.has(group.id)) {
+      group.style.cursor = 'pointer';
+      // Highlight on hover
+      group.addEventListener('mouseenter', () => {
+        group.style.filter = 'brightness(0.88) drop-shadow(0 0 4px rgba(56,189,248,0.7))';
+      });
+      group.addEventListener('mouseleave', () => {
+        group.style.filter = '';
+      });
+      group.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showRoomDetails(floorKey, group.id);
+      });
+    }
   });
 }
 
