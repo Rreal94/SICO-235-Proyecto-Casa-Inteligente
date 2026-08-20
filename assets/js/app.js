@@ -3504,7 +3504,6 @@ function initDocsViewer() {
 document.addEventListener('DOMContentLoaded', () => {
   initNavigationTabs();
   initCurrencyToggle();
-  initGlobalKPIs();
   renderMilestonesList();
   initWBS();
   initFinancialPlanner();
