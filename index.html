@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Casa 235 | Hoja de Ruta: Ahorro → Construcción</title>
+  <title>Casa 235 | Plan Financiero & Suite PB</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -11,361 +11,692 @@
 </head>
 <body>
 
+  <!-- HEADER FINANCIERO -->
   <header class="app-header">
     <div class="header-inner">
       <div class="brand">
-        <div class="brand-icon">🏗️</div>
+        <div class="brand-icon">💰</div>
         <div class="brand-info">
-          <div class="brand-label">CASA 235 • HOJA DE RUTA</div>
-          <div class="brand-title">Residencia Inteligente en 3 Niveles</div>
+          <div class="brand-label">CASA 235 • PLAN FINANCIERO &amp; OBRA</div>
+          <div class="brand-title">Estrategia de Ahorro, Inversión &amp; Suite PB (78 m²)</div>
         </div>
       </div>
       <div class="header-kpis">
         <div class="hkpi">
-          <div class="hkpi-label">Capital Acumulado</div>
+          <div class="hkpi-label">Capital en Bóvedas</div>
           <div class="hkpi-val green" id="hdr-capital">$0 MXN</div>
         </div>
         <div class="hkpi">
-          <div class="hkpi-label">Próxima Meta</div>
-          <div class="hkpi-val gold" id="hdr-next-goal">$700,000 MXN</div>
+          <div class="hkpi-label">Hito 1 (Cimentación)</div>
+          <div class="hkpi-val gold" id="hdr-next-goal">$330,000 MXN</div>
         </div>
         <div class="hkpi">
-          <div class="hkpi-label">Estimado de Llegada</div>
-          <div class="hkpi-val blue" id="hdr-eta">— meses</div>
+          <div class="hkpi-label">Ahorro Mensual Ponderado</div>
+          <div class="hkpi-val blue" id="hdr-monthly-cap">$18,300 MXN</div>
         </div>
         <div class="hkpi">
-          <div class="hkpi-label">Etapa Activa</div>
-          <div class="hkpi-val" id="hdr-phase">Ahorro Pre-Obra</div>
+          <div class="hkpi-label">Tiempo Estimado Hito 1</div>
+          <div class="hkpi-val" id="hdr-eta">~16 meses</div>
         </div>
       </div>
     </div>
     <nav class="nav-bar">
       <div class="nav-inner">
-        <button class="nav-btn active" data-tab="roadmap">🗺️ Hoja de Ruta</button>
-        <button class="nav-btn" data-tab="capital">💰 Capital &amp; Ahorro</button>
-        <button class="nav-btn" data-tab="hitos">🏁 Hitos Constructivos</button>
-        <button class="nav-btn" data-tab="guia">📋 Guía del Propietario</button>
-        <button class="nav-btn" data-tab="pagos">💳 Control de Pagos</button>
-        <button class="nav-btn" data-tab="planos">📐 Planos</button>
-        <button class="nav-btn" data-tab="docs">📚 Documentos</button>
+        <button class="nav-btn active" data-tab="simulador">📊 Simulador &amp; Proyecciones</button>
+        <button class="nav-btn" data-tab="bovedas">💰 Mis Bóvedas (Cetes &amp; SOFIPO)</button>
+        <button class="nav-btn" data-tab="hitos">🏁 Hitos Suite PB (78 m²)</button>
+        <button class="nav-btn" data-tab="planos">📐 Plano PB &amp; Home Office</button>
+        <button class="nav-btn" data-tab="guia">📋 Estrategia de Inversión</button>
+        <button class="nav-btn" data-tab="docs">📚 Biblioteca Técnica</button>
       </div>
     </nav>
   </header>
 
   <main class="app-main">
 
-    <!-- TAB 1: HOJA DE RUTA -->
-    <section class="tab-content active" id="sec-roadmap">
-      <div class="hero-card" id="hero-card">
-        <div class="hero-left">
-          <div class="hero-emoji" id="hero-emoji">🌱</div>
-          <div class="hero-text">
-            <div class="hero-stage-label" id="hero-stage-label">ETAPA ACTUAL</div>
-            <h1 class="hero-headline" id="hero-headline">Reuniendo el Capital para la Obra</h1>
-            <p class="hero-sub" id="hero-sub">Cada peso ahorrado te acerca a tu casa propia.</p>
-          </div>
-        </div>
-        <div class="hero-progress-wrap">
-          <div class="hero-progress-label">
-            <span>Meta: <strong id="hero-goal-label">$700,000 MXN</strong></span>
-            <span class="hero-pct" id="hero-pct-label">0%</span>
-          </div>
-          <div class="thermometer-track">
-            <div class="thermometer-fill" id="hero-progress-bar" style="width:0%"></div>
-          </div>
-          <div class="hero-progress-amounts">
-            <span id="hero-saved-amount">$0 ahorrado</span>
-            <span id="hero-remaining-amount">Faltan $700,000</span>
-          </div>
-        </div>
-      </div>
-
-      <h2 class="section-title">Mapa de Fases del Proyecto</h2>
-      <div class="phases-roadmap" id="phases-roadmap"></div>
-
-      <div class="quick-actions-grid">
-        <button class="quick-btn primary" onclick="window.appNavTo('capital')">
-          <span class="qbtn-icon">💰</span>
-          <div><strong>Registrar Ahorro</strong><small>Agrega el ahorro del mes</small></div>
-        </button>
-        <button class="quick-btn" onclick="window.appNavTo('hitos')">
-          <span class="qbtn-icon">🏁</span>
-          <div><strong>Ver Hitos</strong><small>Avance de construcción</small></div>
-        </button>
-        <button class="quick-btn" onclick="window.appNavTo('guia')">
-          <span class="qbtn-icon">📋</span>
-          <div><strong>Guía del Propietario</strong><small>Qué exigir al arquitecto</small></div>
-        </button>
-        <button class="quick-btn" onclick="window.appNavTo('pagos')">
-          <span class="qbtn-icon">💳</span>
-          <div><strong>Registrar Pago</strong><small>Estimaciones y retenciones</small></div>
-        </button>
-      </div>
-    </section>
-
-    <!-- TAB 2: CAPITAL & AHORRO -->
-    <section class="tab-content" id="sec-capital">
+    <!-- ================================================================
+         TAB 1: SIMULADOR & PROYECCIONES FINANCIERAS
+    ================================================================ -->
+    <section class="tab-content active" id="sec-simulador">
       <div class="section-hdr">
-        <div class="hero-badge">Fase Financiera Activa</div>
-        <h2 class="card-title">Capital &amp; Planificador de Ahorro</h2>
-        <p class="card-subtitle">Registra ahorros mensuales y visualiza cuándo alcanzarás el primer anticipo de obra</p>
+        <div class="hero-badge">Simulador Financiero Dinámico 2026</div>
+        <h2 class="card-title">Simulador de Ahorro, Inversión &amp; Gastos</h2>
+        <p class="card-subtitle">Modela tus ingresos, gastos y rendimientos compuestos en CETES y SOFIPOs para calcular exactamente cuándo arrancas y terminas tu casa</p>
       </div>
 
-      <div class="savings-hero-card">
-        <div class="savings-thermo">
-          <div class="thermo-labels">
-            <span class="thermo-title">Meta: Anticipo para Arrancar Fase 1</span>
-            <span class="thermo-pct" id="thermo-pct">0%</span>
+      <!-- Métricas Clave de la Simulación -->
+      <div class="sim-kpi-grid">
+        <div class="sim-kpi-card gold">
+          <div class="sim-kpi-icon">🎯</div>
+          <div class="sim-kpi-info">
+            <div class="sim-kpi-label">Primer Hito: Cimentación PB ($330,000)</div>
+            <div class="sim-kpi-val" id="sim-kpi-h1-months">16 Meses</div>
+            <div class="sim-kpi-sub" id="sim-kpi-h1-date">Llegada estimada: Diciembre 2027</div>
           </div>
-          <div class="thermo-bar-large">
-            <div class="thermo-fill-large" id="thermo-fill" style="width:0%"></div>
-          </div>
-          <div class="thermo-amounts">
-            <span id="thermo-saved">$0 MXN acumulado</span>
-            <span id="thermo-goal-amount">Meta: $700,000 MXN</span>
-          </div>
-          <div class="savings-milestones-row" id="savings-milestones-row"></div>
         </div>
-        <div class="savings-stats">
-          <div class="stat-box">
-            <div class="stat-icon">📅</div>
-            <div class="stat-val" id="stat-months-elapsed">0</div>
-            <div class="stat-label">Meses registrados</div>
+        <div class="sim-kpi-card green">
+          <div class="sim-kpi-icon">📈</div>
+          <div class="sim-kpi-info">
+            <div class="sim-kpi-label">Capacidad de Ahorro Anual Total</div>
+            <div class="sim-kpi-val" id="sim-kpi-annual-savings">$220,500 MXN</div>
+            <div class="sim-kpi-sub" id="sim-kpi-monthly-avg">Aprox. $18,375 MXN / mes ponderado</div>
           </div>
-          <div class="stat-box highlight">
-            <div class="stat-icon">⏳</div>
-            <div class="stat-val" id="stat-months-left">—</div>
-            <div class="stat-label">Meses para meta</div>
+        </div>
+        <div class="sim-kpi-card purple">
+          <div class="sim-kpi-icon">🎁</div>
+          <div class="sim-kpi-info">
+            <div class="sim-kpi-label">Interés Compuesto Ganado (Hito 1)</div>
+            <div class="sim-kpi-val" id="sim-kpi-interest-earned">+$26,400 MXN</div>
+            <div class="sim-kpi-sub">¡Paga la mecánica de suelos y trámites gratis!</div>
           </div>
-          <div class="stat-box">
-            <div class="stat-icon">📈</div>
-            <div class="stat-val" id="stat-avg-monthly">—</div>
-            <div class="stat-label">Promedio mensual</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-icon">🎯</div>
-            <div class="stat-val" id="stat-eta-date">—</div>
-            <div class="stat-label">Fecha estimada</div>
+        </div>
+        <div class="sim-kpi-card blue">
+          <div class="sim-kpi-icon">🏡</div>
+          <div class="sim-kpi-info">
+            <div class="sim-kpi-label">Suite PB 100% Pagada ($1,165,000)</div>
+            <div class="sim-kpi-val" id="sim-kpi-full-house">4.4 Años</div>
+            <div class="sim-kpi-sub">Sin deudas hipotecarias bancarias</div>
           </div>
         </div>
       </div>
 
+      <!-- Formulario interactivo en dos columnas -->
       <div class="two-col-grid">
+
+        <!-- Columna 1: Ingresos Ordinarios y Gastos -->
         <div class="card">
-          <div class="card-header"><h3 class="card-title">⚙️ Configuración de Meta</h3></div>
+          <div class="card-header space-between">
+            <h3 class="card-title">💵 1. Ingresos Semanales y Gastos Mensuales</h3>
+            <span class="badge badge-primary">Presupuesto Base</span>
+          </div>
           <div class="form-grid">
+            <div class="form-group" style="grid-column: 1/-1;">
+              <label class="form-label">Sueldo Neto Semanal (después de impuestos)</label>
+              <div class="input-with-badge">
+                <input type="number" id="in-salary-week" class="form-input" value="6400" min="1000" step="100">
+                <span class="input-calc-badge" id="calc-salary-month">=$27,733/mes</span>
+              </div>
+              <small class="form-hint">Basado en tu nómina semanal libre ($6,400 × 52 semanas / 12 meses)</small>
+            </div>
+
             <div class="form-group">
-              <label class="form-label">Meta de Capital — Anticipo Fase 1 (MXN)</label>
-              <input type="number" id="cfg-capital-goal" class="form-input" value="700000" min="100000" step="10000">
-              <small class="form-hint">Recomendado: 35% del costo de Fase 1 ($1,980,000) = $693,000 + buffer</small>
+              <label class="form-label">Renta / Vivienda actual (mes)</label>
+              <input type="number" id="in-exp-housing" class="form-input" value="5000" min="0" step="100">
             </div>
             <div class="form-group">
-              <label class="form-label">Ahorro Mensual Objetivo (MXN)</label>
-              <input type="number" id="cfg-monthly-goal" class="form-input" value="50000" min="1000" step="1000">
+              <label class="form-label">Servicios (luz, agua, gas, internet, cel)</label>
+              <input type="number" id="in-exp-utilities" class="form-input" value="1500" min="0" step="100">
             </div>
             <div class="form-group">
-              <label class="form-label">Capital Inicial ya Ahorrado (MXN)</label>
-              <input type="number" id="cfg-initial-capital" class="form-input" value="0" min="0" step="1000">
-              <small class="form-hint">Si ya tienes capital antes de usar esta app, ingrésalo aquí</small>
+              <label class="form-label">Alimentos &amp; Despensa ($1,200/sem)</label>
+              <input type="number" id="in-exp-food" class="form-input" value="5200" min="0" step="100">
             </div>
             <div class="form-group">
-              <label class="form-label">Fecha de Inicio del Proyecto</label>
-              <input type="month" id="cfg-start-date" class="form-input">
+              <label class="form-label">Transporte &amp; Gasolina ($600/sem)</label>
+              <input type="number" id="in-exp-transport" class="form-input" value="2600" min="0" step="100">
             </div>
-            <div class="form-group" style="grid-column:1/-1">
-              <button class="btn btn-primary w-full" id="btn-save-config">💾 Guardar Configuración</button>
+            <div class="form-group">
+              <label class="form-label">Gastos Personales &amp; Ocio ($800/sem)</label>
+              <input type="number" id="in-exp-personal" class="form-input" value="3500" min="0" step="100">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Margen de Imprevistos</label>
+              <input type="number" id="in-exp-buffer" class="form-input" value="1000" min="0" step="100">
+            </div>
+          </div>
+
+          <!-- Resumen de Balance Ordinario -->
+          <div class="balance-summary-box">
+            <div class="bal-item">
+              <span class="bal-label">Gastos Mensuales Totales:</span>
+              <span class="bal-val danger" id="calc-total-expenses">$18,800 MXN</span>
+            </div>
+            <div class="bal-item">
+              <span class="bal-label">Margen de Ahorro Ordinario:</span>
+              <span class="bal-val success" id="calc-monthly-ordinary-saving">$8,933 MXN / mes (~$2,060/sem)</span>
             </div>
           </div>
         </div>
 
+        <!-- Columna 2: Ingresos Extras e Inversión Compuesta -->
         <div class="card">
-          <div class="card-header"><h3 class="card-title">➕ Registrar Ahorro del Mes</h3></div>
+          <div class="card-header space-between">
+            <h3 class="card-title">🚀 2. Extras Anuales &amp; Inversión</h3>
+            <span class="badge badge-success">Interés Compuesto</span>
+          </div>
+
           <div class="form-grid">
             <div class="form-group">
-              <label class="form-label">Mes / Período</label>
-              <input type="month" id="sav-month" class="form-input">
+              <label class="form-label">Fondo de Ahorro Anual</label>
+              <input type="number" id="in-extra-fondo" class="form-input" value="50000" min="0" step="1000">
             </div>
             <div class="form-group">
-              <label class="form-label">Monto Ahorrado (MXN)</label>
-              <input type="number" id="sav-amount" class="form-input" placeholder="Ej: 45000" min="0" step="100">
+              <label class="form-label">Aguinaldo Anual</label>
+              <input type="number" id="in-extra-aguinaldo" class="form-input" value="25000" min="0" step="1000">
             </div>
-            <div class="form-group" style="grid-column:1/-1">
-              <label class="form-label">Concepto / Nota</label>
-              <input type="text" id="sav-note" class="form-input" placeholder="Ej: Quincenas enero, bono, venta...">
+            <div class="form-group">
+              <label class="form-label">Reparto de Utilidades (PTU)</label>
+              <input type="number" id="in-extra-utilidades" class="form-input" value="35000" min="0" step="1000">
             </div>
-            <div class="form-group" style="grid-column:1/-1">
-              <button class="btn btn-success w-full" id="btn-add-saving">✅ Agregar Registro</button>
+            <div class="form-group">
+              <label class="form-label">Bonos y Otras Prestaciones</label>
+              <input type="number" id="in-extra-bonos" class="form-input" value="40000" min="0" step="1000">
+            </div>
+
+            <!-- Slider porcentaje de extras para la casa -->
+            <div class="form-group" style="grid-column: 1/-1;">
+              <div class="slider-header">
+                <label class="form-label">% de Ingresos Extras destinado a la Casa:</label>
+                <span class="slider-val" id="val-extra-pct">75%</span>
+              </div>
+              <input type="range" id="in-extra-pct" class="range-slider" min="50" max="100" value="75" step="5">
+              <small class="form-hint" id="calc-extra-allocated">Aportas $112,500 de los $150,000 extras (te quedan $37,500 para uso libre)</small>
+            </div>
+
+            <!-- Slider Tasa de Inversión Anual -->
+            <div class="form-group" style="grid-column: 1/-1;">
+              <div class="slider-header">
+                <label class="form-label">Tasa Anual de Rendimiento Ponderada (Cetes + SOFIPO):</label>
+                <span class="slider-val gold" id="val-interest-rate">9.5% anual</span>
+              </div>
+              <input type="range" id="in-interest-rate" class="range-slider" min="4" max="14" value="9.5" step="0.5">
+              <small class="form-hint">CETES (~7.5% - 8.5%) + SOFIPOs como Finsus (~11% - 12% exentas de ISR)</small>
+            </div>
+
+            <div class="form-group" style="grid-column: 1/-1;">
+              <label class="form-label">Capital Inicial ya ahorrado (si tienes saldo actual)</label>
+              <input type="number" id="in-init-capital" class="form-input" value="0" min="0" step="1000">
             </div>
           </div>
         </div>
+
       </div>
 
+      <!-- Gráfico de Comparación: Colchón (0%) vs Inversión Compuesta (9.5%) -->
       <div class="card">
         <div class="card-header space-between">
-          <h3 class="card-title">📊 Proyección de Ahorro (próximos 12 meses)</h3>
-          <span class="badge badge-primary" id="projection-badge">—</span>
+          <div>
+            <h3 class="card-title">📈 Proyección Gráfica a 24 Meses: El Efecto del Interés Compuesto</h3>
+            <p class="card-subtitle">Observa cómo la barra dorada de rendimientos crece mes a mes y adelanta tu meta</p>
+          </div>
+          <div class="legend-pills">
+            <span class="legend-pill" style="background:#10b981;"></span> Tu Ahorro Propio
+            <span class="legend-pill" style="background:#fbbf24;"></span> Intereses Ganados Gratis
+            <span class="legend-pill" style="background:#ef4444;"></span> Meta Hito 1 ($330k)
+          </div>
         </div>
-        <div class="projection-bars" id="projection-bars"></div>
+        <div class="compound-chart-container" id="sim-chart-bars">
+          <!-- Rendered by JS -->
+        </div>
       </div>
 
+      <!-- Tabla de Proyección Mes a Mes -->
       <div class="card">
         <div class="card-header space-between">
-          <h3 class="card-title">📋 Historial de Ahorros</h3>
-          <button class="btn btn-sm btn-danger" id="btn-clear-savings">🗑️ Limpiar todo</button>
+          <h3 class="card-title">📋 Cronograma de Proyección Mes a Mes (24 Meses)</h3>
+          <span class="badge badge-primary">Evolución del Capital</span>
         </div>
         <div class="table-wrap">
           <table class="data-table">
-            <thead><tr><th>Período</th><th>Monto</th><th>Balance Acumulado</th><th>% de Meta</th><th>Concepto</th><th></th></tr></thead>
-            <tbody id="savings-table-body">
-              <tr><td colspan="6" class="empty-state">Sin registros. ¡Agrega tu primer ahorro!</td></tr>
+            <thead>
+              <tr>
+                <th>Mes</th>
+                <th>Ahorro Ordinario</th>
+                <th>Bono / Extra</th>
+                <th>Aporte Total</th>
+                <th>Rendimiento del Mes</th>
+                <th>Saldo Invertido</th>
+                <th>Saldo sin Invertir (0%)</th>
+                <th>Ganancia Libre</th>
+                <th>Hito</th>
+              </tr>
+            </thead>
+            <tbody id="sim-table-body">
+              <!-- Rendered by JS -->
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- TAB 3: HITOS CONSTRUCTIVOS -->
-    <section class="tab-content" id="sec-hitos">
+    <!-- ================================================================
+         TAB 2: MIS BÓVEDAS (REGISTRO REAL)
+    ================================================================ -->
+    <section class="tab-content" id="sec-bovedas">
       <div class="section-hdr">
-        <div class="hero-badge">Plan de Obra por Etapas</div>
-        <h2 class="card-title">Hitos Constructivos por Fase</h2>
-        <p class="card-subtitle">Marca cada hito solo cuando el DRO o supervisor haya validado. Son tus checkpoints para liberar pagos.</p>
-      </div>
-      <div class="phase-selector-tabs" id="hitos-phase-tabs">
-        <button class="phase-tab active" data-hphase="0">F0: Pre-Obra</button>
-        <button class="phase-tab" data-hphase="1">F1: Estructura PB</button>
-        <button class="phase-tab" data-hphase="2">F2: Planta Alta</button>
-        <button class="phase-tab" data-hphase="3">F3: Roof Garden</button>
-        <button class="phase-tab" data-hphase="4">F4: Solar &amp; Smart</button>
-      </div>
-      <div class="phase-progress-summary" id="hitos-phase-summary"></div>
-      <div class="hitos-list" id="hitos-list"></div>
-    </section>
-
-    <!-- TAB 4: GUÍA DEL PROPIETARIO -->
-    <section class="tab-content" id="sec-guia">
-      <div class="section-hdr">
-        <div class="hero-badge">Tu Derecho como Dueño de Obra</div>
-        <h2 class="card-title">Guía del Propietario: Qué Exigir y Cuándo</h2>
-        <p class="card-subtitle">Conocer tus derechos y las verificaciones correctas te protege de trabajos deficientes, retrasos y sobrecostos.</p>
-      </div>
-      <div class="guide-accordion" id="guide-accordion"></div>
-    </section>
-
-    <!-- TAB 5: CONTROL DE PAGOS -->
-    <section class="tab-content" id="sec-pagos">
-      <div class="section-hdr">
-        <div class="hero-badge">Administración Financiera de Obra</div>
-        <h2 class="card-title">Control de Estimaciones y Pagos</h2>
-        <p class="card-subtitle">Cada pago a contratistas lleva: amortización del 30% de anticipo y retención del 5% de garantía</p>
+        <div class="hero-badge">Control de Capital Real</div>
+        <h2 class="card-title">Mis Bóvedas de Ahorro &amp; Inversión</h2>
+        <p class="card-subtitle">Registra tus aportaciones reales para dar seguimiento a cada cuenta y comparar contra tu simulación</p>
       </div>
 
-      <div class="finance-summary-row">
-        <div class="fsum-card"><div class="fsum-label">Total Bruto Estimado</div><div class="fsum-val" id="fsum-gross">$0</div></div>
-        <div class="fsum-card warning"><div class="fsum-label">Anticipo Amortizado</div><div class="fsum-val" id="fsum-advance">$0</div></div>
-        <div class="fsum-card danger"><div class="fsum-label">Retención Garantía (5%)</div><div class="fsum-val" id="fsum-retention">$0</div></div>
-        <div class="fsum-card success"><div class="fsum-label">Neto Pagado</div><div class="fsum-val" id="fsum-net">$0</div></div>
+      <!-- Tarjetas de Bóvedas -->
+      <div class="vaults-grid">
+        <!-- Bóveda 1: Cetesdirecto -->
+        <div class="vault-card cetes">
+          <div class="vault-header">
+            <div class="vault-icon">🏛️</div>
+            <div>
+              <div class="vault-name">Bóveda 1: Cetesdirecto</div>
+              <div class="vault-type">Ahorro Recurrente Semanal ($2,200/sem)</div>
+            </div>
+            <span class="badge badge-success">0% Riesgo</span>
+          </div>
+          <div class="vault-balance" id="vbal-cetes">$0 MXN</div>
+          <div class="vault-meta">
+            <span>Tasa Ref: <strong>~7.5% - 8.5%</strong></span>
+            <span>Respaldo: <strong>Gobierno Federal</strong></span>
+          </div>
+          <div class="vault-desc">Domiciliación automática cada viernes desde tu nómina. Sin comisiones ni topes de saldo.</div>
+        </div>
+
+        <!-- Bóveda 2: SOFIPO / Finsus -->
+        <div class="vault-card sofipo">
+          <div class="vault-header">
+            <div class="vault-icon">⚡</div>
+            <div>
+              <div class="vault-name">Bóveda 2: SOFIPO (Finsus)</div>
+              <div class="vault-type">Plazos Fijos para Bonos y Fondo</div>
+            </div>
+            <span class="badge badge-warning">0% ISR (&lt;$205k)</span>
+          </div>
+          <div class="vault-balance" id="vbal-sofipo">$0 MXN</div>
+          <div class="vault-meta">
+            <span>Tasa Ref: <strong>~11.0% - 12.0%</strong></span>
+            <span>Seguro PROSOFIPO: <strong>Hasta $210,000</strong></span>
+          </div>
+          <div class="vault-desc">Para depositar los montos grandes de aguinaldo y utilidades a plazo fijo. Exento de impuestos.</div>
+        </div>
+
+        <!-- Bóveda 3: Fondo de Emergencia -->
+        <div class="vault-card emergency">
+          <div class="vault-header">
+            <div class="vault-icon">🛡️</div>
+            <div>
+              <div class="vault-name">Bóveda 3: Fondo de Emergencia</div>
+              <div class="vault-type">Liquidez 24/7 (Nu / Bonddia)</div>
+            </div>
+            <span class="badge badge-primary">Disponible Hoy</span>
+          </div>
+          <div class="vault-balance" id="vbal-emergency">$0 MXN</div>
+          <div class="vault-meta">
+            <span>Meta de reserva: <strong>$20,000 MXN</strong></span>
+            <span>Tasa Ref: <strong>~6.5%</strong></span>
+          </div>
+          <div class="vault-desc">Colchón intocable para gastos médicos o mecánicos, para no descapitalizar la obra.</div>
+        </div>
       </div>
 
+      <!-- Formulario para agregar movimiento -->
       <div class="card">
-        <div class="card-header"><h3 class="card-title">➕ Nueva Estimación</h3></div>
+        <div class="card-header space-between">
+          <h3 class="card-title">➕ Registrar Depósito o Rendimiento en Bóveda</h3>
+          <span class="badge badge-primary">Nuevo Movimiento</span>
+        </div>
         <div class="form-grid col-3">
           <div class="form-group">
             <label class="form-label">Fecha</label>
-            <input type="date" id="est-date" class="form-input">
+            <input type="date" id="reg-date" class="form-input">
           </div>
           <div class="form-group">
-            <label class="form-label">Fase</label>
-            <select id="est-phase" class="form-input">
-              <option value="F0">F0: Pre-Obra</option>
-              <option value="F1">F1: Estructura PB</option>
-              <option value="F2">F2: Planta Alta</option>
-              <option value="F3">F3: Roof Garden</option>
-              <option value="F4">F4: Solar &amp; Smart</option>
+            <label class="form-label">Bóveda Destino</label>
+            <select id="reg-vault" class="form-input">
+              <option value="cetes">Bóveda 1: Cetesdirecto</option>
+              <option value="sofipo">Bóveda 2: SOFIPO (Finsus)</option>
+              <option value="emergency">Bóveda 3: Fondo Emergencia</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Concepto / Contratista</label>
-            <input type="text" id="est-concept" class="form-input" placeholder="Ej: Est. #3 - Maestro Albañil">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Monto Bruto (MXN)</label>
-            <input type="number" id="est-gross" class="form-input" placeholder="0" step="100">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Amort. Anticipo (30%)</label>
-            <input type="number" id="est-advance-deduct" class="form-input" placeholder="Auto" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Retención (5%)</label>
-            <input type="number" id="est-retention" class="form-input" placeholder="Auto" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Neto a Pagar</label>
-            <input type="number" id="est-net" class="form-input" placeholder="Auto" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Estado</label>
-            <select id="est-status" class="form-input">
-              <option value="pendiente">Pendiente</option>
-              <option value="pagado">Pagado</option>
-              <option value="revision">En Revisión</option>
+            <label class="form-label">Tipo de Movimiento</label>
+            <select id="reg-type" class="form-input">
+              <option value="ahorro">Ahorro Semanal / Ordinario</option>
+              <option value="extra">Bono / Fondo de Ahorro / Aguinaldo</option>
+              <option value="rendimiento">Rendimiento Generado (Intereses)</option>
+              <option value="retiro">Retiro / Ajuste</option>
             </select>
           </div>
-          <div class="form-group" style="display:flex;align-items:flex-end;">
-            <button class="btn btn-primary w-full" id="btn-save-est">💾 Registrar</button>
+          <div class="form-group">
+            <label class="form-label">Monto (MXN)</label>
+            <input type="number" id="reg-amount" class="form-input" placeholder="Ej: 2200" min="1" step="10">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label class="form-label">Concepto o Nota (opcional)</label>
+            <input type="text" id="reg-note" class="form-input" placeholder="Ej: Raya semana 34, Rendimientos mes, etc.">
+          </div>
+          <div class="form-group" style="grid-column: 1/-1;">
+            <button class="btn btn-success w-full" id="btn-save-movement">💾 Registrar Movimiento en Bóveda</button>
           </div>
         </div>
       </div>
 
+      <!-- Historial de Movimientos -->
       <div class="card">
-        <div class="card-header"><h3 class="card-title">📋 Historial de Estimaciones</h3></div>
+        <div class="card-header space-between">
+          <h3 class="card-title">📋 Historial de Transacciones</h3>
+          <button class="btn btn-sm btn-danger" id="btn-clear-movements">🗑️ Limpiar Historial</button>
+        </div>
         <div class="table-wrap">
           <table class="data-table">
-            <thead><tr><th>Folio</th><th>Fecha</th><th>Fase</th><th>Concepto</th><th>Bruto</th><th>Anticipo</th><th>Retención</th><th>Neto</th><th>Estado</th><th></th></tr></thead>
-            <tbody id="est-table-body">
-              <tr><td colspan="10" class="empty-state">Sin estimaciones registradas</td></tr>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Bóveda</th>
+                <th>Tipo</th>
+                <th>Monto</th>
+                <th>Concepto</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="movements-table-body">
+              <tr><td colspan="6" class="empty-state">Sin movimientos registrados aún. ¡Agrega tu primer depósito!</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- TAB 6: PLANOS -->
+    <!-- ================================================================
+         TAB 3: HITOS CONSTRUCTIVOS PB (78.36 m²)
+    ================================================================ -->
+    <section class="tab-content" id="sec-hitos">
+      <div class="section-hdr">
+        <div class="hero-badge">Plan de Obra Replantado</div>
+        <h2 class="card-title">Hitos Constructivos: Suite Residencial PB (78.36 m²)</h2>
+        <p class="card-subtitle">Tu meta no son 4 millones, son $1,165,000 MXN en 3 hitos claros. Con cimentación calculada para crecer, pero 100% terminada y habitable abajo.</p>
+      </div>
+
+      <!-- Barra de progreso hacia la casa completa -->
+      <div class="card" style="background: linear-gradient(135deg, #0e1e36, #162a4c); border-color: rgba(59,130,246,0.3);">
+        <div class="space-between" style="margin-bottom:0.75rem;">
+          <div>
+            <span class="hero-badge" style="background:rgba(251,191,36,0.2); color:#fbbf24; border-color:rgba(251,191,36,0.3);">Objetivo Global PB</span>
+            <h3 style="font-size:1.15rem; font-weight:800;">$1,165,000 MXN — Suite PB Llave en Mano</h3>
+          </div>
+          <div style="text-align:right;">
+            <span style="font-size:1.5rem; font-weight:900; font-family:var(--font-mono); color:var(--color-success);" id="hitos-overall-pct">0%</span>
+            <div style="font-size:0.72rem; color:var(--text-muted);" id="hitos-overall-amount">$0 de $1,165,000</div>
+          </div>
+        </div>
+        <div class="thermometer-track" style="height:16px;">
+          <div class="thermometer-fill" id="hitos-overall-bar" style="width:0%;"></div>
+        </div>
+      </div>
+
+      <!-- Los 3 Hitos de la PB -->
+      <div class="hitos-pb-list">
+
+        <!-- Hito 1 -->
+        <div class="card hito-phase-block active-hito">
+          <div class="card-header space-between">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+              <span class="phase-badge-pill" style="background:#fbbf24; color:#000;">HITO 1</span>
+              <div>
+                <h3 class="card-title">Cimentación de 3 Niveles, Cisterna &amp; Trámites</h3>
+                <div class="card-subtitle">Meta de Ahorro: <strong>$330,000 MXN</strong> (~16 meses)</div>
+              </div>
+            </div>
+            <span class="badge badge-warning" id="badge-h1-status">🎯 Meta Activa</span>
+          </div>
+          <p style="font-size:0.83rem; color:var(--text-muted); margin-bottom:1rem;">
+            Se construye la cimentación completa (zapatas y contratrabes reforzadas) calculadas por el ingeniero para soportar los 3 pisos a futuro, con las varillas de amarre protegidas sobre la losa.
+          </p>
+          <div class="hito-tasks-list">
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h1-1" onchange="togglePBHito('h1-1', this.checked)">
+              <label for="chk-h1-1"><strong>1.1 Estudio de Mecánica de Suelos formal:</strong> 3 sondeos a 4 m para verificar capacidad de carga en arcillas de Tlajomulco (~$18,000 MXN).</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h1-2" onchange="togglePBHito('h1-2', this.checked)">
+              <label for="chk-h1-2"><strong>1.2 Proyecto Ejecutivo Completo (3 niveles) &amp; Firma DRO:</strong> Planos sellados y cálculo estructural con previsión de escalera futura (~$45,000 MXN).</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h1-3" onchange="togglePBHito('h1-3', this.checked)">
+              <label for="chk-h1-3"><strong>1.3 Licencia de Construcción en Tlajomulco &amp; Toma de Agua:</strong> Derechos municipales H3 y contrato CFE provisional (~$55,000 MXN).</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h1-4" onchange="togglePBHito('h1-4', this.checked)">
+              <label for="chk-h1-4"><strong>1.4 Cisterna de 5,000 L de concreto armado:</strong> Muros impermeabilizados con prueba hidrostática de 48h (~$45,000 MXN).</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h1-5" onchange="togglePBHito('h1-5', this.checked)">
+              <label for="chk-h1-5"><strong>1.5 Cimentación con concreto f'c=250 kg/cm² y acero Grado 42:</strong> Zapatas y contratrabes con revenimiento probado (~$167,000 MXN).</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hito 2 -->
+        <div class="card hito-phase-block">
+          <div class="card-header space-between">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+              <span class="phase-badge-pill" style="background:#3b82f6; color:#fff;">HITO 2</span>
+              <div>
+                <h3 class="card-title">Muros de Block, Estructura &amp; Losa de Techo PB</h3>
+                <div class="card-subtitle">Inversión requerida: <strong>$350,000 MXN</strong> (Total acum: $680,000)</div>
+              </div>
+            </div>
+            <span class="badge badge-secondary" id="badge-h2-status">🔒 Bloqueado</span>
+          </div>
+          <p style="font-size:0.83rem; color:var(--text-muted); margin-bottom:1rem;">
+            Levantamiento de muros de block estructural, dalas, castillos y colado de losa plana a +3.15 m. El área de la escalera se techa con vigueta/bovedilla desmontable para usar como Home Office.
+          </p>
+          <div class="hito-tasks-list">
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h2-1" onchange="togglePBHito('h2-1', this.checked)">
+              <label for="chk-h2-1"><strong>2.1 Muros de block 15×20×40 clase A:</strong> Castillos cada 2.5 m y dalas de desplante y cerramiento a 3.15 m de altura.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h2-2" onchange="togglePBHito('h2-2', this.checked)">
+              <label for="chk-h2-2"><strong>2.2 Cubierta desmontable en cubo de escalera (5.62 m²):</strong> Techo de bovedilla de unicel fácilmente retirable cuando se instale la escalera futura.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h2-3" onchange="togglePBHito('h2-3', this.checked)">
+              <label for="chk-h2-3"><strong>2.3 Losa de concreto f'c=250 kg/cm² colada in situ:</strong> Concreto con curado mínimo de 28 días y varillas "esperas" protegidas.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h2-4" onchange="togglePBHito('h2-4', this.checked)">
+              <label for="chk-h2-4"><strong>2.4 Tubería hidráulica PPR y drenajes enterrados:</strong> Prueba a 10 bar durante 24h antes de tapar ranuras.</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hito 3 -->
+        <div class="card hito-phase-block">
+          <div class="card-header space-between">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+              <span class="phase-badge-pill" style="background:#10b981; color:#fff;">HITO 3</span>
+              <div>
+                <h3 class="card-title">Acabados, 2 Baños, Cocina, Cancelería &amp; Mudanza</h3>
+                <div class="card-subtitle">Inversión requerida: <strong>$485,000 MXN</strong> (Total acum: $1,165,000)</div>
+              </div>
+            </div>
+            <span class="badge badge-secondary" id="badge-h3-status">🔒 Bloqueado</span>
+          </div>
+          <p style="font-size:0.83rem; color:var(--text-muted); margin-bottom:1rem;">
+            Tu casa queda 100% terminada, con acabados finos de nivel residencial medio, canceles, cocina con isla y lista para mudarte a vivir solo con máxima comodidad.
+          </p>
+          <div class="hito-tasks-list">
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h3-1" onchange="togglePBHito('h3-1', this.checked)">
+              <label for="chk-h3-1"><strong>3.1 Impermeabilización térmica en losa:</strong> Sistema elastomérico blanco reflectivo para mantener fresca la PB.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h3-2" onchange="togglePBHito('h3-2', this.checked)">
+              <label for="chk-h3-2"><strong>3.2 Yesos, aplanados y pintura lavable interior/exterior:</strong> Acabados lisos y limpios a plomo.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h3-3" onchange="togglePBHito('h3-3', this.checked)">
+              <label for="chk-h3-3"><strong>3.3 Baño Suite en "L" + 1/2 Baño de visitas:</strong> Azulejos en regadera, cancel templado, muebles suspendidos y grifería de calidad.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h3-4" onchange="togglePBHito('h3-4', this.checked)">
+              <label for="chk-h3-4"><strong>3.4 Piso Porcelánico 60×60 cm (78 m²):</strong> Nivelación con crucetas y lechada sellada en toda la planta.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h3-5" onchange="togglePBHito('h3-5', this.checked)">
+              <label for="chk-h3-5"><strong>3.5 Cancelería de aluminio y puerta principal de seguridad:</strong> Cancel de 2.85 m al jardín posterior.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h3-6" onchange="togglePBHito('h3-6', this.checked)">
+              <label for="chk-h3-6"><strong>3.6 Cocina con isla integrada &amp; Despacho Home Office amueblado:</strong> Barra desayunadora, tarja, estufa y escritorio.</label>
+            </div>
+            <div class="hito-task-item">
+              <input type="checkbox" class="hito-checkbox" id="chk-h3-7" onchange="togglePBHito('h3-7', this.checked)">
+              <label for="chk-h3-7"><strong>3.7 🎉 MUDANZA &amp; CASA PROPIA:</strong> Entrega física de obra, cero deudas y casa lista para disfrutar.</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Módulo de Expansión Futura -->
+      <div class="card" style="border-style:dashed; opacity:0.85; margin-top:1.5rem;">
+        <div class="card-header space-between">
+          <div>
+            <span class="badge badge-secondary">Fase Opcional Futura (5 a 10 años)</span>
+            <h3 class="card-title">Módulo de Expansión: Planta Alta &amp; Roof Garden</h3>
+            <p class="card-subtitle">Solo si en el futuro decides casarte, tener familia o requieres más espacio</p>
+          </div>
+          <span class="badge badge-secondary">Presupuesto Futuro: ~$1.1M MXN</span>
+        </div>
+        <p style="font-size:0.85rem; color:var(--text-muted);">
+          Gracias al <strong>Pasillo de Obra Limpia</strong> en el lateral de tu terreno, los albañiles subirán materiales por fuera sin entrar a tu casa. Se abrirá el techo de tu Home Office únicamente al final para montar la escalera en seco.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         TAB 4: PLANO PB & HOME OFFICE
+    ================================================================ -->
     <section class="tab-content" id="sec-planos">
       <div class="section-hdr space-between">
         <div>
-          <div class="hero-badge">Geometría Oficial</div>
-          <h2 class="card-title">Planos Arquitectónicos Oficiales</h2>
-          <p class="card-subtitle">PB (78.36 m²) • PA (77.89 m²) • Roof Garden (40.5 m²) — Haz clic en cada espacio</p>
+          <div class="hero-badge">Distribución Vectorial Oficial</div>
+          <h2 class="card-title">Planta Baja: Suite de Autor con Home Office (78.36 m²)</h2>
+          <p class="card-subtitle">Terreno: 153.19 m² • Frente 10.04 m • Jardín posterior 21 m² • Haz clic en el despacho o habitaciones</p>
         </div>
         <div class="level-selector">
-          <button class="pill-btn active" data-floor="pb">Planta Baja</button>
-          <button class="pill-btn" data-floor="pa">Planta Alta</button>
-          <button class="pill-btn" data-floor="ext">Roof Garden</button>
+          <button class="pill-btn active" data-floor="pb">Planta Baja (Habitable)</button>
+          <button class="pill-btn" data-floor="pa">Planta Alta (Expansión)</button>
+          <button class="pill-btn" data-floor="ext">Roof Garden (Expansión)</button>
         </div>
       </div>
+
+      <!-- Terreno -->
       <div class="card terrain-card">
-        <h3 class="card-title">Terreno: 153.19 m² (Perímetro: 50.57 m)</h3>
-        <p class="card-subtitle">Frente: 10.04 m • Fondo L1: 15.74 m • Posterior: 10.30 m • Fondo L3: 14.49 m</p>
+        <h3 class="card-title">Polígono del Terreno: 153.19 m² (Perímetro: 50.57 m)</h3>
+        <p class="card-subtitle">Frente: 10.04 m • Fondo L1: 15.74 m • Posterior: 10.30 m • Fondo L3: 14.49 m • Servidumbre frontal: 1.50 m</p>
         <div class="terrain-svg-container" id="terrain-svg-wrapper"></div>
       </div>
+
+      <!-- Visor de Plano SVG -->
       <div class="blueprint-viewer" id="blueprint-display"></div>
+
+      <!-- Ficha de detalles del espacio seleccionado -->
       <div class="room-details-card" id="room-details">
         <div class="room-details-header">
           <h4 class="room-title" id="room-name">Selecciona un espacio en el plano</h4>
           <span class="badge badge-primary" id="room-badge">Planta Baja</span>
         </div>
-        <div id="room-specs"><p class="text-muted">Haz clic en cualquier habitación para ver especificaciones.</p></div>
+        <div id="room-specs">
+          <p class="text-muted">Haz clic en cualquier área (especialmente el despacho en la escalera) para ver sus especificaciones técnicas.</p>
+        </div>
       </div>
     </section>
 
-    <!-- TAB 7: DOCUMENTOS -->
+    <!-- ================================================================
+         TAB 5: ESTRATEGIA DE INVERSIÓN
+    ================================================================ -->
+    <section class="tab-content" id="sec-guia">
+      <div class="section-hdr">
+        <div class="hero-badge">Educación Financiera Práctica</div>
+        <h2 class="card-title">Estrategia de Inversión y Blindaje Financiero</h2>
+        <p class="card-subtitle">Cómo exprimir cada peso, evitar las trampas comerciales y hacer rendir tu salario semanal</p>
+      </div>
+
+      <div class="two-col-grid">
+        <!-- Tarjeta 1: La Trampa de los Topes de Saldo -->
+        <div class="card">
+          <h3 class="card-title" style="color:var(--color-danger);">⚠️ La Trampa de los "Topes de Saldo" en Apps Fintech</h3>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+            Muchos bancos digitales anuncian tasas de 13% a 15% como gancho comercial, pero con letras chiquitas que perjudican a quien acumula capital real:
+          </p>
+          <div class="guide-item critical">
+            <div class="guide-item-label">LÍMITES DE SALDO DIMINUTOS</div>
+            <div class="guide-item-text">
+              Plataformas como Klar o Ualá te pagan el 15% <strong>únicamente en los primeros $25,000 o $30,000 pesos</strong>. Cualquier peso por encima de eso te paga solo el 6% o 7%. Para tu meta de $330,000 pesos, no sirven.
+            </div>
+          </div>
+          <div class="guide-item critical">
+            <div class="guide-item-label">OBLIGACIÓN DE CONSUMO</div>
+            <div class="guide-item-text">
+              Te exigen gastar entre $3,000 y $6,000 pesos al mes con su tarjeta para mantener la tasa alta. <strong>Gastar para ganar un interés es el peor error financiero</strong>.
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: La Estrategia de las 2 Bóvedas -->
+        <div class="card">
+          <h3 class="card-title" style="color:var(--color-success);">✅ Tu Estrategia Ganadora: Cetes + SOFIPO</h3>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">
+            El esquema limpio que te da máximo rendimiento, cero comisiones y cero impuestos:
+          </p>
+          <div class="guide-item success">
+            <div class="guide-item-label">BÓVEDA 1: CETESDIRECTO (SIN TOPES)</div>
+            <div class="guide-item-text">
+              Activa el <strong>Ahorro Recurrente de $2,200 semanales</strong> cada viernes. Respaldado 100% por el Gobierno de México. Cero comisiones y capital disponible en Bonddia o Cetes a 28 días.
+            </div>
+          </div>
+          <div class="guide-item success">
+            <div class="guide-item-label">BÓVEDA 2: FINSUS (PLAZO FIJO CERO IMPUESTOS)</div>
+            <div class="guide-item-text">
+              Cuando recibas tu fondo de ahorro o aguinaldo ($30k a $50k), mételo a <strong>plazo fijo de 1 año al 11.5%</strong>. Al mantenerte debajo de $205,000 MXN, está <strong>100% protegido por el seguro PROSOFIPO y exento de ISR (0% impuestos)</strong> por el artículo 93 de la Ley del ISR.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Técnica de las 4 cuentas -->
+      <div class="card">
+        <h3 class="card-title">💡 El Método de las "4 Cuentas" para tu Salario de $6,400 Semanales</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.25rem;">
+          Para que el dinero no se te escape en gastos hormiga de fin de semana, divide tus flujos así cada viernes:
+        </p>
+        <div class="four-accounts-grid">
+          <div class="account-box">
+            <div class="acc-num">1</div>
+            <div class="acc-title">Cuenta de Nómina</div>
+            <div class="acc-val">$6,400</div>
+            <div class="acc-desc">Llega tu raya el viernes. Esta cuenta debe quedar casi en ceros en menos de 2 horas.</div>
+          </div>
+          <div class="account-box highlight">
+            <div class="acc-num">2</div>
+            <div class="acc-title">Bóveda Cetes (Obra)</div>
+            <div class="acc-val green">$2,200</div>
+            <div class="acc-desc">Se transfiere automáticamente vía Cetesdirecto. <strong>Intocable para la cimentación</strong>.</div>
+          </div>
+          <div class="account-box">
+            <div class="acc-num">3</div>
+            <div class="acc-title">Gastos Fijos Semanales</div>
+            <div class="acc-val blue">$2,700</div>
+            <div class="acc-desc">Apartado para comida, despensa, gasolina y prorrateo de servicios.</div>
+          </div>
+          <div class="account-box">
+            <div class="acc-num">4</div>
+            <div class="acc-title">Gasto Libre / Bolsillo</div>
+            <div class="acc-val gold">$1,500</div>
+            <div class="acc-desc">Tu dinero libre semanal para salidas, comidas fuera o gustos personales sin culpa.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         TAB 6: BIBLIOTECA TÉCNICA (DOCS 01-15)
+    ================================================================ -->
     <section class="tab-content" id="sec-docs">
       <div class="docs-layout">
         <aside class="docs-sidebar">
           <div class="docs-search-header">
-            <input type="text" id="input-search-docs" class="docs-search-input" placeholder="🔍 Buscar...">
+            <input type="text" id="input-search-docs" class="docs-search-input" placeholder="🔍 Buscar documentos...">
           </div>
           <h4 class="sidebar-heading">Documentos Técnicos</h4>
           <ul class="docs-nav-list" id="docs-nav-list">
@@ -392,18 +723,9 @@
 
   </main>
 
-  <!-- Celebration overlay -->
-  <div class="celebration-overlay" id="celebration-overlay" style="display:none">
-    <div class="celebration-card">
-      <div class="celebration-emoji" id="celebration-emoji">🎉</div>
-      <h2 id="celebration-title">¡Hito Alcanzado!</h2>
-      <p id="celebration-msg">Has dado un gran paso en tu proyecto.</p>
-      <button class="btn btn-primary" onclick="document.getElementById('celebration-overlay').style.display='none'">¡Continuar! 🚀</button>
-    </div>
-  </div>
-
   <footer class="app-footer">
-    <p><strong>Casa 235</strong> • Sistema personal de planificación financiera y control constructivo para Residencia Inteligente en 3 Niveles.</p>
+    <p><strong>CASA 235</strong> • Sistema Personal de Control Financiero y Construcción Progresiva en Tlajomulco de Zúñiga, Jalisco.</p>
+    <p class="footer-meta">Meta Activa: Suite Residencial PB (78.36 m²) • Cimentación calculada para 3 niveles • 100% libre de deudas</p>
   </footer>
 
   <script src="assets/js/app.js"></script>
