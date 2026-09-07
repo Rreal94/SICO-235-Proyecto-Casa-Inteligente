@@ -1739,18 +1739,56 @@ function renderFloor(floorKey) {
   else if (floorKey === 'ext') display.innerHTML = getExteriorRoofSVG();
 
   if (terrainWrapper && !terrainWrapper.hasChildNodes()) {
-    terrainWrapper.innerHTML = `<svg viewBox="0 0 760 520" width="100%" height="200" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="80,60 710,60 660,469 80,462" fill="rgba(56,189,248,0.06)" stroke="#38bdf8" stroke-width="2"/>
-      <text x="395" y="45" font-size="10" font-weight="900" fill="#fbbf24" text-anchor="middle">L1-2 (SUR): 15.74 m</text>
-      <line x1="80" y1="60" x2="710" y2="60" stroke="#f59e0b" stroke-width="2"/>
-      <text x="710" y="270" font-size="9" font-weight="800" fill="#34d399" text-anchor="start" dx="6">L2-3 (ORIENTE): 10.30 m</text>
-      <line x1="710" y1="60" x2="660" y2="469" stroke="#10b981" stroke-width="2"/>
-      <text x="370" y="488" font-size="10" font-weight="900" fill="#38bdf8" text-anchor="middle">L3-4 (NORTE): 14.49 m</text>
-      <line x1="660" y1="469" x2="80" y2="462" stroke="#38bdf8" stroke-width="2"/>
-      <text x="55" y="260" font-size="9" font-weight="800" fill="#f472b6" text-anchor="end">L4-1 (PONIENTE): 10.04 m</text>
-      <line x1="80" y1="462" x2="80" y2="60" stroke="#ec4899" stroke-width="2"/>
-      <text x="393" y="268" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">TERRENO: 153.19 m²</text>
-      <text x="393" y="285" font-size="8" fill="#94a3b8" text-anchor="middle">Perímetro: 50.57 m • Servidumbre frontal: 1.50 m</text>
+    terrainWrapper.innerHTML = `<svg viewBox="0 0 920 380" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" style="background:#070d1e; border-radius:8px;">
+      <!-- Retícula tenue -->
+      <line x1="60" y1="50" x2="60" y2="330" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+      
+      <!-- Polígono del Terreno (153.19 m²) -->
+      <polygon points="100,60 630,60 588,320 100,314" fill="#0d1f3d" stroke="#38bdf8" stroke-width="2.5"/>
+
+      <!-- Servidumbre Trasera (3.00 m) -->
+      <polygon points="100,60 200,60 200,315.1 100,314" fill="#10b981" fill-opacity="0.18" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="150" y="190" font-size="9" font-weight="800" fill="#34d399" text-anchor="middle" transform="rotate(-90, 150, 190)">SERV. TRASERA (3.00 m)</text>
+
+      <!-- Huella Construcción PB (78.36 m²) -->
+      <polygon points="200,70 475,70 475,305 200,305" fill="#0284c7" fill-opacity="0.25" stroke="#38bdf8" stroke-width="2"/>
+      <text x="337" y="185" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle">HUELLA PB (78.36 m²)</text>
+      <text x="337" y="202" font-size="8.5" fill="#94a3b8" text-anchor="middle">C.O.S. = 51.1% (Máx 70%)</text>
+
+      <!-- Servidumbre Delantera (2.50 m Oblicua siguiendo L2-3) -->
+      <polygon points="545,60 630,60 588,320 505,318.5" fill="#fbbf24" fill-opacity="0.18" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="565" y="190" font-size="8.5" font-weight="800" fill="#fbbf24" text-anchor="middle" transform="rotate(97, 565, 190)">SERV. DELANTERA (2.50 m)</text>
+
+      <!-- Vialidad al Este: Banqueta, Arriate y Calle -->
+      <!-- Banqueta (1.50 m) -->
+      <polygon points="630,60 680,60 638,320 588,320" fill="#1e293b" fill-opacity="0.6" stroke="#64748b" stroke-width="1"/>
+      <text x="635" y="190" font-size="7.5" font-weight="700" fill="#cbd5e1" text-anchor="middle" transform="rotate(97, 635, 190)">BANQUETA (1.50m)</text>
+
+      <!-- Arriate (0.80 m) -->
+      <polygon points="680,60 707,60 665,320 638,320" fill="#065f46" fill-opacity="0.5" stroke="#10b981" stroke-width="1"/>
+      <circle cx="692" cy="110" r="6" fill="#10b981"/>
+      <circle cx="653" cy="270" r="6" fill="#10b981"/>
+
+      <!-- Arroyo de Calle y Eje -->
+      <polygon points="707,60 860,60 818,320 665,320" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      <line x1="770" y1="60" x2="728" y2="320" stroke="#fbbf24" stroke-width="1.8" stroke-dasharray="8,4"/>
+      <text x="755" y="190" font-size="8" font-weight="800" fill="#fbbf24" text-anchor="middle" transform="rotate(97, 755, 190)">EJE DE CALLE (ESTE)</text>
+
+      <!-- Cotas Linderos -->
+      <text x="365" y="45" font-size="10.5" font-weight="900" fill="#38bdf8" text-anchor="middle">L1-2 (NORTE): 15.74 m</text>
+      <text x="345" y="340" font-size="10.5" font-weight="900" fill="#38bdf8" text-anchor="middle">L3-4 (SUR): 14.49 m</text>
+      <text x="50" y="190" font-size="10" font-weight="900" fill="#38bdf8" text-anchor="middle" transform="rotate(-90, 50, 190)">L4-1 (FONDO): 10.04 m</text>
+      <text x="615" y="348" font-size="10" font-weight="900" fill="#fbbf24" text-anchor="middle">L2-3 (FRENTE ESTE): 10.30 m</text>
+
+      <!-- Vértices -->
+      <circle cx="100" cy="60" r="4" fill="#fbbf24"/>
+      <text x="90" y="52" font-size="9" font-weight="900" fill="#fbbf24">P1 (90°)</text>
+      <circle cx="630" cy="60" r="4" fill="#10b981"/>
+      <text x="640" y="52" font-size="9" font-weight="900" fill="#10b981">P2 (83°)</text>
+      <circle cx="588" cy="320" r="4" fill="#38bdf8"/>
+      <text x="598" y="332" font-size="9" font-weight="900" fill="#38bdf8">P3 (96°)</text>
+      <circle cx="100" cy="314" r="4" fill="#ec4899"/>
+      <text x="88" y="330" font-size="9" font-weight="900" fill="#ec4899">P4 (91°)</text>
     </svg>`;
   }
 
