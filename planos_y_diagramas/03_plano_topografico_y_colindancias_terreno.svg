@@ -66,14 +66,11 @@
   <!-- CAPA 1: CALLE DE ACCESO (ORIENTE / ESTE)                 -->
   <!-- ======================================================= -->
   <g inkscape:groupmode="layer" id="layer-street" inkscape:label="01_Calle_Oriente">
-    <!-- Pavimento de Calle (pegado a L2-3) -->
     <polygon points="1007,100 1215,100 1152.45,780 944.45,780" fill="#0f172a" fill-opacity="0.9" stroke="#1e293b" stroke-width="1.5" />
     
-    <!-- Eje Central de Calle -->
     <line x1="1157" y1="100" x2="1094.45" y2="780" stroke="#fbbf24" stroke-width="2" stroke-dasharray="16,8,4,8" stroke-opacity="0.75" />
     <text x="1135" y="440" font-size="11" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#fbbf24" fill-opacity="0.85" transform="rotate(97, 1135, 440)" letter-spacing="3">EJE DE CALLE (ORIENTE)</text>
 
-    <!-- Flechas de Circulación -->
     <g transform="translate(1155, 250) rotate(97)">
       <line x1="0" y1="-25" x2="0" y2="25" stroke="#94a3b8" stroke-width="2" stroke-opacity="0.5" />
       <polygon points="0,25 -5,12 5,12" fill="#94a3b8" fill-opacity="0.5" />
@@ -191,16 +188,16 @@
   <g inkscape:groupmode="layer" id="layer-dimensions" inkscape:label="06_Cotas_y_Dimensiones">
     
     <!-- 1. COTAS SUPERIORES AL NORTE (L1-2) -->
-    <!-- Cota General Total Lado Norte (15.74 m) -->
-    <line x1="220" y1="105" x2="1007" y2="105" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#tickCad)" marker-end="url(#tickCad)" />
-    <line x1="220" y1="170" x2="220" y2="95" stroke="#38bdf8" stroke-width="0.8" stroke-opacity="0.4" />
-    <line x1="1007" y1="170" x2="1007" y2="95" stroke="#38bdf8" stroke-width="0.8" stroke-opacity="0.4" />
-    <rect x="548" y="93" width="130" height="22" rx="3" fill="#080e1e" stroke="#38bdf8" stroke-width="1" />
-    <text x="613" y="108" font-size="11.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#38bdf8" text-anchor="middle">L1-2: 15.74 m</text>
-    <text x="613" y="80" font-size="10.5" font-weight="700" fill="#94a3b8" text-anchor="middle" letter-spacing="1">COLINDANCIA CON LOTE VECINO NORTE (15.74 m)</text>
+    <!-- Cota General Total Lado Norte (15.74 m) en Y=85 -->
+    <line x1="220" y1="85" x2="1007" y2="85" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#tickCad)" marker-end="url(#tickCad)" />
+    <line x1="220" y1="170" x2="220" y2="75" stroke="#38bdf8" stroke-width="0.8" stroke-opacity="0.4" />
+    <line x1="1007" y1="170" x2="1007" y2="75" stroke="#38bdf8" stroke-width="0.8" stroke-opacity="0.4" />
+    <rect x="548" y="73" width="130" height="22" rx="3" fill="#080e1e" stroke="#38bdf8" stroke-width="1" />
+    <text x="613" y="88" font-size="11.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#38bdf8" text-anchor="middle">L1-2: 15.74 m</text>
+    <text x="613" y="60" font-size="10.5" font-weight="700" fill="#94a3b8" text-anchor="middle" letter-spacing="1">COLINDANCIA CON LOTE VECINO NORTE (15.74 m)</text>
 
-    <!-- Cota Desglosada Norte: Serv. Trasera (3.00m) | LIBRE CONSTRUIBLE (10.22m) | Serv. Delantera (2.50m) -->
-    <g transform="translate(0, 140)">
+    <!-- Nivel 2: Cota Desglosada Norte (Y=120): Serv. Trasera (3.00m) | LIBRE NORTE (10.22m) | Serv. Delantera (2.50m) -->
+    <g transform="translate(0, 120)">
       <!-- Serv Trasera Norte 3.00m -->
       <line x1="220" y1="0" x2="370" y2="0" stroke="#10b981" stroke-width="1.2" marker-start="url(#tickGreen)" marker-end="url(#tickGreen)" />
       <rect x="260" y="-11" width="70" height="20" rx="3" fill="#080e1e" stroke="#10b981" stroke-width="1" />
@@ -211,10 +208,35 @@
       <rect x="540" y="-12" width="170" height="22" rx="3" fill="#080e1e" stroke="#38bdf8" stroke-width="1.2" />
       <text x="625" y="3" font-size="11" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#ffffff" text-anchor="middle">LIBRE NORTE: 10.22 m</text>
 
-      <!-- Serv Delantera Norte 2.50m -->
+      <!-- Serv Delantera Norte 2.50m (Global) -->
       <line x1="881.05" y1="0" x2="1007" y2="0" stroke="#fbbf24" stroke-width="1.2" marker-start="url(#tickGold)" marker-end="url(#tickGold)" />
       <rect x="910" y="-11" width="70" height="20" rx="3" fill="#080e1e" stroke="#fbbf24" stroke-width="1" />
       <text x="945" y="3" font-size="10" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#fbbf24" text-anchor="middle">2.50 m</text>
+    </g>
+
+    <!-- Nivel 3: SUBDIVISIONES HORIZONTALES (0°) DEBAJO DE LA COTA DE SERVIDUMBRE NORTE (Y=155) -->
+    <!-- Franja Interior (1.00m) | Banqueta (0.90m) | Arriate (0.60m) - SIN INCLINACIÓN -->
+    <g transform="translate(0, 155)">
+      <!-- Líneas Guía Verticales hacia linderos -->
+      <line x1="881.05" y1="-30" x2="881.05" y2="15" stroke="#fbbf24" stroke-width="0.7" stroke-dasharray="2,2" stroke-opacity="0.5" />
+      <line x1="931.45" y1="-5" x2="931.45" y2="15" stroke="#94a3b8" stroke-width="0.7" stroke-dasharray="2,2" stroke-opacity="0.5" />
+      <line x1="976.80" y1="-5" x2="976.80" y2="15" stroke="#10b981" stroke-width="0.7" stroke-dasharray="2,2" stroke-opacity="0.5" />
+      <line x1="1007.00" y1="-30" x2="1007.00" y2="15" stroke="#fbbf24" stroke-width="0.7" stroke-dasharray="2,2" stroke-opacity="0.5" />
+
+      <!-- 1. Franja Interior (1.00 m) horizontal de X=881.05 a X=931.45 -->
+      <line x1="881.05" y1="0" x2="931.45" y2="0" stroke="#fde68a" stroke-width="1.2" marker-start="url(#tickGold)" marker-end="url(#tickGold)" />
+      <rect x="888" y="-9" width="36" height="16" rx="2" fill="#080e1e" />
+      <text x="906" y="3" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#fde68a" text-anchor="middle">1.00m</text>
+
+      <!-- 2. Banqueta (0.90 m) horizontal de X=931.45 a X=976.80 -->
+      <line x1="931.45" y1="0" x2="976.80" y2="0" stroke="#94a3b8" stroke-width="1.2" marker-start="url(#tickCad)" marker-end="url(#tickCad)" />
+      <rect x="936" y="-9" width="36" height="16" rx="2" fill="#080e1e" />
+      <text x="954" y="3" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#cbd5e1" text-anchor="middle">0.90m</text>
+
+      <!-- 3. Arriate (0.60 m) horizontal de X=976.80 a X=1007.00 -->
+      <line x1="976.80" y1="0" x2="1007.00" y2="0" stroke="#10b981" stroke-width="1.2" marker-start="url(#tickGreen)" marker-end="url(#tickGreen)" />
+      <rect x="978" y="-9" width="28" height="16" rx="2" fill="#080e1e" />
+      <text x="992" y="3" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#34d399" text-anchor="middle">0.60m</text>
     </g>
 
     <!-- 2. COTAS INFERIORES AL SUR (L3-4) -->
@@ -258,21 +280,6 @@
     <line x1="950" y1="691.20" x2="975" y2="691.20" stroke="#fbbf24" stroke-width="0.8" stroke-opacity="0.4" />
     <rect x="932" y="423.8" width="130" height="22" rx="3" fill="#080e1e" stroke="#fbbf24" stroke-width="1" transform="rotate(97, 997, 435.8)" />
     <text x="997" y="438.8" font-size="11.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#fbbf24" text-anchor="middle" transform="rotate(97, 997, 435.8)">L2-3: 10.30 m</text>
-
-    <!-- 5. DETALLE DE COTAS PERPENDICULARES EN SERVIDUMBRE FRONTAL (0.60m + 0.90m + 1.00m = 2.50m) -->
-    <g transform="translate(940, 220) rotate(7)">
-      <!-- Cota Arriate 0.60m -->
-      <line x1="0" y1="0" x2="-30" y2="0" stroke="#10b981" stroke-width="1.2" marker-start="url(#tickGreen)" marker-end="url(#tickGreen)" />
-      <text x="-15" y="-5" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#34d399" text-anchor="middle">0.60m</text>
-
-      <!-- Cota Banqueta 0.90m -->
-      <line x1="-30" y1="0" x2="-75" y2="0" stroke="#94a3b8" stroke-width="1.2" marker-start="url(#tickCad)" marker-end="url(#tickCad)" />
-      <text x="-52.5" y="-5" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#cbd5e1" text-anchor="middle">0.90m</text>
-
-      <!-- Cota Franja Interior 1.00m -->
-      <line x1="-75" y1="0" x2="-125" y2="0" stroke="#fbbf24" stroke-width="1.2" marker-start="url(#tickGold)" marker-end="url(#tickGold)" />
-      <text x="-100" y="-5" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#fde68a" text-anchor="middle">1.00m</text>
-    </g>
   </g>
 
   <!-- ======================================================= -->
@@ -349,7 +356,6 @@
       <text x="455" y="155" font-size="10" font-family="'JetBrains Mono', monospace" fill="#cbd5e1" text-anchor="middle">-10.040</text>
       <line x1="0" y1="165" x2="520" y2="165" stroke="#334155" stroke-width="1.2" />
 
-      <!-- Resumen Cuadro -->
       <rect x="0" y="166" width="520" height="69" fill="#080e1e" rx="4" />
       <text x="20" y="188" font-size="10" font-weight="900" fill="#34d399">SUPERFICIE TOTAL:</text>
       <text x="140" y="188" font-size="13" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#ffffff">153.19 m²</text>
@@ -376,33 +382,27 @@
         <text x="390" y="0" font-size="9.5" font-weight="800" fill="#94a3b8">SUPERFICIE</text>
         <line x1="0" y1="8" x2="480" y2="8" stroke="#334155" stroke-width="1" />
 
-        <!-- Servidumbre Trasera -->
         <text x="0" y="26" font-size="10" font-weight="700" fill="#34d399">Servidumbre Trasera (Jardín)</text>
         <text x="260" y="26" font-size="10" font-family="'JetBrains Mono', monospace" fill="#34d399">3.00 m fondo</text>
         <text x="390" y="26" font-size="10" font-family="'JetBrains Mono', monospace" fill="#ffffff">30.12 m²</text>
 
-        <!-- Servidumbre Delantera Total -->
         <text x="0" y="48" font-size="10" font-weight="700" fill="#fbbf24">Servidumbre Delantera Total</text>
         <text x="260" y="48" font-size="10" font-family="'JetBrains Mono', monospace" fill="#fbbf24">2.50 m (oblicua)</text>
         <text x="390" y="48" font-size="10" font-family="'JetBrains Mono', monospace" fill="#ffffff">24.73 m²</text>
 
-        <!-- Arriate 0.60m -->
         <text x="12" y="68" font-size="9" fill="#a7f3d0">↳ Arriate ajardinado (frente)</text>
         <text x="260" y="68" font-size="9" font-family="'JetBrains Mono', monospace" fill="#a7f3d0">0.60 m</text>
         <text x="390" y="68" font-size="9" font-family="'JetBrains Mono', monospace" fill="#a7f3d0">6.18 m²</text>
 
-        <!-- Banqueta 0.90m -->
         <text x="12" y="88" font-size="9" fill="#cbd5e1">↳ Banqueta peatonal</text>
         <text x="260" y="88" font-size="9" font-family="'JetBrains Mono', monospace" fill="#cbd5e1">0.90 m</text>
         <text x="390" y="88" font-size="9" font-family="'JetBrains Mono', monospace" fill="#cbd5e1">9.27 m²</text>
 
-        <!-- Franja interior 1.00m -->
         <text x="12" y="108" font-size="9" fill="#fde68a">↳ Franja interior de servidumbre</text>
         <text x="260" y="108" font-size="9" font-family="'JetBrains Mono', monospace" fill="#fde68a">1.00 m</text>
         <text x="390" y="108" font-size="9" font-family="'JetBrains Mono', monospace" fill="#fde68a">9.28 m²</text>
         <line x1="0" y1="118" x2="480" y2="118" stroke="#334155" stroke-width="1" />
 
-        <!-- Dimensiones Libres -->
         <text x="0" y="136" font-size="10" font-weight="800" fill="#ffffff">Longitud Libre Construible Norte</text>
         <text x="260" y="136" font-size="10" font-weight="900" font-family="'JetBrains Mono', monospace" fill="#38bdf8">10.22 m</text>
         <text x="390" y="136" font-size="9" fill="#94a3b8">(15.74 - 3.0 - 2.52)</text>
@@ -476,7 +476,6 @@
   <g inkscape:groupmode="layer" id="layer-graphic-scale" inkscape:label="08_Escala_Grafica">
     <g transform="translate(220, 940)">
       <text x="0" y="-10" font-size="10" font-weight="800" fill="#94a3b8" letter-spacing="1">ESCALA GRÁFICA (METROS)</text>
-      <!-- 1m = 50px -->
       <rect x="0" y="0" width="50" height="7" fill="#ffffff" stroke="#334155" stroke-width="1" />
       <rect x="50" y="0" width="50" height="7" fill="#000000" stroke="#334155" stroke-width="1" />
       <rect x="100" y="0" width="50" height="7" fill="#ffffff" stroke="#334155" stroke-width="1" />
