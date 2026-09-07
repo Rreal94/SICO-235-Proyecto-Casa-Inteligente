@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="planta-pb-casa235" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <pattern id="grid5" width="27.5" height="27.5" patternUnits="userSpaceOnUse">
+      <path d="M 27.5 0 L 0 0 0 27.5" fill="none" stroke="#14243a" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="grid25" width="137.5" height="137.5" patternUnits="userSpaceOnUse">
+      <path d="M 137.5 0 L 0 0 0 137.5" fill="none" stroke="#1c3050" stroke-width="1"/>
+    </pattern>
+    <marker id="tk" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <line x1="2" y1="9" x2="8" y2="1" stroke="#38bdf8" stroke-width="1.5"/>
+    </marker>
+    <marker id="tkg" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <line x1="2" y1="9" x2="8" y2="1" stroke="#10b981" stroke-width="1.5"/>
+    </marker>
+    <pattern id="hCoch" width="12" height="12" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="12" stroke="#1e3a5f" stroke-width="1.2" stroke-opacity="0.6"/>
+    </pattern>
+    <pattern id="hServ" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#10b981" stroke-width="1" stroke-opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- FONDO Y CUADRICULA -->
+  <rect width="1920" height="1080" fill="#0c1420"/>
+  <rect width="1920" height="1080" fill="url(#grid5)"/>
+  <rect width="1920" height="1080" fill="url(#grid25)"/>
+  <rect x="20" y="20" width="1880" height="1040" fill="none" stroke="#1e3a8a" stroke-width="1.5" rx="3"/>
+
+  <!--
+    SISTEMA DE COORDENADAS DEL PLANO:
+    Origen SVG del área construible NW: (200, 72)
+    Escala: 1m = 55px
+    X (horizontal) → hacia el Este (calle)
+    Y (vertical)   ↓ hacia el Sur
+    
+    DISTRIBUCIÓN DEFINITIVA (metros reales):
+    ┌──────────────────────────────────────────────────────────────┐ Y=0 (Norte)
+    │Pas.Serv.N 4.5×1m │ COCHERA AUTO 1  5.0×2.75m               │
+    ├───────────────────│─────────────────────────────────────────-│
+    │Lavandería 2.5×2.5 │ COCHERA AUTO 2  4.0×2.75m (más corta)  │
+    ├───────────────────│                                          │
+    │Cto.Máq.   2.5×2.0 │                                          │
+    ├── Home Office / Escaleras futuras ──────────────────────────┤ Y=5.5m
+    │ RECÁMARA 3.0×3.5 │Vestidor 2×1.5│ SALA+COMEDOR │ RECIBIDOR │
+    │                  │Baño M.  2×2.0│ +COCINA OPEN │ BAÑO VIS. │
+    ├──────────────────┴──────────────┴──────────────┴────────────┤ Y=9.0m
+    │ PASILLO DE SERVICIO SUR  9.0×1.0m                           │
+    └──────────────────────────────────────────────────────────────┘ Y=10.04m
+  -->
+
+  <!-- ═══ RELLENOS DE HABITACIONES ═══ -->
+
+  <!-- COCHERA AUTO 1: X=4.5-9.5m (275px), Y=0-2.75m (151px) -->
+  <rect x="447.5" y="72" width="275" height="151.25" fill="url(#hCoch)"/>
+  <rect x="447.5" y="72" width="275" height="151.25" fill="#0d2640" fill-opacity="0.7" stroke="#1e4080" stroke-width="2.5"/>
+
+  <!-- COCHERA AUTO 2: X=5.0-9.0m (220px), Y=2.75-5.5m (151px) — MÁS CORTA (irregularidad) -->
+  <rect x="475" y="223.25" width="220" height="151.25" fill="url(#hCoch)"/>
+  <rect x="475" y="223.25" width="220" height="151.25" fill="#0d2640" fill-opacity="0.7" stroke="#1e4080" stroke-width="2.5"/>
+
+  <!-- Línea divisoria entre bays de cochera (divisor muro intermedio) -->
+  <line x1="475" y1="223.25" x2="722.5" y2="223.25" stroke="#2a4f8a" stroke-width="4"/>
+
+  <!-- Retranqueo visible en cochera (irregularidad del lado sur) -->
+  <line x1="447.5" y1="223.25" x2="475" y2="223.25" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,3"/>
+
+  <!-- PASILLO DE SERVICIO NORTE: X=0-4.5m, Y=0-1.0m -->
+  <rect x="200" y="72" width="247.5" height="55" fill="#0a1f35"/>
+  <rect x="200" y="72" width="247.5" height="55" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- LAVANDERÍA: X=0-2.5m, Y=1.0-3.5m -->
+  <rect x="200" y="127" width="137.5" height="137.5" fill="#0f2035" stroke="#818cf8" stroke-width="2"/>
+  <rect x="200" y="127" width="137.5" height="137.5" fill="#818cf8" fill-opacity="0.1"/>
+
+  <!-- CUARTO DE MÁQUINAS: X=0-2.5m, Y=3.5-5.5m -->
+  <rect x="200" y="264.5" width="137.5" height="110" fill="#0f2035" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="200" y="264.5" width="137.5" height="110" fill="#f59e0b" fill-opacity="0.07"/>
+
+  <!-- HOME OFFICE / FUTURAS ESCALERAS: X=2.5-4.5m, Y=1.0-5.5m -->
+  <rect x="337.5" y="127" width="110" height="247.5" fill="#0f2035" stroke="#a78bfa" stroke-width="2"/>
+  <rect x="337.5" y="127" width="110" height="247.5" fill="#a78bfa" fill-opacity="0.1"/>
+
+  <!-- RECÁMARA PRINCIPAL: X=0-3.0m, Y=5.5-9.0m -->
+  <rect x="200" y="374.5" width="165" height="192.5" fill="#0f2035" stroke="#ec4899" stroke-width="2.5"/>
+  <rect x="200" y="374.5" width="165" height="192.5" fill="#ec4899" fill-opacity="0.08"/>
+
+  <!-- VESTIDOR: X=3.0-5.0m, Y=5.5-7.0m -->
+  <rect x="365" y="374.5" width="110" height="82.5" fill="#0f2035" stroke="#f0abfc" stroke-width="1.8"/>
+  <rect x="365" y="374.5" width="110" height="82.5" fill="#f0abfc" fill-opacity="0.1"/>
+
+  <!-- BAÑO MÁSTER: X=3.0-5.0m, Y=7.0-9.0m -->
+  <rect x="365" y="457" width="110" height="110" fill="#0f2035" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="365" y="457" width="110" height="110" fill="#38bdf8" fill-opacity="0.1"/>
+
+  <!-- SALA + COMEDOR + COCINA (Open Plan): X=5.0-8.0m, Y=5.5-9.0m -->
+  <rect x="475" y="374.5" width="165" height="192.5" fill="#0f2035" stroke="#34d399" stroke-width="2"/>
+  <rect x="475" y="374.5" width="165" height="192.5" fill="#34d399" fill-opacity="0.08"/>
+
+  <!-- RECIBIDOR: X=8.0-9.5m, Y=5.5-7.0m -->
+  <rect x="640" y="374.5" width="82.5" height="82.5" fill="#0f2035" stroke="#fbbf24" stroke-width="2"/>
+  <rect x="640" y="374.5" width="82.5" height="82.5" fill="#fbbf24" fill-opacity="0.1"/>
+
+  <!-- BAÑO DE VISITAS: X=8.0-9.5m, Y=7.0-9.0m -->
+  <rect x="640" y="457" width="82.5" height="110" fill="#0f2035" stroke="#38bdf8" stroke-width="2"/>
+  <rect x="640" y="457" width="82.5" height="110" fill="#38bdf8" fill-opacity="0.12"/>
+
+  <!-- PASILLO DE SERVICIO SUR: X=0-9.5m, Y=9.0-10.04m -->
+  <rect x="200" y="567" width="522.5" height="57.2" fill="#0a1f35"/>
+  <rect x="200" y="567" width="522.5" height="57.2" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- ═══ MUROS PERIMETRALES ═══ -->
+  <g stroke="#e2e8f0" fill="none" stroke-linejoin="round">
+    <line x1="200" y1="72" x2="722.5" y2="72" stroke-width="5.5"/>
+    <line x1="200" y1="72" x2="200" y2="624.2" stroke-width="5.5"/>
+    <line x1="200" y1="624.2" x2="693.35" y2="624.2" stroke-width="5.5"/>
+    <line x1="722.5" y1="72" x2="722.5" y2="374.5" stroke-width="5.5"/>
+    <!-- Muro este fachada cochera (oblicua terreno al sur) -->
+    <line x1="695" y1="374.5" x2="693.35" y2="567" stroke-width="3.5" stroke-dasharray="6,3" stroke="#64748b"/>
+    <line x1="693.35" y1="567" x2="693.35" y2="624.2" stroke-width="5.5"/>
+  </g>
+
+  <!-- ═══ MUROS INTERIORES ═══ -->
+  <g stroke="#94a3b8" stroke-width="3" fill="none">
+    <line x1="447.5" y1="72" x2="447.5" y2="374.5"/>
+    <line x1="337.5" y1="127" x2="337.5" y2="374.5"/>
+    <line x1="200" y1="264.5" x2="337.5" y2="264.5"/>
+    <line x1="200" y1="374.5" x2="722.5" y2="374.5"/>
+    <line x1="365" y1="374.5" x2="365" y2="567"/>
+    <line x1="365" y1="457" x2="475" y2="457"/>
+    <line x1="475" y1="374.5" x2="475" y2="567"/>
+    <line x1="640" y1="374.5" x2="640" y2="567"/>
+    <line x1="640" y1="457" x2="722.5" y2="457"/>
+  </g>
+
+  <!-- ═══ PUERTAS (arcos de giro) ═══ -->
+  <g stroke="#fbbf24" stroke-width="1.8" fill="none">
+    <!-- Acceso peatonal desde recibidor al exterior (puerta principal) -->
+    <line x1="670" y1="374.5" x2="722.5" y2="374.5" stroke-width="2.5"/>
+    <path d="M 670,374.5 A 52.5,52.5 0 0,0 670,427" stroke-dasharray="4,3"/>
+
+    <!-- Portón cochera A1 -->
+    <rect x="509" y="69" width="137" height="8" fill="#3b82f6" fill-opacity="0.4" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="577.5" y="66" font-size="7" fill="#3b82f6" text-anchor="middle" font-family="Arial">PORTÓN</text>
+
+    <!-- Portón cochera A2 -->
+    <rect x="536" y="220" width="110" height="8" fill="#3b82f6" fill-opacity="0.4" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="591" y="218" font-size="7" fill="#3b82f6" text-anchor="middle" font-family="Arial">PORTÓN</text>
+
+    <!-- Puerta lavandería → pasillo Norte -->
+    <line x1="233" y1="127" x2="283" y2="127" stroke-width="2"/>
+    <path d="M 233,127 A 50,50 0 0,0 183,127" stroke-dasharray="3,3"/>
+
+    <!-- Puerta cuarto máquinas → exterior oeste -->
+    <line x1="200" y1="310" x2="200" y2="360" stroke="#10b981" stroke-width="2"/>
+    <path d="M 200,310 A 50,50 0 0,0 150,310" stroke="#10b981" stroke-dasharray="3,3"/>
+
+    <!-- Puerta home office desde pasillo -->
+    <line x1="337.5" y1="157" x2="337.5" y2="207" stroke-width="2"/>
+    <path d="M 337.5,157 A 50,50 0 0,1 387.5,157" stroke-dasharray="3,3"/>
+
+    <!-- Puerta recámara ↔ pasillo/home office -->
+    <line x1="200" y1="374.5" x2="200" y2="424.5" stroke-width="2"/>
+    <path d="M 200,374.5 A 50,50 0 0,1 250,374.5" stroke-dasharray="3,3"/>
+
+    <!-- Puerta recámara → vestidor -->
+    <line x1="365" y1="398" x2="365" y2="448" stroke-width="2"/>
+    <path d="M 365,398 A 50,50 0 0,0 315,398" stroke-dasharray="3,3"/>
+
+    <!-- Puerta vestidor → baño master -->
+    <line x1="392" y1="457" x2="442" y2="457" stroke-width="1.8"/>
+    <path d="M 392,457 A 50,50 0 0,1 392,507" stroke-dasharray="3,3"/>
+
+    <!-- Puerta zona social → pasillo sur -->
+    <line x1="533" y1="567" x2="583" y2="567" stroke-width="2"/>
+    <path d="M 533,567 A 50,50 0 0,0 533,517" stroke-dasharray="3,3"/>
+
+    <!-- Puerta pasillo norte → cochera (lateral) -->
+    <line x1="447.5" y1="88" x2="447.5" y2="127" stroke-width="1.8"/>
+    <path d="M 447.5,88 A 39,39 0 0,1 408.5,88" stroke-dasharray="3,3"/>
+
+    <!-- Puerta baño visitas -->
+    <line x1="640" y1="490" x2="640" y2="540" stroke-width="1.8"/>
+    <path d="M 640,490 A 50,50 0 0,1 690,490" stroke-dasharray="3,3"/>
+
+    <!-- Puerta pasillo sur → jardín oeste -->
+    <line x1="200" y1="567" x2="200" y2="624.2" stroke="#10b981" stroke-width="2.5"/>
+    <!-- Puerta pasillo sur → calle este (gate) -->
+    <line x1="665" y1="567" x2="693.35" y2="567" stroke="#10b981" stroke-width="2.5"/>
+    <line x1="665" y1="567" x2="665" y2="624.2" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- ═══ VENTANAS ═══ -->
+  <g stroke="#38bdf8" stroke-width="1" fill="#38bdf8" fill-opacity="0.15">
+    <!-- Norte: lavandería -->
+    <rect x="215" y="68" width="80" height="9"/>
+    <line x1="242" y1="68" x2="242" y2="77" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="268" y1="68" x2="268" y2="77" stroke="#38bdf8" stroke-width="0.8"/>
+    <!-- Norte: home office -->
+    <rect x="352" y="68" width="80" height="9"/>
+    <line x1="379" y1="68" x2="379" y2="77" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="405" y1="68" x2="405" y2="77" stroke="#38bdf8" stroke-width="0.8"/>
+    <!-- Norte: cochera (ventilación) -->
+    <rect x="480" y="69" width="60" height="7" fill-opacity="0.08" stroke="#64748b"/>
+    <line x1="510" y1="69" x2="510" y2="76" stroke="#64748b" stroke-width="0.7"/>
+    <!-- Oeste: recámara -->
+    <rect x="196" y="395" width="9" height="110"/>
+    <line x1="196" y1="428" x2="205" y2="428" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="196" y1="462" x2="205" y2="462" stroke="#38bdf8" stroke-width="0.8"/>
+    <!-- Oeste: cuarto máquinas (transom) -->
+    <rect x="196" y="285" width="9" height="55" fill-opacity="0.08" stroke="#64748b"/>
+    <!-- Sur: recámara -->
+    <rect x="220" y="563" width="100" height="9"/>
+    <line x1="253" y1="563" x2="253" y2="572" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="287" y1="563" x2="287" y2="572" stroke="#38bdf8" stroke-width="0.8"/>
+    <!-- Sur: zona social -->
+    <rect x="495" y="563" width="130" height="9"/>
+    <line x1="538" y1="563" x2="538" y2="572" stroke="#38bdf8" stroke-width="0.8"/>
+    <line x1="582" y1="563" x2="582" y2="572" stroke="#38bdf8" stroke-width="0.8"/>
+    <!-- Este: recibidor (fachada) -->
+    <rect x="718" y="385" width="9" height="70" fill-opacity="0.2" stroke="#fbbf24"/>
+    <line x1="718" y1="410" x2="727" y2="410" stroke="#fbbf24" stroke-width="0.8"/>
+    <line x1="718" y1="435" x2="727" y2="435" stroke="#fbbf24" stroke-width="0.8"/>
+  </g>
+
+  <!-- ═══ EQUIPAMIENTO ESQUEMÁTICO ═══ -->
+  <g fill="none" stroke-width="1.2">
+    <!-- CAMA MATRIMONIAL en recámara -->
+    <rect x="208" y="400" width="132" height="92" rx="5" fill="#ec4899" fill-opacity="0.1" stroke="#ec4899"/>
+    <rect x="208" y="400" width="55" height="20" rx="2" fill="#ec4899" fill-opacity="0.15" stroke="#ec4899" stroke-width="0.8"/>
+    <rect x="268" y="400" width="60" height="20" rx="2" fill="#ec4899" fill-opacity="0.15" stroke="#ec4899" stroke-width="0.8"/>
+    <text x="274" y="455" font-size="8" fill="#f9a8d4" text-anchor="middle" font-family="Arial">CAMA 1.5×1.8m</text>
+    <!-- Closet vestidor -->
+    <line x1="370" y1="379" x2="370" y2="455" stroke="#f0abfc" stroke-width="0.8" stroke-dasharray="6,3"/>
+    <line x1="405" y1="379" x2="405" y2="455" stroke="#f0abfc" stroke-width="0.8" stroke-dasharray="6,3"/>
+    <line x1="440" y1="379" x2="440" y2="455" stroke="#f0abfc" stroke-width="0.8" stroke-dasharray="6,3"/>
+    <!-- BAÑO MASTER: WC + ducha + lavabo -->
+    <rect x="370" y="462" width="42" height="60" rx="3" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8"/>
+    <circle cx="391" cy="507" r="16" fill="none" stroke="#38bdf8"/>
+    <rect x="416" y="462" width="54" height="30" rx="2" fill="none" stroke="#38bdf8"/>
+    <circle cx="443" cy="477" r="8" fill="none" stroke="#38bdf8" stroke-width="0.8"/>
+    <!-- LAVADORAS -->
+    <rect x="208" y="137" width="52" height="52" rx="4" fill="#818cf8" fill-opacity="0.1" stroke="#818cf8"/>
+    <circle cx="234" cy="163" r="17" fill="none" stroke="#818cf8"/>
+    <rect x="265" y="137" width="52" height="52" rx="4" fill="#818cf8" fill-opacity="0.1" stroke="#818cf8"/>
+    <circle cx="291" cy="163" r="17" fill="none" stroke="#818cf8"/>
+    <rect x="208" y="244" width="45" height="32" rx="3" fill="none" stroke="#818cf8"/>
+    <!-- CUARTO MÁQUINAS: simbolos -->
+    <rect x="210" y="278" width="35" height="35" rx="3" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b"/>
+    <text x="227" y="300" font-size="7" fill="#fcd34d" text-anchor="middle" font-family="Arial">★</text>
+    <rect x="252" y="278" width="35" height="35" rx="3" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b"/>
+    <text x="269" y="300" font-size="7" fill="#fcd34d" text-anchor="middle" font-family="Arial">⚡</text>
+    <!-- HOME OFFICE: escritorio + lineas escalera futura -->
+    <rect x="346" y="137" width="92" height="55" rx="3" fill="#a78bfa" fill-opacity="0.12" stroke="#a78bfa"/>
+    <text x="392" y="170" font-size="8" fill="#c4b5fd" text-anchor="middle" font-family="Arial">ESCRITORIO</text>
+    <g stroke="#a78bfa" stroke-width="0.8" stroke-dasharray="3,2">
+      <line x1="342" y1="270" x2="442" y2="270"/>
+      <line x1="342" y1="285" x2="442" y2="285"/>
+      <line x1="342" y1="300" x2="442" y2="300"/>
+      <line x1="342" y1="315" x2="442" y2="315"/>
+      <line x1="342" y1="330" x2="442" y2="330"/>
+      <line x1="342" y1="345" x2="442" y2="345"/>
+    </g>
+    <!-- COCINA: mostrador L -->
+    <rect x="480" y="379" width="130" height="20" rx="2" fill="#34d399" fill-opacity="0.15" stroke="#34d399"/>
+    <rect x="480" y="399" width="20" height="90" rx="2" fill="#34d399" fill-opacity="0.15" stroke="#34d399"/>
+    <!-- Fogones -->
+    <circle cx="510" cy="389" r="5" fill="none" stroke="#34d399" stroke-width="1.2"/>
+    <circle cx="528" cy="389" r="5" fill="none" stroke="#34d399" stroke-width="1.2"/>
+    <circle cx="546" cy="389" r="5" fill="none" stroke="#34d399" stroke-width="1.2"/>
+    <!-- Mesa comedor -->
+    <rect x="510" y="440" width="90" height="55" rx="4" fill="#34d399" fill-opacity="0.1" stroke="#34d399" stroke-width="1"/>
+    <!-- Sofá -->
+    <rect x="480" y="510" width="140" height="42" rx="6" fill="#34d399" fill-opacity="0.1" stroke="#34d399"/>
+    <rect x="483" y="513" width="40" height="36" rx="4" fill="#34d399" fill-opacity="0.08" stroke="none"/>
+    <rect x="528" y="513" width="40" height="36" rx="4" fill="#34d399" fill-opacity="0.08" stroke="none"/>
+    <rect x="573" y="513" width="40" height="36" rx="4" fill="#34d399" fill-opacity="0.08" stroke="none"/>
+    <!-- BAÑO VISITAS -->
+    <rect x="648" y="465" width="35" height="50" rx="3" fill="#38bdf8" fill-opacity="0.12" stroke="#38bdf8"/>
+    <rect x="648" y="515" width="35" height="20" rx="2" fill="none" stroke="#38bdf8"/>
+    <circle cx="665" cy="520" r="7" fill="none" stroke="#38bdf8" stroke-width="0.8"/>
+    <!-- Siluetas autos cochera -->
+    <rect x="462" y="87" width="245" height="115" rx="10" fill="#1e4080" fill-opacity="0.6" stroke="#3b82f6" stroke-width="1.8"/>
+    <rect x="489" y="238" width="196" height="115" rx="10" fill="#1e4080" fill-opacity="0.6" stroke="#3b82f6" stroke-width="1.5"/>
+  </g>
+
+  <!-- ═══ ETIQUETAS DE ESPACIOS ═══ -->
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="585" y="108" font-size="12" font-weight="900" fill="#60a5fa">COCHERA — AUTO 1</text>
+    <text x="585" y="122" font-size="9" fill="#93c5fd">5.0m prof. × 2.75m — profundidad máxima</text>
+    <text x="585" y="255" font-size="12" font-weight="900" fill="#60a5fa">COCHERA — AUTO 2</text>
+    <text x="585" y="269" font-size="9" fill="#93c5fd">4.0m prof. × 2.75m</text>
+    <text x="585" y="280" font-size="8" fill="#f59e0b">★ Lado irregular (terreno oblicuo)</text>
+    <text x="323.75" y="96" font-size="9" font-weight="700" fill="#34d399">PASILLO SERVICIO NORTE</text>
+    <text x="323.75" y="109" font-size="7.5" fill="#6ee7b7">1.0m — jardín ↔ serv. delantera</text>
+    <text x="268.75" y="184" font-size="10" font-weight="900" fill="#818cf8">LAVANDERÍA</text>
+    <text x="268.75" y="197" font-size="8" fill="#a5b4fc">2.5×2.5m = 6.25m²</text>
+    <text x="268.75" y="290" font-size="10" font-weight="800" fill="#f59e0b">CTO. MÁQUINAS</text>
+    <text x="268.75" y="303" font-size="7.5" fill="#fcd34d">2.5×2.0m = 5.0m²</text>
+    <text x="268.75" y="315" font-size="7" fill="#92400e">Cisterna·Calent.·Panel</text>
+    <text x="392.5" y="218" font-size="10" font-weight="900" fill="#a78bfa">HOME OFFICE</text>
+    <text x="392.5" y="232" font-size="7.5" fill="#c4b5fd">2.0×4.5m = 9.0m²</text>
+    <text x="392.5" y="260" font-size="8" fill="#7c3aed">▲ Escalera futura</text>
+    <text x="282.5" y="468" font-size="11" font-weight="900" fill="#f472b6">RECÁMARA</text>
+    <text x="282.5" y="482" font-size="11" font-weight="900" fill="#f472b6">PRINCIPAL</text>
+    <text x="282.5" y="497" font-size="8" fill="#fbcfe8">3.0×3.5m = 10.5m²</text>
+    <text x="420" y="406" font-size="9.5" font-weight="800" fill="#f0abfc">VESTIDOR</text>
+    <text x="420" y="419" font-size="7.5" fill="#e879f9">2.0m × 1.5m</text>
+    <text x="420" y="482" font-size="9" font-weight="800" fill="#38bdf8">BAÑO MÁSTER</text>
+    <text x="420" y="496" font-size="7.5" fill="#7dd3fc">2.0×2.0m — Completo</text>
+    <text x="557.5" y="404" font-size="11" font-weight="900" fill="#34d399">SALA + COMEDOR</text>
+    <text x="557.5" y="418" font-size="11" font-weight="900" fill="#34d399">+ COCINA</text>
+    <text x="557.5" y="432" font-size="7.5" fill="#6ee7b7">Open Plan 3.0×3.5m = 10.5m²</text>
+    <text x="681" y="402" font-size="9" font-weight="800" fill="#fbbf24">RECIBIDOR</text>
+    <text x="681" y="416" font-size="7" fill="#fde68a">1.5×1.5m</text>
+    <text x="681" y="490" font-size="9" font-weight="800" fill="#38bdf8">BAÑO</text>
+    <text x="681" y="504" font-size="9" font-weight="800" fill="#38bdf8">VISITAS</text>
+    <text x="681" y="519" font-size="7.5" fill="#7dd3fc">1.5×2.0m</text>
+    <text x="461" y="591" font-size="9" font-weight="700" fill="#34d399">PASILLO DE SERVICIO SUR — 1.0m</text>
+    <text x="461" y="604" font-size="7.5" fill="#6ee7b7">Conecta jardín trasero ↔ servidumbre delantera</text>
+  </g>
+
+  <!-- ═══ COTAS ═══ -->
+  <g font-family="monospace" font-size="9.5" fill="#94a3b8">
+    <!-- Cota total norte -->
+    <line x1="200" y1="48" x2="722.5" y2="48" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#tk)" marker-end="url(#tk)"/>
+    <line x1="200" y1="60" x2="200" y2="42" stroke="#38bdf8" stroke-width="0.7" stroke-opacity="0.5"/>
+    <line x1="722.5" y1="60" x2="722.5" y2="42" stroke="#38bdf8" stroke-width="0.7" stroke-opacity="0.5"/>
+    <rect x="387" y="38" width="148" height="18" rx="2" fill="#0c1420" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="461" y="50" fill="#38bdf8" font-weight="900" text-anchor="middle">LIBRE NORTE: 10.22 m</text>
+
+    <!-- Cota total sur -->
+    <line x1="200" y1="645" x2="693.35" y2="645" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#tk)" marker-end="url(#tk)"/>
+    <rect x="370" y="636" width="120" height="16" rx="2" fill="#0c1420" stroke="#38bdf8" stroke-width="0.8"/>
+    <text x="430" y="648" fill="#38bdf8" font-weight="900" text-anchor="middle">LIBRE SUR: 8.97 m</text>
+
+    <!-- Cota profundidad oeste -->
+    <line x1="162" y1="72" x2="162" y2="624.2" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#tk)" marker-end="url(#tk)"/>
+    <line x1="175" y1="72" x2="156" y2="72" stroke="#38bdf8" stroke-width="0.7"/>
+    <line x1="175" y1="624.2" x2="156" y2="624.2" stroke="#38bdf8" stroke-width="0.7"/>
+    <rect x="90" y="317" width="64" height="16" rx="2" fill="#0c1420" stroke="#38bdf8" stroke-width="0.8" transform="rotate(-90,122,325)"/>
+    <text x="122" y="325" fill="#38bdf8" font-weight="900" text-anchor="middle" transform="rotate(-90,122,325)">10.04 m</text>
+
+    <!-- Cota cochera A1 profundidad -->
+    <line x1="447.5" y1="58" x2="722.5" y2="58" stroke="#3b82f6" stroke-width="0.9" marker-start="url(#tk)" marker-end="url(#tk)"/>
+    <rect x="544" y="50" width="82" height="14" rx="2" fill="#0c1420"/>
+    <text x="585" y="61" fill="#3b82f6" text-anchor="middle">Coch A1: 5.0m</text>
+
+    <!-- Cota cochera A2 profundidad -->
+    <line x1="475" y1="228" x2="695" y2="228" stroke="#3b82f6" stroke-width="0.9" stroke-dasharray="3,2" marker-start="url(#tk)" marker-end="url(#tk)"/>
+    <rect x="546" y="220" width="82" height="14" rx="2" fill="#0c1420"/>
+    <text x="587" y="231" fill="#3b82f6" text-anchor="middle">Coch A2: 4.0m</text>
+
+    <!-- Cota N-S cochera total -->
+    <line x1="738" y1="72" x2="738" y2="374.5" stroke="#3b82f6" stroke-width="0.9" marker-start="url(#tk)" marker-end="url(#tk)"/>
+    <rect x="700" y="196" width="40" height="14" rx="2" fill="#0c1420"/>
+    <text x="720" y="207" fill="#3b82f6" text-anchor="middle">5.5m</text>
+
+    <!-- Cota recámara N-S -->
+    <line x1="155" y1="374.5" x2="155" y2="567" stroke="#ec4899" stroke-width="0.9" marker-start="url(#tk)" marker-end="url(#tk)"/>
+    <rect x="115" y="456" width="34" height="14" rx="2" fill="#0c1420"/>
+    <text x="132" y="467" fill="#ec4899" text-anchor="middle">3.5m</text>
+
+    <!-- Cota social N-S -->
+    <line x1="738" y1="374.5" x2="738" y2="567" stroke="#34d399" stroke-width="0.9" marker-start="url(#tkg)" marker-end="url(#tkg)"/>
+    <rect x="700" y="456" width="34" height="14" rx="2" fill="#0c1420"/>
+    <text x="717" y="467" fill="#34d399" text-anchor="middle">3.5m</text>
+  </g>
+
+  <!-- ═══ ROSA DE VIENTOS ═══ -->
+  <g transform="translate(835, 185)">
+    <circle cx="0" cy="0" r="40" fill="#0f172a" stroke="#3b82f6" stroke-width="1.2"/>
+    <polygon points="0,-32 6,-10 0,0" fill="#ef4444"/>
+    <polygon points="0,-32 -6,-10 0,0" fill="#b91c1c"/>
+    <polygon points="0,32 6,10 0,0" fill="#64748b"/>
+    <polygon points="0,32 -6,10 0,0" fill="#475569"/>
+    <polygon points="32,0 10,6 0,0" fill="#fbbf24"/>
+    <polygon points="32,0 10,-6 0,0" fill="#d97706"/>
+    <polygon points="-32,0 -10,6 0,0" fill="#64748b"/>
+    <polygon points="-32,0 -10,-6 0,0" fill="#475569"/>
+    <circle cx="0" cy="0" r="3" fill="#0f172a" stroke="#38bdf8"/>
+    <text x="0" y="-37" font-size="11" font-weight="900" fill="#ef4444" text-anchor="middle" font-family="Arial">N</text>
+    <text x="0" y="47" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="Arial">S</text>
+    <text x="47" y="4" font-size="9" fill="#fbbf24" text-anchor="middle" font-family="Arial">E (Calle)</text>
+    <text x="-47" y="4" font-size="9" fill="#94a3b8" text-anchor="middle" font-family="Arial">O</text>
+  </g>
+
+  <!-- ═══ TÍTULO Y CARÁTULA ═══ -->
+  <g transform="translate(800, 260)">
+    <rect x="0" y="0" width="560" height="770" rx="4" fill="#080e1e" stroke="#1e3a8a" stroke-width="1.5"/>
+    <rect x="0" y="0" width="560" height="36" rx="4" fill="#1e3a8a"/>
+    <text x="280" y="23" font-size="12" font-weight="900" fill="#ffffff" text-anchor="middle" font-family="Arial" letter-spacing="0.5">CASA 235 — PLANTA ARQ. BAJA (PB)</text>
+
+    <!-- Cuadro de áreas -->
+    <g transform="translate(20,52)" font-family="Arial, sans-serif">
+      <text x="0" y="0" font-size="10.5" font-weight="900" fill="#fbbf24">CUADRO DE ÁREAS CONSTRUIDAS</text>
+      <line x1="0" y1="8" x2="520" y2="8" stroke="#334155" stroke-width="1"/>
+
+      <rect x="0" y="14" width="520" height="22" fill="#0f2035"/>
+      <text x="10" y="29" font-size="9" font-weight="700" fill="#94a3b8">ESPACIO</text>
+      <text x="330" y="29" font-size="9" font-weight="700" fill="#94a3b8">DIMENSIONES</text>
+      <text x="455" y="29" font-size="9" font-weight="700" fill="#94a3b8">ÁREA</text>
+
+      <g font-size="9" font-family="monospace">
+        <text x="10"  y="52" fill="#93c5fd">Cochera 2 autos (irregular)</text>
+        <text x="330" y="52" fill="#cbd5e1">5.0m + 4.0m × 2.75m</text>
+        <text x="455" y="52" fill="#ffffff" font-weight="700">≈ 26.0 m²</text>
+
+        <text x="10"  y="68" fill="#818cf8">Lavandería</text>
+        <text x="330" y="68" fill="#cbd5e1">2.50m × 2.50m</text>
+        <text x="455" y="68" fill="#ffffff" font-weight="700">  6.25 m²</text>
+
+        <text x="10"  y="84" fill="#fcd34d">Cuarto de Máquinas</text>
+        <text x="330" y="84" fill="#cbd5e1">2.50m × 2.00m</text>
+        <text x="455" y="84" fill="#ffffff" font-weight="700">  5.00 m²</text>
+
+        <text x="10" y="100" fill="#c4b5fd">Home Office / Escaleras</text>
+        <text x="330" y="100" fill="#cbd5e1">2.00m × 4.50m</text>
+        <text x="455" y="100" fill="#ffffff" font-weight="700">  9.00 m²</text>
+
+        <text x="10" y="116" fill="#f9a8d4">Recámara Principal</text>
+        <text x="330" y="116" fill="#cbd5e1">3.00m × 3.50m</text>
+        <text x="455" y="116" fill="#ffffff" font-weight="700"> 10.50 m²</text>
+
+        <text x="10" y="132" fill="#f5d0fe">Vestidor / Closet</text>
+        <text x="330" y="132" fill="#cbd5e1">2.00m × 1.50m</text>
+        <text x="455" y="132" fill="#ffffff" font-weight="700">  3.00 m²</text>
+
+        <text x="10" y="148" fill="#7dd3fc">Baño Máster (completo)</text>
+        <text x="330" y="148" fill="#cbd5e1">2.00m × 2.00m</text>
+        <text x="455" y="148" fill="#ffffff" font-weight="700">  4.00 m²</text>
+
+        <text x="10" y="164" fill="#6ee7b7">Sala + Comedor + Cocina</text>
+        <text x="330" y="164" fill="#cbd5e1">3.00m × 3.50m</text>
+        <text x="455" y="164" fill="#ffffff" font-weight="700"> 10.50 m²</text>
+
+        <text x="10" y="180" fill="#fde68a">Recibidor</text>
+        <text x="330" y="180" fill="#cbd5e1">1.50m × 1.50m</text>
+        <text x="455" y="180" fill="#ffffff" font-weight="700">  2.25 m²</text>
+
+        <text x="10" y="196" fill="#7dd3fc">Baño de Visitas</text>
+        <text x="330" y="196" fill="#cbd5e1">1.50m × 2.00m</text>
+        <text x="455" y="196" fill="#ffffff" font-weight="700">  3.00 m²</text>
+
+        <text x="10" y="212" fill="#6ee7b7">Pasillos de Servicio (N + S)</text>
+        <text x="330" y="212" fill="#cbd5e1">≈ 9.0m × 1.0m c/u</text>
+        <text x="455" y="212" fill="#ffffff" font-weight="700">≈ 9.50 m²</text>
+      </g>
+
+      <line x1="0" y1="220" x2="520" y2="220" stroke="#334155" stroke-width="1.2"/>
+      <text x="10"  y="240" font-size="11" font-weight="900" fill="#34d399" font-family="Arial">SUPERFICIE TOTAL CONSTRUIDA:</text>
+      <text x="420" y="240" font-size="13" font-weight="900" fill="#34d399" font-family="monospace">≈ 89 m²</text>
+      <text x="10"  y="258" font-size="9" fill="#94a3b8" font-family="Arial">Área construible máxima permitida: 98.34 m²</text>
+      <text x="10"  y="272" font-size="9" fill="#38bdf8" font-family="Arial">C.O.S. aprox.: 58% (dentro del 60% Tlajomulco H4)</text>
+
+      <line x1="0" y1="282" x2="520" y2="282" stroke="#1e293b" stroke-width="1"/>
+
+      <!-- Notas de diseño -->
+      <text x="0" y="300" font-size="10" font-weight="900" fill="#fbbf24" font-family="Arial">NOTAS ARQUITECTÓNICAS:</text>
+      <text x="0" y="316" font-size="8" fill="#94a3b8" font-family="Arial">① Cochera irregular: Auto 1 (5.0m prof.) &gt; Auto 2 (4.0m prof.) adaptada al terreno oblicuo</text>
+      <text x="0" y="330" font-size="8" fill="#94a3b8" font-family="Arial">② Home Office conserva el espacio mínimo para escalera futura (2.0m × 4.5m = 9.0m²)</text>
+      <text x="0" y="344" font-size="8" fill="#94a3b8" font-family="Arial">③ Open Plan Sala+Comedor+Cocina expandible en Fase 2 al liberar Home Office</text>
+      <text x="0" y="358" font-size="8" fill="#94a3b8" font-family="Arial">④ Pasillo servicio Norte: Peatonal privado jardín ↔ franja interior 1.0m</text>
+      <text x="0" y="372" font-size="8" fill="#94a3b8" font-family="Arial">⑤ Pasillo servicio Sur: Acceso servicio jardín trasero ↔ calle oriente</text>
+      <text x="0" y="386" font-size="8" fill="#94a3b8" font-family="Arial">⑥ Ventilación cruzada: Norte (lavandería, home office) ↔ Sur/Oeste (recámara, social)</text>
+      <text x="0" y="400" font-size="8" fill="#94a3b8" font-family="Arial">⑦ Baño máster: ducha + WC + lavabo en 2.0×2.0m (distribución compacta urbana)</text>
+      <text x="0" y="414" font-size="8" fill="#94a3b8" font-family="Arial">⑧ Muros: tabique rojo recocido 0.15m / Castillos y dalas de concreto en esquinas y vanos</text>
+
+      <line x1="0" y1="424" x2="520" y2="424" stroke="#1e293b" stroke-width="1"/>
+      <text x="0" y="442" font-size="8.5" fill="#38bdf8" font-family="Arial">Escala: 1:50 (1m = 55px SVG) • Anteproyecto PB v1.0 • Sep. 2026</text>
+      <text x="0" y="456" font-size="8" fill="#64748b" font-family="Arial">SICO-235 • github.com/Rreal94 • Tlajomulco de Zúñiga, Jalisco</text>
+    </g>
+  </g>
+
+</svg>
