@@ -1,18 +1,20 @@
-# Carpeta de Planos y Diagramas Arquitectónicos
+# Planos y Diagramas Vectoriales Oficiales (CAD / Inkscape)
 
-Guarda en esta carpeta todos los archivos generados con tu arquitecto e instaladores:
-
-* `plano_arquitectonico_planta_baja.pdf` / `.png`
-* `plano_arquitectonico_planta_alta.pdf` / `.png`
-* `plano_instalaciones_electricas.dwg` / `.pdf`
-* `plano_red_y_camaras.pdf`
-* `diagrama_unifilar_electrico.pdf`
+Esta carpeta contiene los planos y diagramas técnicos del proyecto **Casa 235**, calibrados en formato vectorial SVG nativo de **Inkscape** y exportados en alta resolución (PNG 300 DPI y PDF imprimible).
 
 ---
 
-### Recordatorio para la simbología del plano eléctrico:
-1. **[RACK]** Ubicación del gabinete en Planta Baja.
-2. **[AP]** Toma en techo para Access Point (Planta Baja y Planta Alta).
-3. **[CAM]** Tomas de red exterior a 3 metros de altura para cámaras PoE.
-4. **[SPK]** Salidas para bocinas empotradas en cielo raso de Sala, Cocina y Terraza.
-5. **[TV-2"]** Tubo conduit de 2 pulgadas para paso de HDMI sin cables visibles.
+### Catálogo de Planos Disponibles:
+
+1. **[03_plano_topografico_y_colindancias_terreno.svg](file:///home/olethros1318/Escritorio/Proyecto_Casa_Inteligente/planos_y_diagramas/03_plano_topografico_y_colindancias_terreno.svg)**
+   * **Contenido:** Levantamiento geométrico del polígono ($153.19\text{ m}^2$, perímetro $50.57\text{ m}$), cuadro oficial de construcción con rumbos y distancias, coordenadas cartesianas, ángulos interiores, colindancias, servidumbre frontal (cochera 2 autos) y posterior ($21\text{ m}^2$), rosa de vientos y parámetros urbanísticos de Tlajomulco (H3/H4).
+   * **Archivos generados:**
+     * [SVG Vectorial (Inkscape)](file:///home/olethros1318/Escritorio/Proyecto_Casa_Inteligente/planos_y_diagramas/03_plano_topografico_y_colindancias_terreno.svg)
+     * [PNG Alta Resolución 300 DPI](file:///home/olethros1318/Escritorio/Proyecto_Casa_Inteligente/planos_y_diagramas/03_plano_topografico_y_colindancias_terreno.png)
+     * [PDF Imprimible](file:///home/olethros1318/Escritorio/Proyecto_Casa_Inteligente/planos_y_diagramas/03_plano_topografico_y_colindancias_terreno.pdf)
+
+2. **[01_plano_isometrico_hidraulico_y_solar.svg](file:///home/olethros1318/Escritorio/Proyecto_Casa_Inteligente/planos_y_diagramas/01_plano_isometrico_hidraulico_y_solar.svg)**
+   * **Contenido:** Red de agua fría y caliente en PPR PN-20, cisterna 5,000 L, bypass de calentador solar a gas y presurizador.
+
+3. **[02_plano_red_sanitaria_y_pluvial.svg](file:///home/olethros1318/Escritorio/Proyecto_Casa_Inteligente/planos_y_diagramas/02_plano_red_sanitaria_y_pluvial.svg)**
+   * **Contenido:** Tubería sanitaria de PVC serie métrica con pendientes al 2%, columna de ventilación sanitaria (CVS) y bajadas pluviales.
